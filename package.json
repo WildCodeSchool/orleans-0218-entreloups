@@ -1,0 +1,24 @@
+{
+  "name": "orleans-0218-entreloups",
+  "version": "1.0.0",
+  "description": "orleans-0218-entreloups =======================",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.20.1",
+    "bootstrap": "^4.1.0",
+    "jquery": "^3.3.1",
+    "webpack-notifier": "^1.6.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1"
+  }
+}
