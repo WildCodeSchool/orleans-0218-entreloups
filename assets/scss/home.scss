@@ -1,0 +1,20 @@
+.backgrd {
+  background-image: url("../images/accueil.jpeg");
+  background-repeat: no-repeat;
+  margin-top: -8px;
+  object-fit: cover;
+  max-height: 450px;
+  width: 100%;
+}
+
+.welcome {
+  background: #0c5460;
+  text-align: center;
+  .btn_sign {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+  .title {
+    color: white;
+  }
+}
