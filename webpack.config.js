@@ -7,6 +7,8 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
     .addEntry('style', './assets/scss/main.scss')
+    .addEntry('home', './assets/scss/home.scss')
+    .addEntry('accueil', './assets/images/accueil.jpeg')
     .addEntry('event', './assets/scss/event.scss')
     .enableBuildNotifications();
 
