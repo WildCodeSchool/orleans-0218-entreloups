@@ -8,6 +8,7 @@ Encore
     .enableSassLoader()
     .addEntry('style', './assets/scss/main.scss')
     .addEntry('home', './assets/scss/home.scss')
+    .addEntry('event', './assets/scss/event.scss')
     .enableBuildNotifications();
 
 module.exports = Encore.getWebpackConfig();

@@ -18,4 +18,12 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
+    /**
+     * @Route("/legal", name="legal")
+     */
+    public function showLegalNotice()
+    {
+        return $this->render('legal_notice/legal_notice.html.twig');
+    }
 }
