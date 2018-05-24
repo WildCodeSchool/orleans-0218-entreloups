@@ -5,5 +5,9 @@ $lightFontColor: #FFFFFF;
 @import "navbar.scss";
 
 .row {
+  margin: 0;
+}
+
+.container-fluid{
   padding: 0;
 }
