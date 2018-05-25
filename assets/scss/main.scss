@@ -2,3 +2,12 @@ $mainColor: #656668;
 $lightFontColor: #FFFFFF;
 @import "~bootstrap/scss/bootstrap";
 @import "footer.scss";
+@import "navbar.scss";
+
+.row {
+  margin: 0;
+}
+
+.container-fluid{
+  padding: 0;
+}
