@@ -1,4 +1,4 @@
-$mainColor: #656668;
+$mainColor: #007bff;
 $lightFontColor: #FFFFFF;
 @import "~bootstrap/scss/bootstrap";
 @import "footer.scss";
@@ -10,4 +10,12 @@ $lightFontColor: #FFFFFF;
 
 .container-fluid{
   padding: 0;
+}
+
+body {
+  background: #eeeeee;
+  background: -moz-radial-gradient(center, ellipse cover, #eeeeee 22%, #cccccc 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, #eeeeee 22%,#cccccc 100%);
+  background: radial-gradient(ellipse at center, #eeeeee 22%,#cccccc 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 );
 }
