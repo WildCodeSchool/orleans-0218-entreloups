@@ -1,0 +1,16 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<link rel="stylesheet" href="{{ asset('build/profile.css') }}">
+<h1 class="text-center mt-4">Mon Compte</h1>
+<div class="card bg-primary mx-auto">
+    <div class="card-body">
+        <h3 class="card-title text-center ">Mes Données</h3>
+        <div class="fos_user_user_show text-center card-text">
+            <p>{{ 'Nom'|trans }}: {{ user.lastname }}</p>
+            <p>{{ 'Prénom'|trans }}: {{ user.firstname }}</p>
+            <p>{{ 'Nom d\'utilisateur'|trans }}: {{ user.username }}</p>
+            <p>{{ 'Email'|trans }}: {{ user.email }}</p>
+            <p>{{ 'Ville'|trans }}: {{ user.location }}</p>
+        </div>
+    </div>
+</div>
+<h2 class="text-center mt-2">Mes Evènements</h2>
