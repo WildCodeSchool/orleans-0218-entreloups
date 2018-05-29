@@ -4,6 +4,8 @@ $lightFontColor: #FFFFFF;
 @import "footer.scss";
 @import "navbar.scss";
 
+@import "~flatpickr/dist/flatpickr.css";
+
 .row {
   margin: 0;
 }
