@@ -9,7 +9,18 @@
 namespace AppBundle\Form;
 
 
-class ChangePasswordType
+use Symfony\Component\Form\AbstractType;
+
+class ChangePasswordType extends AbstractType
 {
 
+    public function getParent()
+    {
+        return 'FOS\UserBundle\Form\Type\ChangePasswordFormType';
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'app_user_change_password';
+    }
 }
