@@ -12,25 +12,25 @@
                         {% if csrf_token %}
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                         {% endif %}
-                        <div class="form-row p-2 justify-content-center"">
+                        <div class="form-row p-2 justify-content-center">
                             <label class="mr-2" for="username">{{ 'Nom d\'utilisateur: '|trans }}</label>
                             <input type="text" id="username" name="_username" value="{{ last_username }}"
                                    required="required" autocomplete="username"/>
                         </div>
 
-                        <div class="form-row p-2 justify-content-center"">
+                        <div class="form-row p-2 justify-content-center">
                             <label class="mr-4" for="password">{{ 'Mot de passe:'|trans }}</label>
                             <input class="ml-2" type="password" id="password" name="_password" required="required"
                                    autocomplete="current-password"/>
                         </div>
 
-                        <div class="form-check p-2 justify-content-center"">
+                        <div class="form-check p-2 justify-content-center">
                             <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
                             <label class="form-check-label mr-2"
                                    for="remember_me">{{ 'se souvenir de moi'|trans }}</label>
                         </div>
 
-                        <div class="form-row p-2 justify-content-center"">
+                        <div class="form-row p-2 justify-content-center">
                             <input type="submit" class="btn btn-success" id="_submit" name="_submit" value="{{ 'Connexion'|trans }}"/>
                         </div>
                     </form>
