@@ -9,6 +9,7 @@ Encore
     .enableSassLoader()
     .addStyleEntry('style', './assets/scss/main.scss')
     .addStyleEntry('home', './assets/scss/home.scss')
+    .addStyleEntry('profile', './assets/scss/profile.scss')
     .addEntry('accueil', './assets/images/accueil.jpeg')
     .addStyleEntry('event', './assets/scss/event.scss')
     .enableBuildNotifications()
