@@ -2,3 +2,13 @@ $mainColor: #656668;
 $lightFontColor: #FFFFFF;
 @import "~bootstrap/scss/bootstrap";
 @import "footer.scss";
+@import "navbar.scss";
+@import "~flatpickr/dist/flatpickr.css";
+
+.row {
+  margin: 0;
+}
+
+.container-fluid{
+  padding: 0;
+}

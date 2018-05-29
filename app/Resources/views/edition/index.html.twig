@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Editions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Startdate</th>
+                <th>Enddate</th>
+                <th>Place</th>
+                <th>Hashtag</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for edition in editions %}
+            <tr>
+                <td><a href="{{ path('edition_show', { 'id': edition.id }) }}">{{ edition.id }}</a></td>
+                <td>{{ edition.name }}</td>
+                <td>{% if edition.startDate %}{{ edition.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if edition.endDate %}{{ edition.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ edition.place }}</td>
+                <td>{{ edition.hashtag }}</td>
+                <td>{{ edition.status }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('edition_show', { 'id': edition.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('edition_edit', { 'id': edition.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('edition_new') }}">Create a new edition</a>
+        </li>
+    </ul>
+{% endblock %}
