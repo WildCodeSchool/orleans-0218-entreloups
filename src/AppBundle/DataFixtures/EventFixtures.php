@@ -1,6 +1,6 @@
 <?php
 
-namespace AppFixtures\DataFixtures;
+namespace AppBundle\DataFixtures;
 
 use AppBundle\Entity\Event;
 use Doctrine\Bundle\FixturesBundle\Fixture;
