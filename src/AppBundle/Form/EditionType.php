@@ -18,14 +18,18 @@ class EditionType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'Nom'])
-            ->add('startDate', DateTimeType::class,
+            ->add(
+                'startDate',
+                DateTimeType::class,
                 [
                     'label' => 'Date de début',
                     'widget' => 'single_text', 'model_timezone' => 'Europe/Paris', 'html5' => false,
                     'attr' => ['class' => 'flatpickr']
                 ]
             )
-            ->add('endDate', DateTimeType::class,
+            ->add(
+                'endDate',
+                DateTimeType::class,
                 [
                     'label' => 'Date de fin',
                     'widget' => 'single_text', 'model_timezone' => 'Europe/Paris', 'html5' => false,
@@ -56,6 +60,4 @@ class EditionType extends AbstractType
     {
         return 'appbundle_edition';
     }
-
-
 }
