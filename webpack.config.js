@@ -4,13 +4,15 @@ Encore
     .setOutputPath('web/build')
     .setPublicPath('/build')
     .addEntry('app', './assets/js/app.js')
+    .addEntry('datepicker', './assets/js/datepicker.js')
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
-    .addEntry('style', './assets/scss/main.scss')
-    .addEntry('profile', './assets/scss/profile.scss')
-    .addEntry('home', './assets/scss/home.scss')
+    .addStyleEntry('style', './assets/scss/main.scss')
+    .addStyleEntry('home', './assets/scss/home.scss')
+    .addStyleEntry('profile', './assets/scss/profile.scss')
     .addEntry('accueil', './assets/images/accueil.jpeg')
-    .addEntry('event', './assets/scss/event.scss')
-    .enableBuildNotifications();
+    .addStyleEntry('event', './assets/scss/event.scss')
+    .enableBuildNotifications()
+    .autoProvidejQuery();
 
 module.exports = Encore.getWebpackConfig();
