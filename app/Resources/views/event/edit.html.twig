@@ -40,7 +40,7 @@
                 <button class="btn btn-success float-right mr-3" type="submit"><i class="far fa-save"></i> Enregister les modifications</button>
                 {{ form_end(edit_form) }}
                 {{ form_start(delete_form) }}
-                <button class="btn btn-danger mb-3" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
+                <button class="btn btn-danger mb-3" type="submit" onclick="return confirm('Etes-vous sûr(e) de vouloir supprimer cet événement ?')"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
                 {{ form_end(delete_form) }}
             </div>
         </div>
