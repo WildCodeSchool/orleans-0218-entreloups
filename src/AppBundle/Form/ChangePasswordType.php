@@ -8,7 +8,6 @@
 
 namespace AppBundle\Form;
 
-
 use Symfony\Component\Form\AbstractType;
 
 class ChangePasswordType extends AbstractType
