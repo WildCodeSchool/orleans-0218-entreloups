@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/datepicker.js') }}"></script>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Edition creation</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.name) }}
+
+        {{ form_row(form.startDate) }}
+
+        {{ form_row(form.endDate) }}
+
+        {{ form_row(form.place) }}
+
+        {{ form_label(form.hashtag) }}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">#</span>
+            </div>
+            {{ form_widget(form.hashtag) }}
+        </div>
+
+        {{ form_errors(form.hashtag) }}
+
+        {{ form_row(form.status) }}
+
+        {{ form_row(form.event) }}
+
+        <input class="btn btn-success" type="submit" value="Créer" />
+        <a role="button" class="btn btn-primary float-right" href="{{ path('event_index') }}">Retourner à la liste d'évènements</a>
+
+    {{ form_end(form) }}
+
+
+{% endblock %}
