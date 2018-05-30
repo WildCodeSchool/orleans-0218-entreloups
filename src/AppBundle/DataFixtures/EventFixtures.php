@@ -15,7 +15,7 @@ class EventFixtures extends Fixture
         // create 20 event !
         for ($i = 0; $i < 20; $i++) {
             $event = new Event();
-            $event->setTitle($faker->words(3, true));
+            $event->setTitle(ucfirst($faker->words(3, true)));
             $event->setCity($faker->city);
             $event->setDescription($faker->text);
             $event->setImage('image.jpg');
