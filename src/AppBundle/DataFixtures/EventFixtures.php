@@ -5,21 +5,19 @@ namespace AppBundle\DataFixtures;
 use AppBundle\Entity\Event;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Factory;
 
 class EventFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create('fr_FR');
         // create 20 event !
         for ($i = 0; $i < 20; $i++) {
             $event = new Event();
-            $event->setTitle('Title ' . $i);
-            $event->setCity('Orléans ' . $i);
-            $event->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-             Praesent interdum, metus id malesuada tempor, velit neque ullamcorper tortor, 
-             vel sollicitudin est orci id metus. Curabitur rutrum quam massa, nec porttitor risus euismod quis. 
-             Praesent sit amet sollicitudin diam. Sed tincidunt sapien nec rhoncus ullamcorper. 
-             Etiam tempus eleifend nulla, vitae scelerisque.');
+            $event->setTitle($faker->words(3, true));
+            $event->setCity($faker->city);
+            $event->setDescription($faker->text);
             $event->setImage('image.jpg');
             $manager->persist($event);
         }
