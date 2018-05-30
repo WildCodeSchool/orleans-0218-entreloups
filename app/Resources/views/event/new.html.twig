@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row mt-5 mb-5">
+    <div class="row my-5">
         <div class="offset-3 col-md-6 shadow">
             <h1 class="text-center mt-3">Event creation</h1>
             {{ form_start(form) }}
@@ -11,7 +11,7 @@
                 {{ form_row(form.description, {'label' : 'Description :', 'attr' : {'rows' : '5'}}) }}
                 <button type="submit"  class="btn btn-primary float-right">Créer   <i class="fas fa-chevron-right"></i></button>
             {{ form_end(form) }}
-            <a href="{{ path('event_index') }}" class="btn btn-primary mb-3">   <i class="fas fa-chevron-left"></i>   Retour</a>
+            <a href="{{ path('event_index') }}" class="btn btn-primary mb-3">   <i class="fas fa-chevron-left"></i>Retour</a>
         </div>
     </div>
 {% endblock %}
