@@ -6,25 +6,25 @@
         {{ form_start(edit_form) }}
         <div class="form-row">
             <div class="form-group  col-md-4 pl-3">
-                {{ form_label(edit_form.title, 'Titre') }}
+                {{ form_label(edit_form.title, 'Titre :') }}
                 {{ form_widget(edit_form.title, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(edit_form.title) }}
             </div>
             <div class="form-group  col-md-7 offset-md-1 pr-3">
-                {{ form_label(edit_form.city, 'Ville') }}
+                {{ form_label(edit_form.city, 'Ville :') }}
                 {{ form_widget(edit_form.city, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(edit_form.city) }}
             </div>
         </div>
         <div class="form-row">
             <div class="form-group  col-md-4 pl-3">
-                {{ form_label(edit_form.image, 'Image') }}
+                {{ form_label(edit_form.image, 'Image :') }}
                 {{ form_widget(edit_form.image, { 'attr': {'class': 'form-control mb-3'} }) }}
                 {{ form_errors(edit_form.image) }}
                 <img class="adminEventImg img-fluid" src="http://via.placeholder.com/400x300" alt="Image de l'événement" />
             </div>
             <div class="form-group  col-md-7 offset-md-1 pr-3">
-                {{ form_label(edit_form.description, 'Description') }}
+                {{ form_label(edit_form.description, 'Description :') }}
                 {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control', 'rows': '12'}}) }}
                 {{ form_errors(edit_form.description) }}
             </div>
