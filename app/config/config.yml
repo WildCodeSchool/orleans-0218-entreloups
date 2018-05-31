@@ -82,3 +82,11 @@ fos_user:
             form:
                 name: app_user_registration
                 type: AppBundle\Form\RegistrationType
+    profile:
+            form:
+                name: app_user_profile
+                type: AppBundle\Form\ProfileType
+    change_password:
+            form:
+                name: app_user_change_password
+                type: AppBundle\Form\ChangePasswordType

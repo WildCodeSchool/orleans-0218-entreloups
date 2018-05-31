@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 /**
  * Event
@@ -72,6 +75,16 @@ class Event
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Edition", mappedBy="event")
+     */
+    private $editions;
+
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
     /**
      * Get id
@@ -171,5 +184,48 @@ class Event
     {
         $this->description = $description;
         return $this;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->editions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add edition.
+     *
+     * @param \AppBundle\Entity\Edition $edition
+     *
+     * @return Event
+     */
+    public function addEdition(\AppBundle\Entity\Edition $edition)
+    {
+        $this->editions[] = $edition;
+
+        return $this;
+    }
+
+    /**
+     * Remove edition.
+     *
+     * @param \AppBundle\Entity\Edition $edition
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEdition(\AppBundle\Entity\Edition $edition)
+    {
+        return $this->editions->removeElement($edition);
+    }
+
+    /**
+     * Get editions.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEditions()
+    {
+        return $this->editions;
     }
 }
