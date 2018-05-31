@@ -5,25 +5,28 @@
 
 {% block body %}
 
-    <h1 class="text-center m-5">{{ event.title }}</h1>
+    <h1 class="text-center mt-5">{{ event.title }}</h1>
+
+    <div class="text-center mb-5">
+        <a type="button" class="btn btn-primary" href="#">Participer</a>
+    </div>
 
     <div>
 
-        <section class="d-md-flex justify-content-around">
+        <section class="d-flex flex-row">
 
-            <div class="p-0 shadow">
+            <div class="p-0 mr-5">
                 <a href="#"><img class="img-fluid" src="http://via.placeholder.com/350x350"></a>
             </div>
             <div class="p-0">
-                <h3>Info:</h3>
-                <p></p>
-            </div>
-            <div class="p-0">
-                <h3>Edition:</h3>
-                <p></p>
-            </div>
-            <div class="p-0">
-                <a type="button" class="btn btn-primary" href="#">Participer</a>
+                <div>
+                    <h3>Prochaine edition :</h3>
+                    <p></p>
+                </div>
+                <div>
+                    <h3>Descriptif :</h3>
+                    <p></p>
+                </div>
             </div>
 
         </section>
@@ -77,7 +80,7 @@
     </div>
 
     <div class="text-center m-5">
-        <a type="button" class="btn btn-primary" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"> Retour</i></a>
+        <a type="button" class="btn btn-primary" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour</a>
     </div>
 
 {% endblock %}
