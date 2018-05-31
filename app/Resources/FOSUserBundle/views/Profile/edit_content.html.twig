@@ -1,0 +1,29 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<h1 class="text-center">Modifier mes données personnelles</h1>
+<div class="row">
+    <div class="col-sm-6 mx-auto text-center shadow">
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        <div class="form-row p-2 justify-content-center">
+            <label for="app_user_profile_email">Adresse e-mail</label>
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="form-row p-2 justify-content-center">
+            <label for="app_user_profile_username">Nom d'utilisateur</label>
+            {{ form_widget(form.username) }}
+        </div>
+        <div class="form-row p-2 justify-content-center">
+            <label for="app_user_profile_current_password">Mot de passe actuel</label>
+            {{ form_widget(form.current_password) }}
+        </div>
+        {{ form_widget(form) }}
+        <div class="form-row">
+            <input type="submit" class="btn btn-success ml-5 mb-2 mr-5" value="{{ 'Modifier'|trans }}"/>
+            <a class="btn btn-warning mr-5 mb-2" href="/profile/change-password">Changer le mot de passe</a>
+            <a class="btn btn-dark mb-2" href="/profile">Retour</a>
+        </div>
+        <div class="form-row">
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
