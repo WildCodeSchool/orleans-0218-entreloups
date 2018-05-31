@@ -4,39 +4,39 @@
 
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<div class="row">
-    <div class="col-6 mx-auto">
+<div class="row mt-2">
+    <div class="col-6 mx-auto shadow">
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             <label for="app_user_registration_email">Adresse e-mail</label>
             {{ form_widget(form.email) }}
         </div>
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             <label for="app_user_registration_username">Nom d'utilisateur</label>
         {{ form_widget(form.username) }}
         </div>
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             <label for="app_user_registration_plainpassword_first">Mot de passe</label>
         {{ form_widget(form.plainPassword.first) }}
         </div>
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             <label for="app_user_registration_plainpassword_second">Confirmation mot de passe</label>
         {{ form_widget(form.plainPassword.second) }}
         </div>
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             {{ form_label(form.lastName) }}
         {{ form_widget(form.lastName) }}
         </div>
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             {{ form_label(form.firstName) }}
         {{ form_widget(form.firstName) }}
         </div>
-        <div class="form-row">
+        <div class="form-row justify-content-center">
             {{ form_label(form.location) }}
         {{ form_widget(form.location) }}
         </div>
-        <div class="form-row mt-2">
-            <input type="submit" value="{{ 'Enregistrer'|trans }}" />
+        <div class="form-row mt-2 mb-2">
+            <input type="submit" class="btn btn-success mx-auto" value="{{ 'Enregistrer'|trans }}" />
         </div>
         {{ form_end(form) }}
     </div>
