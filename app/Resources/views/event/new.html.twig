@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Event creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('event_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <div class="row my-5">
+        <div class="offset-3 col-md-6 shadow">
+            <h1 class="text-center mt-3">Création de l'évènement</h1>
+            {{ form_start(form) }}
+                {{ form_row(form.title, {'label' : 'Titre :'}) }}
+                {{ form_row(form.city, {'label' : 'Ville :'}) }}
+                {{ form_row(form.image, {'label' : 'Photo :'}) }}
+                {{ form_row(form.description, {'label' : 'Description :', 'attr' : {'rows' : '5'}}) }}
+                <button type="submit"  class="btn btn-primary float-right">Créer   <i class="fas fa-chevron-right"></i></button>
+            {{ form_end(form) }}
+            <a href="{{ path('event_index') }}" class="btn btn-primary mb-3">   <i class="fas fa-chevron-left"></i>Retour</a>
+        </div>
+    </div>
 {% endblock %}
+
+
+
