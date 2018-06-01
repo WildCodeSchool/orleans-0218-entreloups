@@ -6,7 +6,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
@@ -31,6 +31,7 @@ framework:
       json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     php_errors:
         log: true
+    translator: { fallback: fr }
 
 # Twig Configuration
 twig:
@@ -82,3 +83,11 @@ fos_user:
             form:
                 name: app_user_registration
                 type: AppBundle\Form\RegistrationType
+    profile:
+            form:
+                name: app_user_profile
+                type: AppBundle\Form\ProfileType
+    change_password:
+            form:
+                name: app_user_change_password
+                type: AppBundle\Form\ChangePasswordType
