@@ -37,7 +37,7 @@
                 {{ form_end(edit_form) }}
             </div>
             {{ form_start(delete_form) }}
-            <button class="btn btn-danger float-right mr-3" type="submit" onclick="return confirm('Etes-vous sûr(e) de vouloir supprimer cet événement ?')"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
+            <button class="btn btn-danger float-right mr-3 confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
             {{ form_end(delete_form) }}
         </div>
     </div>
