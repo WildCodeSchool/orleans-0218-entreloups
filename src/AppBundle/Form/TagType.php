@@ -31,6 +31,4 @@ class TagType extends AbstractType
     {
         return 'appbundle_tag';
     }
-
-
 }
