@@ -31,6 +31,4 @@ class RoleType extends AbstractType
     {
         return 'appbundle_role';
     }
-
-
 }
