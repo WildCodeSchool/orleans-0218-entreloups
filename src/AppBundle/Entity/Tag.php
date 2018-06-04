@@ -25,8 +25,9 @@ class Tag
     /**
      * @var string
      *
-     * @ORM\Column(name="label", type="string", length=255)
+     * @ORM\Column(name="label", type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Ce champ ne peut être vide")
+     * @Assert\Length(min="3", minMessage="Tag trop court", max="255", maxMessage="Tag trop long")
      */
     private $label;
 
