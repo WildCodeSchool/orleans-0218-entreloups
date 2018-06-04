@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -27,6 +28,13 @@ class Event
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide"
+     * )
+     * @Assert\Length(
+     *     max = 255,
+     *     maxMessage="Le titre est trop long !"
+     * )
      */
     private $title;
 
@@ -34,6 +42,11 @@ class Event
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide")
+     * @Assert\Length(
+     *     max = 255 )
+     *
      */
     private $city;
 
@@ -41,6 +54,10 @@ class Event
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255)
+     * @Assert\NotNull(
+     *     message = "Ce champs ne peut être vide")
+     * @Assert\Length(
+     *     max = 255 )
      */
     private $image;
 
@@ -48,6 +65,12 @@ class Event
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=2000)
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide")
+     * @Assert\Length(
+     *     max = 2000,
+     *     maxMessage="La description est trop longue !"
+     * )
      */
     private $description;
 
