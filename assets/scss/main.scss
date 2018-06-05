@@ -14,12 +14,3 @@ $lightFontColor: #FFFFFF;
   padding: 0;
 }
 
-body {
-  background: #eeeeee;
-  background: -moz-radial-gradient(center, ellipse cover, #eeeeee 22%, #cccccc 100%);
-  background: -webkit-radial-gradient(center, ellipse cover, #eeeeee 22%,#cccccc 100%);
-  background: radial-gradient(ellipse at center, #eeeeee 22%,#cccccc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 );
-  background-repeat: no-repeat;
-  height: 100vh;
-}

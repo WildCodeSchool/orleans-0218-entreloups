@@ -1,40 +1,39 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+{% endblock %}
+
 {% block body %}
-    <h1>Event</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ event.title }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ event.city }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ event.image }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1 class="text-center mt-5">{{ event.title }}</h1>
+    <div class="text-center mb-5">
+        <a type="button" class="btn btn-primary" href="#">Participer</a>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('event_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('event_edit', { 'id': event.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div>
+
+        <section class="d-flex flex-row">
+
+            <div class="p-0 mr-5">
+                <a href="#"><img class="img-fluid" src="{{ asset('images/') }}{{ event.image }}" alt="{{ event.title }}"></a>
+            </div>
+            <div class="p-0">
+                <div>
+                    <h3>Prochaine edition :</h3>
+                    <p></p>
+                </div>
+                <div>
+                    <h3>Descriptif :</h3>
+                    <p>{{ event.description }}</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="text-center m-5">
+        <a type="button" class="btn btn-primary" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour</a>
+    </div>
+
 {% endblock %}
