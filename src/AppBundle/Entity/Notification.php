@@ -35,6 +35,20 @@ class Notification
      */
     private $publicationTime;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Edition", inversedBy="notifications")
+     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id")
+     */
+    private $edition;
+
+    /**
+     * Notification constructor.
+     */
+    public function __construct()
+    {
+        $this->publicationTime = new \DateTime('now');
+    }
+
 
     /**
      * Get id.
@@ -92,5 +106,29 @@ class Notification
     public function getPublicationTime()
     {
         return $this->publicationTime;
+    }
+
+    /**
+     * Set edition.
+     *
+     * @param \AppBundle\Entity\Edition|null $edition
+     *
+     * @return Notification
+     */
+    public function setEdition(\AppBundle\Entity\Edition $edition = null)
+    {
+        $this->edition = $edition;
+
+        return $this;
+    }
+
+    /**
+     * Get edition.
+     *
+     * @return \AppBundle\Entity\Edition|null
+     */
+    public function getEdition()
+    {
+        return $this->edition;
     }
 }
