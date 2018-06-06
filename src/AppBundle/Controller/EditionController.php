@@ -88,6 +88,7 @@ class EditionController extends Controller
         $editForm->handleRequest($request);
 
         $notification = new Notification();
+        $notification->setEdition($edition);
         $notificationForm = $this->createForm('AppBundle\Form\NotificationType', $notification);
         $notificationForm->handleRequest($request);
 
@@ -97,12 +98,12 @@ class EditionController extends Controller
             return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
         }
 
-        if ($notificationForm->isSubmitted() && $form->isValid()) {
+        if ($notificationForm->isSubmitted() && $notificationForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($notification);
             $em->flush();
 
-            return $this->redirectToRoute('notification_show', array('id' => $notification->getId()));
+            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
         }
 
         return $this->render('edition/edit.html.twig', array(
