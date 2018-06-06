@@ -86,7 +86,7 @@ class Tag
      *
      * @return Tag
      */
-    public function addProduct(\AppBundle\Entity\Event $event)
+    public function addEvent(\AppBundle\Entity\Event $event)
     {
         $this->events[] = $event;
 
@@ -98,7 +98,7 @@ class Tag
      *
      * @param \AppBundle\Entity\Event $event
      */
-    public function removeProduct(\AppBundle\Entity\Event $event)
+    public function removeEvent(\AppBundle\Entity\Event $event)
     {
         $this->events->removeElement($event);
     }

@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use AppBundle\Form\DataTransformer\TagsToCollectionTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,13 +26,23 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title')->add('city')->add('image')->add('description')
-            ->add('tags', CollectionType::class, array(
-                'entry_type' => TagType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'required' => false,
-                'by_reference' => false,
+            ->add('tags', EntityType::class, array(
+                'class' => 'AppBundle:Tag',
+                'choice_label' => 'label',
+                'multiple' => true,
+                'expanded' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->orderBy('', 'ASC');
+                }
             ));
+//            ->add('tags', CollectionType::class, array(
+//                'entry_type' => TagType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'required' => false,
+//                'by_reference' => false,
+//            ));
         $builder
             ->get('tags')
             ->addModelTransformer(new TagsToCollectionTransformer($this->manager));
