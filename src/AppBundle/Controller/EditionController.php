@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Edition;
+use AppBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -86,15 +87,29 @@ class EditionController extends Controller
         $editForm = $this->createForm('AppBundle\Form\EditionType', $edition);
         $editForm->handleRequest($request);
 
+        $notification = new Notification();
+        $notificationForm = $this->createForm('AppBundle\Form\NotificationType', $notification);
+        $notificationForm->handleRequest($request);
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
         }
 
+        if ($notificationForm->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($notification);
+            $em->flush();
+
+            return $this->redirectToRoute('notification_show', array('id' => $notification->getId()));
+        }
+
         return $this->render('edition/edit.html.twig', array(
             'edition' => $edition,
+            'notification' => $notification,
             'edit_form' => $editForm->createView(),
+            'notification_form' => $notificationForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
