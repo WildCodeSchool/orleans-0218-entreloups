@@ -1,39 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Roles list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for role in roles %}
-            <tr>
-                <td><a href="{{ path('role_show', { 'id': role.id }) }}">{{ role.id }}</a></td>
-                <td>{{ role.label }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('role_show', { 'id': role.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('role_edit', { 'id': role.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('role_new') }}">Create a new role</a>
-        </li>
-    </ul>
+    <div class="shadow">
+        <h1 class="text-center my-5">Gestion des rôles</h1>
+        <div class="row">
+            <div class="col-{{ edit_form ? 8 : 12 }}">
+                <h2 class="text-center">Liste des rôles</h2>
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Label</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {{ form_start(form_create) }}
+                            <td>
+                                {{ form_widget(form_create.label) }}
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> Créer</button>
+                            </td>
+                            {{ form_end(form_create) }}
+                        </tr>
+                        {% for role in roles %}
+                        <tr>
+                            <td>{{ role.label }}</td>
+                            <td>
+                                <div class="form-inline">
+                                    <a class="btn btn-primary mr-2" href="{{ path('role_index', {'id': role.id}) }}">
+                                        <i class="fas fa-pencil-alt"></i> Editer
+                                    </a>
+                                    {{ form_start(delete_forms[role.id]) }}
+                                    <button class="btn btn-danger" type="submit">
+                                        <i class="far fa-trash-alt"></i> Supprimer
+                                    </button>
+                                    {{ form_end(delete_forms[role.id]) }}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if edit_form is not null %}
+                <div class="text-center col-3">
+                    <h2>Edition du rôle</h2>
+                    {{ form_start(edit_form) }}
+                    {{ form_widget(edit_form.label) }}
+                    <button class="btn btn-primary mt-4" type="submit"><i class="fas fa-check"></i> Valider</button>
+                    {{ form_end(edit_form) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

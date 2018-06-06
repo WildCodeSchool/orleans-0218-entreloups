@@ -18,17 +18,58 @@ class RoleController extends Controller
     /**
      * Lists all role entities.
      *
-     * @Route("/", name="role_index")
+     * @Route("/{id}", defaults={"id"=null}, name="role_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request, int $id = null)
     {
         $em = $this->getDoctrine()->getManager();
 
+        /**
+         * Create form
+         */
+        $roleCreate = new Role();
+        $formCreate = $this->createForm(
+            'AppBundle\Form\RoleType',
+            $roleCreate,
+            ['action' => $this->generateUrl('role_new')]
+        );
+        $formCreate->handleRequest($request);
+
+        /**
+         * Edit form
+         */
+        $editForm = null;
+        if ($id !== null) {
+            $roleEdit = $em->find('AppBundle\Entity\Role', $id);
+            $editForm = $this->createForm(
+                'AppBundle\Form\RoleType',
+                $roleEdit,
+                ['action' => $this->generateUrl(('role_edit'), array('id' => $roleEdit->getId()))]
+            );
+            $editForm->handleRequest($request);
+            $editForm = $editForm->createView();
+        }
+
+        /**
+         * get roles
+         */
         $roles = $em->getRepository('AppBundle:Role')->findAll();
+
+        /**
+         * Delete forms
+         */
+        $deleteForms = [];
+        foreach ($roles as $role) {
+            $deleteForm = $this->createDeleteForm($role);
+            $deleteForms[$role->getId()] = $deleteForm->createView();
+        }
 
         return $this->render('role/index.html.twig', array(
             'roles' => $roles,
+            'form_create' => $formCreate->createView(),
+            'delete_forms' => $deleteForms,
+            'edit_form' => $editForm,
         ));
     }
 
@@ -36,67 +77,37 @@ class RoleController extends Controller
      * Creates a new role entity.
      *
      * @Route("/new", name="role_new")
-     * @Method({"GET", "POST"})
+     * @Method("POST")
      */
     public function newAction(Request $request)
     {
         $role = new Role();
         $form = $this->createForm('AppBundle\Form\RoleType', $role);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($role);
             $em->flush();
-
-            return $this->redirectToRoute('role_show', array('id' => $role->getId()));
         }
-
-        return $this->render('role/new.html.twig', array(
-            'role' => $role,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a role entity.
-     *
-     * @Route("/{id}", name="role_show")
-     * @Method("GET")
-     */
-    public function showAction(Role $role)
-    {
-        $deleteForm = $this->createDeleteForm($role);
-
-        return $this->render('role/show.html.twig', array(
-            'role' => $role,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->redirectToRoute('role_index');
     }
 
     /**
      * Displays a form to edit an existing role entity.
      *
      * @Route("/{id}/edit", name="role_edit")
-     * @Method({"GET", "POST"})
+     * @Method("POST")
      */
     public function editAction(Request $request, Role $role)
     {
-        $deleteForm = $this->createDeleteForm($role);
         $editForm = $this->createForm('AppBundle\Form\RoleType', $role);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('role_edit', array('id' => $role->getId()));
         }
 
-        return $this->render('role/edit.html.twig', array(
-            'role' => $role,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->redirectToRoute('role_index');
     }
 
     /**
