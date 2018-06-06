@@ -23,6 +23,11 @@ class Tag
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Event", mappedBy="tags")
+     */
+    private $events;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="label", type="string", length=255, unique=true)
@@ -65,4 +70,47 @@ class Tag
     {
         return $this->label;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add event
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Tag
+     */
+    public function addProduct(\AppBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \AppBundle\Entity\Event $event
+     */
+    public function removeProduct(\AppBundle\Entity\Event $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
 }

@@ -29,6 +29,16 @@
                 {{ form_errors(edit_form.description) }}
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <h3>Tags</h3>
+                <ul class="tags" data-prototype="{{ form_widget(edit_form.tags.vars.prototype)|e('html_attr') }}">
+                    {% for tag in edit_form.tags %}
+                        <li>{{ form_row(tag.label) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
         <div class="form-row mt-3">
             <div class="col text-center">
                 <a class="btn btn-primary text-center float-left ml-3" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des événements</a>
@@ -41,4 +51,6 @@
             {{ form_end(delete_form) }}
         </div>
     </div>
+    <script type="text/javascript" href="{{ asset('build/addTag.js') }}">
+    </script>
 {% endblock %}

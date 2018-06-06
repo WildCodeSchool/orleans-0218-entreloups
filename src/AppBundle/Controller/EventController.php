@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -86,16 +87,27 @@ class EventController extends Controller
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
+        $tag = new Tag();
+        $tagForm = $this->createForm('AppBundle\Form\TagType', $tag);
+        $tagForm->handleRequest($request);
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
         }
 
+        if ($tagForm->isSubmitted() && $tagForm->isValid()) {
+            $tag->addEvent($event);
+            $event->addTag($tag);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return $this->render('event/edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'tag_form' => $tagForm->createView(),
         ));
     }
 

@@ -4,6 +4,7 @@ Encore
     .setOutputPath('web/build')
     .setPublicPath('/build')
     .addEntry('app', './assets/js/app.js')
+    .addEntry('addTag', './assets/js/addTag.js')
     .addEntry('datepicker', './assets/js/datepicker.js')
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
