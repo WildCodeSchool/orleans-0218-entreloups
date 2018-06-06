@@ -9,6 +9,7 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
     .addStyleEntry('style', './assets/scss/main.scss')
+    .addStyleEntry('listTag', './assets/scss/listTag.scss')
     .addStyleEntry('home', './assets/scss/home.scss')
     .addEntry('accueil', './assets/images/accueil.jpeg')
     .addStyleEntry('event', './assets/scss/event.scss')

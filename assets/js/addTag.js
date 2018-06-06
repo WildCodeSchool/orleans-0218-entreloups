@@ -1,12 +1,17 @@
 let $collectionHolder;
 
 // setup an "add a tag" link
-let $addTagLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
-let $newLinkLi = $('<li></li>').append($addTagLink);
+let $addTagLink = $('<button class="btn btn-primary mt-3"><i class="fas fa-tag mr-2"></i>Ajouter un tag</button>');
+let $newLinkLi = $('<a href="#" class="add_tag_link"></a>').append($addTagLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of tags
     $collectionHolder = $('ul.tags');
+
+    // add a delete link to all of the existing tag form li elements
+    $collectionHolder.find('li').each(function() {
+        addTagFormDeleteLink($(this));
+    });
 
     // add the "add a tag" anchor and li to the tags ul
     $collectionHolder.append($newLinkLi);
@@ -47,4 +52,20 @@ function addTagForm($collectionHolder, $newLinkLi) {
     // Display the form in the page in an li, before the "Add a tag" link li
     let $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
+
+    // add a delete link to the new form
+    addTagFormDeleteLink($newFormLi);
+}
+
+function addTagFormDeleteLink($tagFormLi) {
+    let $removeFormA = $('<a href="#" class="btn btn-danger ml-3"><i class="far fa-trash-alt mr-2"></i>Retirer le tag</a>');
+    $tagFormLi.append($removeFormA);
+
+    $removeFormA.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // remove the li for the tag form
+        $tagFormLi.remove();
+    });
 }
