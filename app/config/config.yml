@@ -95,7 +95,7 @@ fos_user:
 vich_uploader:
     db_driver: orm
     mappings:
-            event-images:
-                      uri_prefix: /images/event/
-                      upload_destination: '%kernel.root_dir%/../web/images/event/'
-                      namer: vich_uploader.namer_origname
+            event_images:
+                    uri_prefix: /images/event/
+                    upload_destination: '%kernel.root_dir%/../web/images/event/'
+                    namer: vich_uploader.namer_origname

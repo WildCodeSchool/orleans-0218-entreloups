@@ -4,17 +4,40 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Event
  *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
+ * @Vich\Uploadable
  */
 class Event
 {
+    /**
+     * @Vich\UploadableField(mapping="event_images", fileNameProperty="imageName")
+     *
+     * @var File
+     *
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updateAt;
+
     /**
      * @var int
      *
@@ -50,16 +73,6 @@ class Event
      */
     private $city;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255)
-     * @Assert\NotNull(
-     *     message = "Ce champs ne peut être vide")
-     * @Assert\Length(
-     *     max = 255 )
-     */
-    private $image;
 
     /**
      * @var string
@@ -79,6 +92,61 @@ class Event
      */
     private $editions;
 
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     *
+     * @param File|null $imageFile
+     * @return Event
+     * @throws \Exception
+     */
+    public function setImageFile(File $imageFile = null )
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile)
+            $this->updateAt = new \DateTimeImmutable();
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName(string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateAt(): \DateTime
+    {
+        return $this->updateAt;
+    }
+
+    /**
+     * @param \DateTime $updateAt
+     */
+    public function setUpdateAt(\DateTime $updateAt): void
+    {
+        $this->updateAt = $updateAt;
+    }
 
     public function __toString()
     {
@@ -143,29 +211,6 @@ class Event
         return $this->city;
     }
 
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Event
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 
     /**
      * @return string
