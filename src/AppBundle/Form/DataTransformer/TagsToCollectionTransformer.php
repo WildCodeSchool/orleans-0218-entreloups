@@ -34,15 +34,11 @@ class TagsToCollectionTransformer implements DataTransformerInterface
             ->getRepository('AppBundle:Tag');
 
         foreach ($tags as $tag) {
-
             $tagInRepo = $tagsRepository->findOneByLabel($tag->getLabel());
 
             if ($tagInRepo !== null) {
-
                 $tagCollection->add($tagInRepo);
-            }
-            else {
-
+            } else {
                 $tagCollection->add($tag);
             }
         }
