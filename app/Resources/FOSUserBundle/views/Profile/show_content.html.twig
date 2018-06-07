@@ -1,16 +1,18 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<h1 class="text-center mt-4">Mon Compte</h1>
-<div class="row">
-    <div class="col-sm-6 offset-sm-3 p-2 shadow">
-        <h3 class="text-center ">Mes Données</h3>
-        <div class="fos_user_user_show text-center">
-            <p>{{ 'Nom'|trans }}: {{ user.lastname }}</p>
-            <p>{{ 'Prénom'|trans }}: {{ user.firstname }}</p>
-            <p>{{ 'Nom d\'utilisateur'|trans }}: {{ user.username }}</p>
-            <p>{{ 'Email'|trans }}: {{ user.email }}</p>
-            <p>{{ 'Ville'|trans }}: {{ user.location }}</p>
-            <a class="btn btn-success" href="/profile/edit">Modifier</a>
+<div class="row justify-content-center my-5">
+    <div class="col-6 shadow text-center">
+        <h1 class="mt-4">Mon compte</h1>
+        <div>
+            <h3>Mes données</h3>
+            <div class="fos_user_user_show">
+                <p>{{ 'Nom'|trans }} : {{ user.lastname }}</p>
+                <p>{{ 'Prénom'|trans }} : {{ user.firstname }}</p>
+                <p>{{ 'Nom d\'utilisateur'|trans }} : {{ user.username }}</p>
+                <p>{{ 'Email'|trans }} : {{ user.email }}</p>
+                <p>{{ 'Ville'|trans }} : {{ user.location }}</p>
+                <a class="btn btn-primary mb-3" href="/profile/edit"><i class="fas fa-pencil-alt"></i> Modifier</a>
+            </div>
         </div>
     </div>
 </div>
-<h2 class="text-center mt-2">Mes Evènements</h2>
+<h2 class="text-center mt-2">Mes évènements</h2>
