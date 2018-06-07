@@ -41,18 +41,20 @@
             </div>
             {{ form_end(notification_form) }}
             <h3 class="my-3">Les dernières nouvelles :</h3>
-            <table class="table table-striped newsTable">
-                <tbody>
-                {% for notification in notifications|reverse %}
-                    <tr>
-                        <td>{% if notification.publicationTime %}{{ notification.publicationTime|date('l j Y G:i', "Europe/Paris") }}{% endif %}</td>
-                    </tr>
-                    <tr>
-                        <td class="pb-4">{{ notification.content }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="tableWrapper">
+                <table class="table table-striped newsTable">
+                    <tbody>
+                    {% for notification in notifications|reverse %}
+                        <tr>
+                            <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td class="pb-4">{{ notification.content }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>

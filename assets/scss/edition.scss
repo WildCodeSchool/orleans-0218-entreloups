@@ -1,6 +1,10 @@
-.newsTable
-{
+.newsTable {
   table-layout:fixed;
   width:100%;
   word-wrap:break-word;
+}
+
+.tableWrapper {
+  height: 45vh;
+  overflow-y: scroll;
 }
