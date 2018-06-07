@@ -37,7 +37,7 @@ class Notification
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Edition", inversedBy="notifications")
-     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="edition_id", referencedColumnName="id", nullable=false)
      */
     private $edition;
 

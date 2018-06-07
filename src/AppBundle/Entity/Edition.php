@@ -71,7 +71,7 @@ class Edition
     private $event;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="edition")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="edition", cascade={"persist", "remove"})
      */
     private $notifications;
 

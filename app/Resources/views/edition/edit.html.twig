@@ -49,13 +49,12 @@
                             <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}</td>
                         </tr>
                         <tr>
-                            <td class="pb-4">{{ notification.content }}</td>
+                            <td class="pb-4">{{ notification.content|nl2br }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 {% endblock %}
