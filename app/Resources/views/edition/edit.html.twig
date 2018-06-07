@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/edition.css') }}">
+{% endblock %}
+
 {% block javascripts %}
     <script src="{{ asset('build/datepicker.js') }}"></script>
 {% endblock %}
@@ -10,7 +14,7 @@
             <h1 class="text-center mt-3">Gestion de l'édition: {{ edition.name }}</h1>
             <h2 class="text-center mb-5">de l'événement: {{ edition.event.title }}</h2>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mb-5">
             <h3 class="mb-3">Informations :</h3>
 
             {{ form_start(edit_form) }}
@@ -33,9 +37,22 @@
             {{ form_start(notification_form) }}
             {{ form_row(notification_form.content, {'label' : '250 caractères maximum :', 'attr' : {'rows' : '4', 'maxlength' : '250'}}) }}
             <div class="text-center">
-            <button type="submit"  class="btn btn-primary">Publier   <i class="far fa-paper-plane"></i></button>
+                <button type="submit"  class="btn btn-primary">Publier   <i class="far fa-paper-plane"></i></button>
             </div>
             {{ form_end(notification_form) }}
+            <h3 class="my-3">Les dernières nouvelles :</h3>
+            <table class="table table-striped newsTable">
+                <tbody>
+                {% for notification in notifications|reverse %}
+                    <tr>
+                        <td>{% if notification.publicationTime %}{{ notification.publicationTime|date('l j Y G:i', "Europe/Paris") }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td class="pb-4">{{ notification.content }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
 
     </div>

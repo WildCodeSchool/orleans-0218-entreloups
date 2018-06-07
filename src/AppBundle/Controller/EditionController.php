@@ -106,9 +106,13 @@ class EditionController extends Controller
             return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $notifications = $em->getRepository(Notification::class)->findByEdition($edition->getId());
+
         return $this->render('edition/edit.html.twig', array(
             'edition' => $edition,
             'notification' => $notification,
+            'notifications' => $notifications,
             'edit_form' => $editForm->createView(),
             'notification_form' => $notificationForm->createView(),
             'delete_form' => $deleteForm->createView(),
