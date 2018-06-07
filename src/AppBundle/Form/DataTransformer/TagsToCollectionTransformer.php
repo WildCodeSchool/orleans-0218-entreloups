@@ -8,41 +8,45 @@
 
 namespace AppBundle\Form\DataTransformer;
 
+use AppBundle\Entity\Tag;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class TagsToCollectionTransformer implements DataTransformerInterface
 {
+    /**
+     * @var ObjectManager
+     */
     private $manager;
 
-    public function __construct(ObjectManager $manager)
+    public function __construct (ObjectManager $manager)
     {
         $this->manager = $manager;
     }
 
-    public function transform($tags)
+    public function transform($value): string
     {
-        return $tags;
+
+        return implode(', ', $value);
     }
 
-    public function reverseTransform($tags)
+    public function reverseTransform($value): array
     {
-        $tagCollection = new ArrayCollection();
+        $names = array_unique(array_filter(array_map('trim',explode(',', $value))));
 
-        $tagsRepository = $this->manager
-            ->getRepository('AppBundle:Tag');
+        $tags = $this->manager->getRepository('AppBundle:Tag')->findBy([
+            'label' => $names
+        ]);
 
-        foreach ($tags as $tag) {
-            $tagInRepo = $tagsRepository->findOneByLabel($tag->getLabel());
+        $newNames = array_diff($names, $tags);
 
-            if ($tagInRepo !== null) {
-                $tagCollection->add($tagInRepo);
-            } else {
-                $tagCollection->add($tag);
-            }
+        foreach ($newNames as $name) {
+            $tag = new Tag();
+            $tag->setLabel($name);
+            $tags[] = $tag;
         }
 
-        return $tagCollection;
+        return $tags;
     }
 }

@@ -7,6 +7,7 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('build/listTag.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/bootstrap-tagsinputCSS.css') }}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     </head>
     <body>
@@ -55,6 +56,9 @@
         </div>
         {% include 'footer.html.twig' %}
         {% block javascripts %}{% endblock %}
+        <script src="{{ asset('build/bootstrap-tagsinput.js') }}"></script>
+        <script src="{{ asset('build/typeahead.bundle.js') }}"></script>
         <script src="{{ asset('build/app.js') }}"></script>
+
     </body>
 </html>

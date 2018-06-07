@@ -25,7 +25,9 @@ class Event
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="events", cascade={"persist"})
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"})
      */
     private $tags;
 

@@ -33,6 +33,20 @@ class TagController extends Controller
     }
 
     /**
+     * @Route("/tag.json", name="allTags")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function autoCompleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tags = $em->getRepository('AppBundle:Tag')->findAll();
+
+        return $this->json($tags, 200, [], ['groups' => ['public']]);
+    }
+
+    /**
      * Creates a new tag entity.
      *
      * @Route("/new", name="tag_new")
