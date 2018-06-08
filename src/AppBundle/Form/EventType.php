@@ -34,7 +34,7 @@ class EventType extends AbstractType
         $builder->add('title')->add('city')->add('image')->add('description')
             ->add('tags', TextType::class, array(
                 'required' => false,
-                'attr' => ['class' => 'tag-input'],
+                'attr' => ['data-role' => 'tagsinput'],
             ));
         $builder->get('tags')
             ->addModelTransformer(new CollectionToArrayTransformer(), true)

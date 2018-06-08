@@ -30,13 +30,9 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-7">
                 <h3>Tags</h3>
-                {#<ul class="tags" data-prototype="{{ form_widget(edit_form.tags.vars.prototype)|e('html_attr') }}">#}
-                    {#{% for tag in edit_form.tags %}#}
-                        {#<li>{{ form_row(tag.label) }}</li>#}
-                    {#{% endfor %}#}
-                {#</ul>#}
+                {{ form_row(edit_form.tags) }}
             </div>
         </div>
         <div class="form-row mt-3">
