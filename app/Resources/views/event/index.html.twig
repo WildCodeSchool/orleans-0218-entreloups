@@ -11,7 +11,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card mr-3 mb-4">
                 <div class="overlay">
-                    <img class="card-img-top image" src="{{ asset('images/') }}{{ event.image }}" alt="{{ event.title }}">
+                    <img class="card-img-top image" src="{{ vich_uploader_asset(event, 'imageFile') }}{{ event.imageFile }}" alt="{{ event.title }}">
                     <span class="text-description p-1">
                         {% if event.description|length > 200 %}
                             {{ event.description|slice(0, 200) ~ '...' }}
