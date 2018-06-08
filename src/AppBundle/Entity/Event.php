@@ -110,7 +110,7 @@ class Event
     {
         $this->imageFile = $imageFile;
 
-        if ($imageFile){
+        if ($imageFile) {
             $this->updateAt = new \DateTimeImmutable();
         }
         return $this;
