@@ -70,7 +70,7 @@ class Tag
         return $this->label;
     }
 
-    public function __toString ()
+    public function __toString()
     {
         return $this->label;
     }

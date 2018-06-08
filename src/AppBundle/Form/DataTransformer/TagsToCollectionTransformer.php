@@ -20,7 +20,7 @@ class TagsToCollectionTransformer implements DataTransformerInterface
      */
     private $manager;
 
-    public function __construct (ObjectManager $manager)
+    public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
     }
@@ -33,7 +33,7 @@ class TagsToCollectionTransformer implements DataTransformerInterface
 
     public function reverseTransform($value): array
     {
-        $names = array_unique(array_filter(array_map('trim',explode(',', $value))));
+        $names = array_unique(array_filter(array_map('trim', explode(',', $value))));
 
         $tags = $this->manager->getRepository('AppBundle:Tag')->findBy([
             'label' => $names
