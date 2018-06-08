@@ -106,13 +106,13 @@ class Event
      * @return Event
      * @throws \Exception
      */
-    public function setImageFile(File $imageFile = null )
+    public function setImageFile(File $imageFile = null)
     {
         $this->imageFile = $imageFile;
 
-        if ($imageFile)
+        if ($imageFile){
             $this->updateAt = new \DateTimeImmutable();
-
+        }
         return $this;
     }
 
