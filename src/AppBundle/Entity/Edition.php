@@ -71,6 +71,11 @@ class Edition
     private $event;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="edition", cascade={"persist", "remove"})
+     */
+    private $notifications;
+
+    /**
      * Get id.
      *
      * @return int
@@ -246,5 +251,48 @@ class Edition
     public function getEvent()
     {
         return $this->event;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notifications = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add notification.
+     *
+     * @param \AppBundle\Entity\Notification $notification
+     *
+     * @return Edition
+     */
+    public function addNotification(\AppBundle\Entity\Notification $notification)
+    {
+        $this->notifications[] = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Remove notification.
+     *
+     * @param \AppBundle\Entity\Notification $notification
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeNotification(\AppBundle\Entity\Notification $notification)
+    {
+        return $this->notifications->removeElement($notification);
+    }
+
+    /**
+     * Get notifications.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 }

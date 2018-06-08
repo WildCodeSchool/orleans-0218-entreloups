@@ -7,8 +7,8 @@
             {{ form_start(form) }}
                 {{ form_row(form.title, {'label' : 'Titre :'}) }}
                 {{ form_row(form.city, {'label' : 'Ville :'}) }}
-                {{ form_row(form.image, {'label' : 'Photo :'}) }}
-                {{ form_row(form.description, {'label' : 'Description :', 'attr' : {'rows' : '5'}}) }}
+                {{ form_row(form.imageFile, {'label' : 'Photo :', 'attr' : {'class' : 'custom-file-input'}}) }}
+                {{ form_row(form.description, {'label' : 'Description :', 'attr': {'novalidate': 'novalidate'}}) }}
                 <button type="submit"  class="btn btn-primary float-right">
                     <i class="fas fa-plus"></i> Créer
                 </button>
