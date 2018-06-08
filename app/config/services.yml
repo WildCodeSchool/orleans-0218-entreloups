@@ -33,8 +33,15 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
     app.form.type.event:
             class: AppBundle\Form\Type\EventType
             arguments: ["@doctrine.orm.entity_manager"]
             tags:
                 - { name: form.type }
+
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }
+
