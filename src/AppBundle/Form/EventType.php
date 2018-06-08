@@ -18,7 +18,9 @@ class EventType extends AbstractType
             ->add('city')
             ->add('imageFile', VichImageType::class)
             ->add('description');
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
