@@ -15,7 +15,7 @@
         <section class="d-flex flex-row">
 
             <div class="p-0 mr-5">
-                <a href="#"><img class="img-fluid" src="{{ asset('images/') }}{{ event.image }}" alt="{{ event.title }}"></a>
+                <img class="img-fluid" src="{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}">
             </div>
             <div class="p-0">
                 <div>

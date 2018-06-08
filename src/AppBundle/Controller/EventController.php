@@ -37,6 +37,8 @@ class EventController extends Controller
      *
      * @Route("/new", name="event_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -124,7 +126,7 @@ class EventController extends Controller
      *
      * @param Event $event The event entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createDeleteForm(Event $event)
     {
