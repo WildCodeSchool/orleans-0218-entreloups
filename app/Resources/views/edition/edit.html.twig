@@ -35,9 +35,11 @@
         <div class="col-md-6">
             <h3 class="mb-3">Publier une nouvelle :</h3>
             {{ form_start(notification_form) }}
-            {{ form_row(notification_form.content, {'label' : '250 caractères maximum :', 'attr' : {'rows' : '4', 'maxlength' : '250'}}) }}
+            {{ form_label(notification_form.content, '250 caractères maximum :') }}
+            {{ form_widget(notification_form.content, { 'attr': {'rows' : '4', 'maxlength' : '250'} }) }}
+            {{ form_errors(notification_form.content) }}
             <div class="text-center">
-                <button type="submit"  class="btn btn-primary">Publier   <i class="far fa-paper-plane"></i></button>
+                <button type="submit"  class="btn btn-primary mt-3">Publier   <i class="far fa-paper-plane"></i></button>
             </div>
             {{ form_end(notification_form) }}
             <h3 class="my-3">Les dernières nouvelles :</h3>
