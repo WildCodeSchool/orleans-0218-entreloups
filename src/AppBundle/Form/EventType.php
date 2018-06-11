@@ -16,7 +16,7 @@ class EventType extends AbstractType
     {
         $builder->add('title')
             ->add('city')
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', VichImageType::class, array('required' => false))
             ->add('description');
     }
 
