@@ -39,9 +39,9 @@ class TagController extends Controller
      */
     public function autoCompleteAction(Request $request)
     {
-        $isNotAjax = $request->isXmlHttpRequest();
+        $isAjax = $request->isXmlHttpRequest();
 
-        if (!$isNotAjax) {
+        if (!$isAjax) {
             $em = $this->getDoctrine()->getManager();
 
             $tags = $em->getRepository('AppBundle:Tag')->findAll();

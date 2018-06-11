@@ -9,18 +9,17 @@
 namespace AppBundle\Form\DataTransformer;
 
 use AppBundle\Entity\Tag;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\DataTransformerInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class TagsToCollectionTransformer implements DataTransformerInterface
 {
     /**
-     * @var ObjectManager
+     * @var EntityManager
      */
     private $manager;
 
-    public function __construct(ObjectManager $manager)
+    public function __construct(EntityManager $manager)
     {
         $this->manager = $manager;
     }
