@@ -39,7 +39,7 @@ class TagController extends Controller
      */
     public function autoCompleteAction(Request $request)
     {
-        if (!$request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
 
             $tags = $em->getRepository('AppBundle:Tag')->findAll();

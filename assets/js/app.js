@@ -18,7 +18,6 @@ let tags = new Bloodhound({
 });
 
 tags.clearPrefetchCache();
-
 tags.initialize(true);
 
 $('.tag-input').tagsinput({
