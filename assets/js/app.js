@@ -11,12 +11,15 @@ $('.confirm-alert').click(function () {
     return confirm ("Etes-vous sûr(e) de vouloir supprimer cet élément ?");
 });
 
-
 let tags = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('label'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: '/tag/tag.json',
 });
+
+tags.clearPrefetchCache();
+
+tags.initialize(true);
 
 $('.tag-input').tagsinput({
     typeaheadjs: [{

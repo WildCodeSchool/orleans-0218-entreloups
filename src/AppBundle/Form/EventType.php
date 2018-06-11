@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Tag;
 use AppBundle\Form\DataTransformer\TagsToCollectionTransformer;
 use AppBundle\Repository\TagRepository;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
@@ -16,11 +17,11 @@ class EventType extends AbstractType
     /**
      * @var TagRepository
      */
-    private $manager;
+    private $tagRepository;
 
-    public function __construct(TagRepository $manager)
+    public function __construct(TagRepository $tagRepository)
     {
-        $this->manager = $manager;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -37,7 +38,7 @@ class EventType extends AbstractType
             ));
         $builder->get('tags')
             ->addModelTransformer(new CollectionToArrayTransformer(), true)
-            ->addModelTransformer(new TagsToCollectionTransformer($this->manager), true);
+            ->addModelTransformer(new TagsToCollectionTransformer($this->tagRepository), true);
     }
     /**
      * {@inheritdoc}

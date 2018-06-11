@@ -17,11 +17,11 @@ class TagsToCollectionTransformer implements DataTransformerInterface
     /**
      * @var TagRepository
      */
-    private $manager;
+    private $tagRepository;
 
-    public function __construct(TagRepository $manager)
+    public function __construct(TagRepository $tagRepository)
     {
-        $this->manager = $manager;
+        $this->tagRepository = $tagRepository;
     }
 
     public function transform($value): string
@@ -33,7 +33,7 @@ class TagsToCollectionTransformer implements DataTransformerInterface
     {
         $names = array_unique(array_filter(array_map('trim', explode(',', $value))));
 
-        $tags = $this->manager->findBy([
+        $tags = $this->tagRepository->findBy([
             'label' => $names
         ]);
 
