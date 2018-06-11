@@ -9,24 +9,23 @@
 namespace AppBundle\Form\DataTransformer;
 
 use AppBundle\Entity\Tag;
-use Doctrine\ORM\EntityManager;
+use AppBundle\Repository\TagRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class TagsToCollectionTransformer implements DataTransformerInterface
 {
     /**
-     * @var EntityManager
+     * @var TagRepository
      */
     private $manager;
 
-    public function __construct(EntityManager $manager)
+    public function __construct(TagRepository $manager)
     {
         $this->manager = $manager;
     }
 
     public function transform($value): string
     {
-
         return implode(', ', $value);
     }
 
@@ -34,7 +33,7 @@ class TagsToCollectionTransformer implements DataTransformerInterface
     {
         $names = array_unique(array_filter(array_map('trim', explode(',', $value))));
 
-        $tags = $this->manager->getRepository('AppBundle:Tag')->findBy([
+        $tags = $this->manager->findBy([
             'label' => $names
         ]);
 

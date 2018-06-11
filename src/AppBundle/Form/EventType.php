@@ -3,13 +3,9 @@
 namespace AppBundle\Form;
 
 use AppBundle\Form\DataTransformer\TagsToCollectionTransformer;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Repository\TagRepository;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,11 +14,11 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 class EventType extends AbstractType
 {
     /**
-     * @var ObjectManager
+     * @var TagRepository
      */
     private $manager;
 
-    public function __construct(ObjectManager $manager)
+    public function __construct(TagRepository $manager)
     {
         $this->manager = $manager;
     }
