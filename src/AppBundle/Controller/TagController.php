@@ -39,11 +39,16 @@ class TagController extends Controller
      */
     public function autoCompleteAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $isAjax = $request->isXmlHttpRequest();
 
-        $tags = $em->getRepository('AppBundle:Tag')->findAll();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
 
-        return $this->json($tags, 200, [], ['groups' => ['public']]);
+            $tags = $em->getRepository('AppBundle:Tag')->findAll();
+
+            return $this->json($tags, 200, [], ['groups' => ['public']]);
+        }
+
     }
 
     /**
