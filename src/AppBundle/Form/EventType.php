@@ -35,7 +35,7 @@ class EventType extends AbstractType
         $builder->add('title')->add('city')->add('imageFile', VichImageType::class)->add('description')
             ->add('tags', TextType::class, array(
                 'required' => false,
-                'attr' => ['data-role' => 'tagsinput'],
+                'attr' => ['data-role' => 'tagsinput', 'class' => 'tag-input'],
             ));
         $builder->get('tags')
             ->addModelTransformer(new CollectionToArrayTransformer(), true)
