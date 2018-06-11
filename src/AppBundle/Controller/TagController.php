@@ -48,7 +48,6 @@ class TagController extends Controller
 
             return $this->json($tags, 200, [], ['groups' => ['public']]);
         }
-
     }
 
     /**
