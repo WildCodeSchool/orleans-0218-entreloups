@@ -6,6 +6,8 @@ $lightFontColor: #FFFFFF;
 
 @import "~flatpickr/dist/flatpickr.css";
 
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Exo+2');
+
 .row {
   margin: 0;
 }
@@ -14,3 +16,10 @@ $lightFontColor: #FFFFFF;
   padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Audiowide', cursive;
+}
+
+body {
+  font-family: 'Exo 2', sans-serif;
+}
