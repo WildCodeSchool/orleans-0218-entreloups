@@ -28,7 +28,9 @@ class EventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('city')->add('imageFile', VichImageType::class, array('required' => false))->add('description')
+        $builder->add('title')
+            ->add('city')
+            ->add('imageFile', VichImageType::class, array('required' => false))->add('description')
             ->add('tags', TextType::class, array(
                 'required' => false,
                 'attr' => ['data-role' => 'tagsinput', 'class' => 'tag-input'],
