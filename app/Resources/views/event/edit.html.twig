@@ -28,11 +28,16 @@
                 {{ form_errors(edit_form.description) }}
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col-md-7">
+                {{ form_row(edit_form.tags) }}
+            </div>
+        </div>
         <div class="form-row mt-3">
             <div class="col text-center">
-                <a class="btn btn-primary text-center float-left ml-3" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des événements</a>
+                <a class="btn btn-dark text-center float-left ml-3" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des événements</a>
 
-                <button class="btn btn-success mb-3" type="submit"><i class="far fa-save"></i> Enregister les modifications</button>
+                <button class="btn btn-primary mb-3" type="submit"><i class="far fa-save"></i> Enregister les modifications</button>
                 {{ form_end(edit_form) }}
             </div>
             {{ form_start(delete_form) }}
