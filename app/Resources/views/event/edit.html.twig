@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ event.title }}: gestion{% endblock %}
 {% block body %}
     <div class="shadow my-5">
     <h1 class="text-center mt-3">Gestion de votre événement</h1>
@@ -29,8 +29,10 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-7">
-                {{ form_row(edit_form.tags) }}
+            <div class="form-group col-md-7 pl-3">
+                {{ form_label(edit_form.tags) }}
+                {{ form_widget(edit_form.tags) }}
+                {{ form_errors(edit_form.tags) }}
             </div>
         </div>
         <div class="form-row mt-3">
