@@ -30,7 +30,12 @@ class EventType extends AbstractType
     {
         $builder->add('title')
             ->add('city')
-            ->add('imageFile', VichImageType::class, array('required' => false))->add('description')
+            ->add('imageFile', VichImageType::class, array(
+                'required' => false,
+                'download_link' => false,
+                'allow_delete' => false,
+            ))
+            ->add('description')
             ->add('tags', TextType::class, array(
                 'required' => false,
                 'attr' => ['data-role' => 'tagsinput', 'class' => 'tag-input'],
