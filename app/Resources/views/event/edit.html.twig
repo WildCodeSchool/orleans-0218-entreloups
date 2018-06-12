@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class=" my-5">
-    <h1 class="text-center mb-3 mt-3">Gestion de votre événement</h1>
+    <div class="shadow my-5">
+    <h1 class="text-center mt-3">Gestion de votre événement</h1>
         {{ form_start(edit_form) }}
         <div class="form-row">
-            <div class="form-group  col-md-4 pl-3">
+            <div class="form-group col-md-4 pl-3">
                 {{ form_label(edit_form.title, 'Titre :') }}
                 {{ form_widget(edit_form.title, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(edit_form.title) }}
             </div>
-            <div class="form-group  col-md-7 offset-md-1 pr-3">
+            <div class="form-group col-md-7 offset-md-1 pr-3">
                 {{ form_label(edit_form.city, 'Ville :') }}
                 {{ form_widget(edit_form.city, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(edit_form.city) }}
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group  col-md-4 pl-3">
+            <div class="form-group col-md-4 pl-3">
                 {{ form_label(edit_form.imageFile, 'Image :') }}
                 {{ form_widget(edit_form.imageFile, { 'attr': {'class': 'form-control mb-3'} }) }}
                 {{ form_errors(edit_form.imageFile) }}
             </div>
-            <div class="form-group  col-md-7 offset-md-1 pr-3">
+            <div class="form-group col-md-7 offset-md-1 pr-3">
                 {{ form_label(edit_form.description, 'Description :') }}
                 {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control', 'rows': '12'}}) }}
                 {{ form_errors(edit_form.description) }}

@@ -1,29 +1,30 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<h1 class="text-center">Modifier mes données personnelles</h1>
-<div class="row">
-    <div class="col-sm-6 mx-auto text-center shadow">
-        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-        <div class="form-row p-2 justify-content-center">
-            <label for="app_user_profile_email">Adresse e-mail</label>
-            {{ form_widget(form.email) }}
-        </div>
-        <div class="form-row p-2 justify-content-center">
-            <label for="app_user_profile_username">Nom d'utilisateur</label>
-            {{ form_widget(form.username) }}
-        </div>
-        <div class="form-row p-2 justify-content-center">
-            <label for="app_user_profile_current_password">Mot de passe actuel</label>
-            {{ form_widget(form.current_password) }}
-        </div>
-        {{ form_widget(form) }}
-        <div class="form-row">
-            <input type="submit" class="btn btn-success ml-5 mb-2 mr-5" value="{{ 'Modifier'|trans }}"/>
-            <a class="btn btn-warning mr-5 mb-2" href="/profile/change-password">Changer le mot de passe</a>
-            <a class="btn btn-dark mb-2" href="/profile">Retour</a>
-        </div>
-        <div class="form-row">
+<div class="row justify-content-center my-5">
+    <div class="col-6 shadow">
+        <h1 class="text-center">Modifier mes données</h1>
+        <div>
+            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+            <div class="form-group">
+                {{ form_row(form.email, {'label': 'Adresse e-mail :'}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.username, {'label': 'Nom d\'utilisateur :'}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.current_password, {'label': 'Mot de passe actuel :'}) }}
+            </div>
+            {{ form_widget(form) }}
+            <div class="form-group text-center">
+                <a class="btn btn-dark float-left" href="/profile"><i class="fas fa-chevron-left"></i> Retour</a>
+                <a class="btn btn-info" href="/profile/change-password">Changer le mot de passe</a>
+                <button type="submit" class="btn btn-primary float-right">
+                    <i class="fas fa-pencil-alt"></i> Modifier
+                </button>
+            </div>
+            <div class="form-row">
 
+            </div>
+            {{ form_end(form) }}
         </div>
-        {{ form_end(form) }}
     </div>
 </div>

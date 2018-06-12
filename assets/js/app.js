@@ -31,3 +31,5 @@ $('.tag-input').tagsinput({
         source: tags
     }]
 });
+
+$('#appbundle_event_imageFile_file').next().children().addClass('img-thumbnail');

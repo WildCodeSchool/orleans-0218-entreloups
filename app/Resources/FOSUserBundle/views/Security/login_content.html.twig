@@ -3,31 +3,32 @@
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-    <div class="row mt-2">
-        <div class="col-sm-6 shadow mx-auto">
+    <div class="row my-5">
+        <div class="offset-3 col-md-6 mx-auto shadow">
+            <h1 class="text-center mt-3">Se connecter</h1>
             <form action="{{ path("fos_user_security_check") }}" method="post">
                 {% if csrf_token %}
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                 {% endif %}
-                <div class="form-row p-2 justify-content-center">
-                    <label class="mr-2" for="username">{{ 'Nom d\'utilisateur: '|trans }}</label>
+                <div class="form-group text-center">
+                    <label class="d-block" for="username">{{ 'Nom d\'utilisateur : '|trans }}</label>
                     <input type="text" id="username" name="_username" value="{{ last_username }}"
                            required="required" autocomplete="username"/>
                 </div>
 
-                <div class="form-row p-2 justify-content-center">
-                    <label class="mr-4" for="password">{{ 'Mot de passe:'|trans }}</label>
-                    <input class="ml-2" type="password" id="password" name="_password" required="required"
+                <div class="form-group text-center">
+                    <label class="d-block" for="password">{{ 'Mot de passe :'|trans }}</label>
+                    <input type="password" id="password" name="_password" required="required"
                            autocomplete="current-password"/>
                 </div>
 
-                <div class="form-check p-2 text-center">
+                <div class="form-group text-center mb-2">
                     <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                    <label class="form-check-label mr-2" for="remember_me">{{ 'se souvenir de moi'|trans }}</label>
+                    <label class="form-check-label" for="remember_me">{{ 'Se souvenir de moi'|trans }}</label>
                 </div>
 
-                <div class="form-row p-2 justify-content-center">
-                    <input type="submit" class="btn btn-success" id="_submit" name="_submit"
+                <div class="form-group text-center">
+                    <input type="submit" class="btn btn-primary" id="_submit" name="_submit"
                            value="{{ 'Connexion'|trans }}"/>
                 </div>
             </form>
