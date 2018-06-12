@@ -21,14 +21,18 @@
     </div>
     <div id="carouselNews" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item text-center active">
-                <h5>Les news de l'édition</h5>
-            </div>
             {% for notification in edition.notifications %}
-                <div class="carousel-item text-center">
-                    <h5>Date de publication: {{ notification.publicationTime|date('Y-m-d H:i:s') }}</h5>
-                    <p>Contenu: {{ notification.content }}</p>
-                </div>
+                {% if loop.first %}
+                    <div class="carousel-item text-center active">
+                        <h5>Contenu: {{ notification.content }}</h5>
+                        <p>Date de publication: {{ notification.publicationTime|date('Y-m-d H:i:s') }}</p>
+                    </div>
+                {% else %}
+                    <div class="carousel-item text-center">
+                        <h5>Contenu: {{ notification.content }}</h5>
+                        <p>Date de publication: {{ notification.publicationTime|date('Y-m-d H:i:s') }}</p>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
         <a class="carousel-control-prev" href="#carouselNews" role="button" data-slide="prev">
