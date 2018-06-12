@@ -34,7 +34,13 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    AppBundle\Repository\TagRepository:
+        factory: 'Doctrine\ORM\EntityManagerInterface:getRepository'
+        arguments:
+            - AppBundle\Entity\Tag
+
     twig.extension.intl:
             class: Twig_Extensions_Extension_Intl
             tags:
                 - { name: twig.extension }
+

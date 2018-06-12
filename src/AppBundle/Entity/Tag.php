@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,8 +23,11 @@ class Tag
      */
     private $id;
 
+
     /**
      * @var string
+     *
+     * @Groups({"public"})
      *
      * @ORM\Column(name="label", type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Ce champ ne peut être vide")
@@ -62,6 +66,11 @@ class Tag
      * @return string
      */
     public function getLabel()
+    {
+        return $this->label;
+    }
+
+    public function __toString()
     {
         return $this->label;
     }
