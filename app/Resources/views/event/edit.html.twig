@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ event.title }}: gestion{% endblock %}
 {% block body %}
     <div class="shadow my-5">
     <h1 class="text-center mt-3">Gestion de votre événement</h1>
@@ -18,10 +18,9 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-4 pl-3">
-                {{ form_label(edit_form.image, 'Image :') }}
-                {{ form_widget(edit_form.image, { 'attr': {'class': 'form-control mb-3'} }) }}
-                {{ form_errors(edit_form.image) }}
-                <img class="adminEventImg img-fluid" src="http://via.placeholder.com/400x300" alt="Image de l'événement" />
+                {{ form_label(edit_form.imageFile, 'Image :') }}
+                {{ form_widget(edit_form.imageFile, { 'attr': {'class': 'form-control mb-3'} }) }}
+                {{ form_errors(edit_form.imageFile) }}
             </div>
             <div class="form-group col-md-7 offset-md-1 pr-3">
                 {{ form_label(edit_form.description, 'Description :') }}
