@@ -24,3 +24,23 @@ body {
   font-family: 'Exo 2', sans-serif;
   padding-bottom: 75px;
 }
+
+.imgEdition {
+  max-width: 200%;
+}
+
+p {
+  font-size: calc(11px + 10 * (100vw - 400px) / 1200);
+}
+
+h1 {
+  font-size: calc(20px + 15 * (100vw - 400px) / 1200);
+}
+
+h2 {
+  font-size: calc(19px + 14 * (100vw - 400px) / 1200);
+}
+
+h5 {
+  font-size: calc(16px + 11 * (100vw - 400px) / 1200);
+}
