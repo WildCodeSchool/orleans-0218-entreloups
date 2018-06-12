@@ -17,12 +17,12 @@ class EditionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Nom'])
+            ->add('name', TextType::class, ['label' => 'Nom :'])
             ->add(
                 'startDate',
                 DateTimeType::class,
                 [
-                    'label' => 'Date de début',
+                    'label' => 'Date de début :',
                     'widget' => 'single_text', 'model_timezone' => 'Europe/Paris', 'html5' => false,
                     'attr' => ['class' => 'flatpickr']
                 ]
@@ -31,15 +31,15 @@ class EditionType extends AbstractType
                 'endDate',
                 DateTimeType::class,
                 [
-                    'label' => 'Date de fin',
+                    'label' => 'Date de fin :',
                     'widget' => 'single_text', 'model_timezone' => 'Europe/Paris', 'html5' => false,
                     'attr' => ['class' => 'flatpickr']
                 ]
             )
-            ->add('place', TextType::class, ['label' => 'Lieu'])
-            ->add('hashtag', TextType::class, ['label' => 'Hashtag'])
+            ->add('place', TextType::class, ['label' => 'Lieu :'])
+            ->add('hashtag', TextType::class, ['label' => 'Hashtag :'])
             ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
+                'label' => 'Statut :',
                 'choices' => ['A venir' => true, 'Annulée' => false]
             ])
             ->add('event');
