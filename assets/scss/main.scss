@@ -44,3 +44,26 @@ h2 {
 h5 {
   font-size: calc(16px + 11 * (100vw - 400px) / 1200);
 }
+
+.date {
+  font-size: calc(9px + 8 * (100vw - 400px) / 1200);
+}
+
+.carousel-item {
+  overflow-wrap: break-word;
+  height: 200px;
+}
+
+.fa-chevron-left, .fa-chevron-right {
+  color: $mainColor;
+}
+
+.carousel-indicators {
+  bottom: 0px;
+  li {
+    background-color: #5a6268;
+  }
+  .active {
+    background-color: $mainColor;
+  }
+}
