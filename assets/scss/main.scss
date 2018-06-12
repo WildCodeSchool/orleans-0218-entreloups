@@ -30,23 +30,23 @@ body {
 }
 
 p {
-  font-size: calc(11px + 10 * (100vw - 400px) / 1200);
+  font-size: calc(11px + 10 * (100vw - 200px) / 1400);
 }
 
 h1 {
-  font-size: calc(20px + 15 * (100vw - 400px) / 1200);
+  font-size: calc(20px + 15 * (100vw - 200px) / 1400);
 }
 
 h2 {
-  font-size: calc(19px + 14 * (100vw - 400px) / 1200);
+  font-size: calc(19px + 14 * (100vw - 200px) / 1400);
 }
 
 h5 {
-  font-size: calc(16px + 11 * (100vw - 400px) / 1200);
+  font-size: calc(16px + 11 * (100vw - 200px) / 1400);
 }
 
 .date {
-  font-size: calc(9px + 8 * (100vw - 400px) / 1200);
+  font-size: calc(9px + 8 * (100vw - 200px) / 1400);
 }
 
 .carousel-item {
