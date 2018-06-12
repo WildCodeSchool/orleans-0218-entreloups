@@ -54,8 +54,10 @@ h5 {
   height: 200px;
 }
 
-.fa-chevron-left, .fa-chevron-right {
-  color: $mainColor;
+.carousel {
+  .fa-chevron-left, .fa-chevron-right {
+    color: $mainColor;
+  }
 }
 
 .carousel-indicators {
