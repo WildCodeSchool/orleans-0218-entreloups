@@ -1,55 +1,56 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ edition.event.title }} - {{ edition.name }}{% endblock %}
 {% block body %}
-    <h1>Edition</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ edition.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ edition.name }}</td>
-            </tr>
-            <tr>
-                <th>Startdate</th>
-                <td>{% if edition.startDate %}{{ edition.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Enddate</th>
-                <td>{% if edition.endDate %}{{ edition.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Place</th>
-                <td>{{ edition.place }}</td>
-            </tr>
-            <tr>
-                <th>Hashtag</th>
-                <td>{{ edition.hashtag }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ edition.status }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('edition_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('edition_edit', { 'id': edition.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-        <li>
-            <a class="btn btn-primary" href="{{ path('notification_new') }}" role="button"><i class="fas fa-pencil-alt"></i> Publier une nouvelle</a>
-        </li>
-    </ul>
+    <div class="row my-5">
+        <div class="shadow d-flex flex-row justify-content-center align-items-center">
+            <div class="col-2 d-none d-sm-block mt-3">
+                <figure>
+                    <img class="img-thumbnail imgEdition"
+                         src="{{ vich_uploader_asset(edition.event, 'imageFile') }}{{ edition.event.imageFile }}" alt="Image Evenement">
+                </figure>
+            </div>
+            <div class="col-8 offset-2">
+                <h1>{{ edition.event.title }}</h1>
+                <h2>{{ edition.name }}</h2>
+                <p>Début: {{ edition.startDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} Fin: {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                <p>Lieu: {{ edition.place }}</p>
+                <p>Hashtag Twitter: #{{ edition.hashtag }}</p>
+                <p>Statut: {{ edition.status }}</p>
+            </div>
+        </div>
+    </div>
+    <div id="carouselNews" class="carousel slide shadow p-5" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for notification in edition.notifications %}
+                {% if loop.first %}
+                    <li data-target="#carouselNews" data-slide-to="{{ loop.index }}" class="active"></li>
+                {% else %}
+                    <li data-target="#carouselNews" data-slide-to="{{ loop.index }}"></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for notification in edition.notifications|sort|reverse %}
+                {% if loop.first %}
+                    <div class="carousel-item text-center active">
+                        <p>{{ notification.content|nl2br }}</p>
+                        <p class="date">{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                    </div>
+                {% else %}
+                    <div class="carousel-item text-center">
+                        <p>{{ notification.content|nl2br }}</p>
+                        <p class="date">{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselNews" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselNews" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 {% endblock %}

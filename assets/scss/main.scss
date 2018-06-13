@@ -24,3 +24,48 @@ body {
   font-family: 'Exo 2', sans-serif;
   padding-bottom: 75px;
 }
+
+.imgEdition {
+  max-width: 200%;
+}
+
+p {
+  font-size: calc(11px + 10 * (100vw - 200px) / 1400);
+}
+
+h1 {
+  font-size: calc(20px + 15 * (100vw - 200px) / 1400);
+}
+
+h2 {
+  font-size: calc(19px + 14 * (100vw - 200px) / 1400);
+}
+
+h5 {
+  font-size: calc(16px + 11 * (100vw - 200px) / 1400);
+}
+
+.date {
+  font-size: calc(9px + 8 * (100vw - 200px) / 1400);
+}
+
+.carousel-item {
+  overflow-wrap: break-word;
+  height: 200px;
+}
+
+.carousel {
+  .fa-chevron-left, .fa-chevron-right {
+    color: $mainColor;
+  }
+}
+
+.carousel-indicators {
+  bottom: 0px;
+  li {
+    background-color: #5a6268;
+  }
+  .active {
+    background-color: $mainColor;
+  }
+}
