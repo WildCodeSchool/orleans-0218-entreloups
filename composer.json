@@ -36,7 +36,8 @@
         "symfony/symfony": "3.4.*",
         "twig/extensions": "^1.5",
         "twig/twig": "^1.0||^2.0",
-        "vich/uploader-bundle": "^1.8"
+        "vich/uploader-bundle": "^1.8",
+        "rexxars/html-validator": "^2.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
