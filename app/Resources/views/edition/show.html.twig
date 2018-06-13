@@ -6,13 +6,13 @@
             <div class="col-2 d-none d-sm-block mt-3">
                 <figure>
                     <img class="img-thumbnail imgEdition"
-                         src="{{ vich_uploader_asset(edition.event, 'imageFile') }}{{ edition.event.imageFile }}">
+                         src="{{ vich_uploader_asset(edition.event, 'imageFile') }}{{ edition.event.imageFile }}" alt="Image Evenement">
                 </figure>
             </div>
             <div class="col-8 offset-2">
                 <h1>{{ edition.event.title }}</h1>
                 <h2>{{ edition.name }}</h2>
-                <p>Début: {{ edition.startDate|date('Y-m-d H:i:s') }} Fin: {{ edition.endDate|date('Y-m-d H:i:s') }}</p>
+                <p>Début: {{ edition.startDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} Fin: {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
                 <p>Lieu: {{ edition.place }}</p>
                 <p>Hashtag Twitter: #{{ edition.hashtag }}</p>
                 <p>Statut: {{ edition.status }}</p>
