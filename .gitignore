@@ -21,3 +21,6 @@
 /web/images/*
 !/web/images/.gitkeep
 /src/AppBundle/Entity/*.php~
+!/var/reports
+/var/reports/*
+!var/reports/.gitkeep
