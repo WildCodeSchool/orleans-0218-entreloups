@@ -1,39 +1,33 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ event.title }}{% endblock %}
 {% block stylesheets %}
 {% endblock %}
 
 {% block body %}
-
-    <h1 class="text-center mt-5">{{ event.title }}</h1>
-    <div class="text-center mb-5">
-        <a type="button" class="btn btn-primary" href="#">Participer</a>
-    </div>
-
-    <div>
-
-        <section class="d-flex flex-row">
-
-            <div class="p-0 mr-5">
-                <img class="img-fluid" src="{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}">
-            </div>
-            <div class="p-0">
-                <div>
-                    <h3>Prochaine edition :</h3>
-                    <p></p>
+    <div class="my-5">
+        <h1 class="text-center mb-3">{{ event.title }}</h1>
+        <div class="text-center mb-4">
+            <a type="button" class="btn btn-primary" href="#">Participer</a>
+        </div>
+        <div>
+            <section class="d-flex flex-row">
+                <div class="p-0 mr-5">
+                    <img class="img-fluid" src="{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}">
                 </div>
-                <div>
-                    <h3>Descriptif :</h3>
-                    <p>{{ event.description }}</p>
+                <div class="p-0">
+                    <div>
+                        <h3>Prochaine edition :</h3>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h3>Descriptif :</h3>
+                        <p>{{ event.description }}</p>
+                    </div>
                 </div>
-            </div>
-
-        </section>
-
+            </section>
+        </div>
+        <div class="mt-5">
+            <a type="button" class="btn btn-dark" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour aux évènements</a>
+        </div>
     </div>
-
-    <div class="text-center m-5">
-        <a type="button" class="btn btn-primary" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour</a>
-    </div>
-
 {% endblock %}

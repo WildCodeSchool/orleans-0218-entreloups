@@ -3,16 +3,18 @@ let Encore = require('@symfony/webpack-encore');
 Encore
     .setOutputPath('web/build')
     .setPublicPath('/build')
-    .addEntry('app', './assets/js/app.js')
-    .addEntry('datepicker', './assets/js/datepicker.js')
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
+    .addEntry('datepicker', './assets/js/datepicker.js')
     .addStyleEntry('style', './assets/scss/main.scss')
+    .addStyleEntry('bootstrap-tagsinput', './assets/css/tagsinput.css')
+    .addEntry('app', './assets/js/app.js')
     .addStyleEntry('home', './assets/scss/home.scss')
     .addEntry('accueil', './assets/images/accueil.jpeg')
     .addStyleEntry('event', './assets/scss/event.scss')
     .addStyleEntry('edition', './assets/scss/edition.scss')
     .enableBuildNotifications()
     .autoProvidejQuery();
+
 
 module.exports = Encore.getWebpackConfig();

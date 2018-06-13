@@ -26,6 +26,7 @@
         "friendsofsymfony/user-bundle": "~2.0",
         "guzzlehttp/guzzle": "^6.3",
         "incenteev/composer-parameter-handler": "^2.0",
+        "phpunit/phpunit": "^7.2",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
         "squizlabs/php_codesniffer": "^3.2",
