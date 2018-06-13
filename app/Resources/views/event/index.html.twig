@@ -22,7 +22,9 @@
                 </div>
                 <div class="card-body">
                     <div class="card-title text-center">
-                        <a class="btn btn-primary" href="{{ path('event_show', { 'id': event.id }) }}">
+                        <a class="btn btn-primary"
+                           title="{{ event.title }}"
+                           href="{{ path('event_show', { 'id': event.id }) }}">
                             {% if event.title|length > 20 %}
                                 {{ event.title|slice(0, 20) ~ '...' }}
                             {% else %}
