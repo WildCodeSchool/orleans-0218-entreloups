@@ -20,17 +20,18 @@
             {{ form_start(edit_form) }}
             {{ form_widget(edit_form) }}
             <div class="text-center">
-                <button class="btn btn-primary mb-3" type="submit"><i class="far fa-save"></i> Enregister les
-                    modifications
+                <button class="btn btn-primary mb-3" type="submit">
+                    <i class="far fa-save"></i>
+                    Enregister les modifications
                 </button>
             </div>
             {{ form_end(edit_form) }}
 
-
-            <a class="btn btn-dark text-center float-left" href="{{ path('edition_index') }}"><i
-                        class="fas fa-chevron-left"></i> Retour à la liste des éditions</a>
+            <a class="btn btn-dark text-center float-left" href="{{ path('edition_index') }}">
+                <i class="fas fa-chevron-left"></i> Retour à la liste des éditions</a>
             {{ form_start(delete_form) }}
-            <button class="btn btn-danger float-right confirm-alert" type="submit"><i class="far fa-trash-alt"></i>
+            <button class="btn btn-danger float-right confirm-alert" type="submit">
+                <i class="far fa-trash-alt"></i>
                 Supprimer l'édition
             </button>
             {{ form_end(delete_form) }}
@@ -79,7 +80,8 @@
                                 <p class="card-text">Statut : {{ task.status }}</p>
                             </div>
                             <div class="card-footer">
-                                Date limite : {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}
+                                Date limite
+                                : {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}
                             </div>
                         </div>
                     {% endfor %}
