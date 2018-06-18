@@ -76,6 +76,11 @@ class Edition
     private $notifications;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="edition", cascade={"persist", "remove"})
+     */
+    private $tasks;
+
+    /**
      * Get id.
      *
      * @return int
@@ -295,4 +300,23 @@ class Edition
     {
         return $this->notifications;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTasks ()
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * @param mixed $tasks
+     * @return Edition
+     */
+    public function setTasks ($tasks)
+    {
+        $this->tasks = $tasks;
+        return $this;
+    }
+
 }

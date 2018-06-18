@@ -20,14 +20,19 @@
             {{ form_start(edit_form) }}
             {{ form_widget(edit_form) }}
             <div class="text-center">
-                <button class="btn btn-primary mb-3" type="submit"><i class="far fa-save"></i> Enregister les modifications</button>
+                <button class="btn btn-primary mb-3" type="submit"><i class="far fa-save"></i> Enregister les
+                    modifications
+                </button>
             </div>
             {{ form_end(edit_form) }}
 
 
-            <a class="btn btn-dark text-center float-left" href="{{ path('edition_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des éditions</a>
+            <a class="btn btn-dark text-center float-left" href="{{ path('edition_index') }}"><i
+                        class="fas fa-chevron-left"></i> Retour à la liste des éditions</a>
             {{ form_start(delete_form) }}
-            <button class="btn btn-danger float-right confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'édition</button>
+            <button class="btn btn-danger float-right confirm-alert" type="submit"><i class="far fa-trash-alt"></i>
+                Supprimer l'édition
+            </button>
             {{ form_end(delete_form) }}
 
         </div>
@@ -39,7 +44,7 @@
             {{ form_widget(notification_form.content, { 'attr': {'rows' : '4', 'maxlength' : '250'} }) }}
             {{ form_errors(notification_form.content) }}
             <div class="text-center">
-                <button type="submit"  class="btn btn-primary mt-3">Publier   <i class="far fa-paper-plane"></i></button>
+                <button type="submit" class="btn btn-primary mt-3">Publier <i class="far fa-paper-plane"></i></button>
             </div>
             {{ form_end(notification_form) }}
             <h3 class="my-3">Les dernières nouvelles :</h3>
@@ -56,6 +61,29 @@
                     {% endfor %}
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="row shadow">
+        <div class="col-md-6">
+            <h3>Liste des taches <a href="/task/{{ edition.id }}/new" class="btn btn-primary">Ajouter une tache</a></h3>
+            <div class="card-deck-wrapper mt-3">
+                <div class="card-deck">
+                    {% for task in edition.tasks %}
+                        <div class="card">
+                            <div class="card-header">
+                                {{ task.name }}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ task.description }}</p>
+                                <p class="card-text">Statut : {{ task.status }}</p>
+                            </div>
+                            <div class="card-footer">
+                                Date limite : {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
