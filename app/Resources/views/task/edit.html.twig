@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification de la tache{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('build/datepicker.js') }}"></script>
+{% endblock %}
+{% block body %}
+    <div class="row my-5">
+        <div class="offset-3 col-md-6 mx-auto shadow">
+            <h1 class="text-center mt-3">Modification de la tache pour {{ task.edition.name }}</h1>
+            {{ form_start(edit_form) }}
+
+            {{ form_row(edit_form.name) }}
+            {{ form_row(edit_form.status) }}
+            {{ form_row(edit_form.description) }}
+            {{ form_row(edit_form.deadline) }}
+            <div class="form-group">
+                <button class="btn btn-primary mb-2 float-right" type="submit"><i class="far fa-save"></i> Modifier</button>
+            </div>
+
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+
+{% endblock %}

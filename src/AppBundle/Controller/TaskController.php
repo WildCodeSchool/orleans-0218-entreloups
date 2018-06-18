@@ -52,4 +52,29 @@ class TaskController extends Controller
             'edition' => $edition,
         ));
     }
+
+    /**
+     * @param Request $request
+     * @param Edition $edition
+     * @param Task $task
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Route("/{edition}/edit/{id}", name="task_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Edition $edition, Task $task)
+    {
+        $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+        }
+
+        return $this->render('task/edit.html.twig', array(
+            'task' => $task,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
 }
