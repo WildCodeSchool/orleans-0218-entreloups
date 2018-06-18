@@ -8,7 +8,6 @@
 
 namespace AppBundle\Form;
 
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -25,7 +24,9 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, ['label' => 'Nom : '])
-        ->add('status', ChoiceType::class,
+        ->add(
+            'status',
+            ChoiceType::class,
             [
                 'label' => 'Statut :',
                 'choices' =>
@@ -36,9 +37,11 @@ class TaskType extends AbstractType
                         'Annulée' => 'Annulée'
                     ]
             ]
-            )
+        )
         ->add('description', TextareaType::class, ['label' => 'Description : '])
-        ->add('deadline', DateTimeType::class,
+        ->add(
+            'deadline',
+            DateTimeType::class,
             [
             'label' => 'Date d\'objectif :',
             'widget' => 'single_text', 'model_timezone' => 'Europe/Paris', 'html5' => false,
@@ -63,5 +66,4 @@ class TaskType extends AbstractType
     {
         return 'appbundle_task';
     }
-
 }

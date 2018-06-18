@@ -304,7 +304,7 @@ class Edition
     /**
      * @return mixed
      */
-    public function getTasks ()
+    public function getTasks()
     {
         return $this->tasks;
     }
@@ -313,10 +313,9 @@ class Edition
      * @param mixed $tasks
      * @return Edition
      */
-    public function setTasks ($tasks)
+    public function setTasks($tasks)
     {
         $this->tasks = $tasks;
         return $this;
     }
-
 }

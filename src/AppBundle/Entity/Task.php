@@ -164,7 +164,7 @@ class Task
     /**
      * @return mixed
      */
-    public function getEdition ()
+    public function getEdition()
     {
         return $this->edition;
     }
@@ -173,10 +173,9 @@ class Task
      * @param mixed $edition
      * @return Task
      */
-    public function setEdition ($edition)
+    public function setEdition($edition)
     {
         $this->edition = $edition;
         return $this;
     }
-
 }
