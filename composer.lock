@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "23be00d3075d284155c57d196571c582",
+    "content-hash": "2b2bfa26cc43efbb5587f6c304c602ab",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2469,6 +2469,47 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "rexxars/html-validator",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rexxars/html-validator.git",
+                "reference": "0efbde751442773c820e2525fb9fcd05a0618a23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rexxars/html-validator/zipball/0efbde751442773c820e2525fb9fcd05a0618a23",
+                "reference": "0efbde751442773c820e2525fb9fcd05a0618a23",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.2.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HtmlValidator": "library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Espen Hovlandsdal",
+                    "email": "espen@hovlandsdal.com"
+                }
+            ],
+            "description": "Validates HTML using Validator.nu",
+            "time": "2017-02-21T23:30:36+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
