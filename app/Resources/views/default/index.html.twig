@@ -10,6 +10,18 @@
             <h1 class="title">Welcome</h1>
         </div>
         <img class="backgrd" src="{{ asset('build/images/accueil.194f2205.jpeg') }}">
+        <div class="container">
+            <div class="searchBar shadow py-3">
+                <h2 class="text-center">Recherche d'évènement</h2>
+                {{ form_start(form) }}
+
+                <div class="form-inline justify-content-center">
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-primary ml-1">Rechercher</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
