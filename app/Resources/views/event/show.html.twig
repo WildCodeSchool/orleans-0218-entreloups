@@ -7,7 +7,7 @@
     <div class="my-5">
         <h1 class="text-center mb-3">{{ event.title }}</h1>
         <div class="text-center mb-4">
-            <a type="button" class="btn btn-primary" href="#">Participer</a>
+            <a role="button" class="btn btn-primary" href="#">Participer</a>
         </div>
         <div>
             <section class="d-flex flex-row">
@@ -27,7 +27,7 @@
             </section>
         </div>
         <div class="mt-5">
-            <a type="button" class="btn btn-dark" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour aux évènements</a>
+            <a role="button" class="btn btn-dark" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour aux évènements</a>
         </div>
     </div>
 {% endblock %}
