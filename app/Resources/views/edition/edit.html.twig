@@ -12,7 +12,7 @@
     <div class="row my-5 shadow">
         <div class="col-12">
             <h1 class="text-center mt-3">Gestion de l'édition: {{ edition.name }}</h1>
-            <h2 class="text-center mb-5">de l'événement: {{ edition.event.title }}</h2>
+            <h2 class="text-center mb-5">de l'évènement: {{ edition.event.title }}</h2>
         </div>
         <div class="col-md-6 mb-5">
             <h3 class="mb-3">Informations :</h3>
@@ -66,22 +66,20 @@
         </div>
     </div>
     <div class="row shadow mb-2">
-        <div class="p-2 d-flex flex-row">
-            <h3>Liste des tâches</h3>
-            <a href="/task/{{ edition.id }}/new" class="ml-2 btn btn-primary"><i class="fas fa-plus"></i> Ajouter une tâche</a>
-        </div>
+        <h3 class="p-2">Liste des tâches</h3>
+        <a href="/task/{{ edition.id }}/new" class="my-auto p-2 btn btn-primary"><i class="fas fa-plus"></i> Ajouter une tâche</a>
         <div class="card-deck-wrapper mt-3 mb-3">
             <div class="card-deck">
                 {% for task in edition.tasks %}
                     <div class="col-md-4 col-sm-6">
-                        <div class="card">
+                        <div class="card mb-2">
                             <div class="card-header">
                                 {{ task.name }}
                             </div>
                             <div class="card-body">
-                                <p class="card-text">{{ task.description }}</p>
-                                <p class="card-text">Statut : {{ task.status }}</p>
-                                <p class="card-text">Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                                <p class="card-text p-1 ml-1">{{ task.description }}</p>
+                                <p class="card-text p-1 ml-1">Statut : {{ task.status }}</p>
+                                <p class="card-text p-1 ml-1">Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
                             </div>
                             <div class="card-footer d-flex">
                                 <a href="/task/{{ edition.id }}/edit/{{ task.id }}" class="btn btn-primary mx-auto mt-2"><i class="far fa-save"></i> Modifier</a>

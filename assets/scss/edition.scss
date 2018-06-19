@@ -8,3 +8,9 @@
   height: 45vh;
   overflow-y: scroll;
 }
+
+.card-deck {
+  .card-body {
+    display: contents;
+  }
+}
