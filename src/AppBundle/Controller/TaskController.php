@@ -65,6 +65,7 @@ class TaskController extends Controller
     {
         $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
+        $deleteForm = $this->createDeleteForm($task, $edition);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -75,6 +76,7 @@ class TaskController extends Controller
         return $this->render('task/edit.html.twig', array(
             'task' => $task,
             'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -83,13 +85,40 @@ class TaskController extends Controller
      * @param Edition $edition
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/{edition}/delete/{id}", name="task_delete")
+     * @Method("DELETE")
      */
-    public function deleteAction(Task $task, Edition $edition)
+    public function deleteAction(Request $request, Task $task, Edition $edition)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
+        $form = $this->createDeleteForm($task, $edition);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($task);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+    }
+
+    /**
+     * Creates a form to delete a tag entity.
+     *
+     * @param Task $task The task entity
+     * @param Edition $edition
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Task $task, Edition $edition)
+    {
+        return $this->createFormBuilder()
+            ->setAction(
+                $this->generateUrl(
+                    'task_delete',
+                    array('id' => $task->getId(), 'edition' => $edition->getId())
+                )
+            )
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 }
