@@ -66,11 +66,14 @@
         </div>
     </div>
     <div class="row shadow mb-2">
-        <div class="col-md-12">
-            <h3>Liste des tâches <a href="/task/{{ edition.id }}/new" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter une tâche</a></h3>
-            <div class="card-deck-wrapper mt-3 mb-3">
-                <div class="card-deck">
-                    {% for task in edition.tasks %}
+        <div class="p-2 d-flex flex-row">
+            <h3>Liste des tâches</h3>
+            <a href="/task/{{ edition.id }}/new" class="ml-2 btn btn-primary"><i class="fas fa-plus"></i> Ajouter une tâche</a>
+        </div>
+        <div class="card-deck-wrapper mt-3 mb-3">
+            <div class="card-deck">
+                {% for task in edition.tasks %}
+                    <div class="col-md-4 col-sm-6">
                         <div class="card">
                             <div class="card-header">
                                 {{ task.name }}
@@ -78,14 +81,17 @@
                             <div class="card-body">
                                 <p class="card-text">{{ task.description }}</p>
                                 <p class="card-text">Statut : {{ task.status }}</p>
+                                <p class="card-text">Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
                             </div>
                             <div class="card-footer">
-                                Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}
-                                <a href="/task/{{ edition.id }}/edit/{{ task.id }}" class="btn btn-primary ml-5 mt-2"><i class="far fa-save"></i> Modifier la tâche</a>
+                                <div class="ml-3">
+                                    <a href="/task/{{ edition.id }}/edit/{{ task.id }}" class="btn btn-primary mt-2"><i class="far fa-save"></i> Modifier</a>
+                                    <a href="/task/{{ edition.id }}/delete/{{ task.id }}" class="btn btn-danger mt-2 confirm-alert"><i class="far fa-trash-alt"></i> Supprimer</a>
+                                </div>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

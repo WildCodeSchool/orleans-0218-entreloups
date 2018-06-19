@@ -31,7 +31,7 @@ class TaskController extends Controller
      * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request, Edition $edition)
+    public function newAction (Request $request, Edition $edition)
     {
         $task = new Task();
         $task->setEdition($edition);
@@ -61,7 +61,7 @@ class TaskController extends Controller
      * @Route("/{edition}/edit/{id}", name="task_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Edition $edition, Task $task)
+    public function editAction (Request $request, Edition $edition, Task $task)
     {
         $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
@@ -76,5 +76,20 @@ class TaskController extends Controller
             'task' => $task,
             'edit_form' => $editForm->createView(),
         ));
+    }
+
+    /**
+     * @param Task $task
+     * @param Edition $edition
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/{edition}/delete/{id}", name="task_delete")
+     */
+    public function deleteAction (Task $task, Edition $edition)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($task);
+        $em->flush();
+
+        return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
     }
 }
