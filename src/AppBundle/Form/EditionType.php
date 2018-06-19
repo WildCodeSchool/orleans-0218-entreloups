@@ -42,7 +42,10 @@ class EditionType extends AbstractType
                 'label' => 'Statut :',
                 'choices' => ['A venir' => true, 'Annulée' => false]
             ])
-            ->add('event');
+            ->add('event', TextType::class, array(
+                'label' => 'Évènement',
+                'disabled' => true,
+            ));
     }/**
      * {@inheritdoc}
      */
