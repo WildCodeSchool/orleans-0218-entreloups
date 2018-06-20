@@ -15,9 +15,9 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('label', TextType::class, array(
-            'label' => 'Tag à rechercher : ',
+            'label' => false,
             'attr' => array(
-                'placeholder' => 'Recherche d\'un évènement par tag',
+                'placeholder' => 'Recherche par tag',
             ),
         ));
     }

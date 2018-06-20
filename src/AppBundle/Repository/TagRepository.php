@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class TagRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByLike(string $label)
+    {
+        return $this->createQueryBuilder('t')
+                ->where('t.label LIKE :label')
+                ->setParameter('label', '%' . $label . '%')
+                ->getQuery()
+                ->getResult();
+    }
 }
