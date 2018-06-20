@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Event;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -42,7 +44,11 @@ class EditionType extends AbstractType
                 'label' => 'Statut :',
                 'choices' => ['A venir' => true, 'Annulée' => false]
             ])
-            ->add('event');
+            ->add('event', EntityType::class, [
+                'class' => Event::class,
+                'label' => 'Évènement',
+                'disabled' => true,
+            ]);
     }/**
      * {@inheritdoc}
      */
