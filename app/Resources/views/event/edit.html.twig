@@ -27,6 +27,12 @@
                 {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control', 'rows': '12'}}) }}
                 {{ form_errors(edit_form.description) }}
                 <a class="btn btn-primary mt-3" href="{{ path('edition_new', {'event' : event.id}) }}"><i class="fas fa-plus"></i> Ajouter une édition</a>
+                <h3 class="mt-2">Liste des éditions</h3>
+                <ul>
+                    {% for edition in event.editions %}
+                        <li><a href="{{ path('edition_edit', {'id' : edition.id}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         <div class="form-row">

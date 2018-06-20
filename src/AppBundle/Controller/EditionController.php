@@ -142,7 +142,7 @@ class EditionController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('edition_index');
+        return $this->redirectToRoute('event_index');
     }
 
     /**
