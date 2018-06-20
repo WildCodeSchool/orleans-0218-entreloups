@@ -30,15 +30,13 @@ class UserController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $form = $this->createForm(UserType::class);
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest(($request));
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $user = $form->getData();
-            $email = $user->getEmail();
-            $searchedUser = null;
-            $searchedUser = $em->getRepository(User::class)->findOneByEmail($email);
+            $searchedUser = $em->getRepository(User::class)->findOneByEmail($user->getEmail());
 
             return $this->render('user/searchUser.html.twig', array(
                 'form' => $form->createView(),
