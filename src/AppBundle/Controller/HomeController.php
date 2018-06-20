@@ -25,7 +25,6 @@ class HomeController extends Controller
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
             $tagName = $data['label'];
-            $events = null;
             $events = $em->getRepository(Event::class)->findEventsByTag($tagName);
 
             return $this->render('default/index.html.twig', [
