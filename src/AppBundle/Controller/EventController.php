@@ -88,6 +88,7 @@ class EventController extends Controller
         $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
+        $today = new \DateTime();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -99,6 +100,7 @@ class EventController extends Controller
             'event' => $event,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'today' => $today,
         ));
     }
 
