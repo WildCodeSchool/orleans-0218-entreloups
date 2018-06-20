@@ -1,5 +1,5 @@
 {% if events is defined %}
-    {% if events is not null %}
+    {% if events is not empty %}
         {% for event in events %}
             <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
                 <div class="card mr-3 mb-4">
@@ -30,15 +30,15 @@
                             <div class="float-left ml-2">
                                 {% if event.tags|length > 0 %}
                                     {% for tag in event.tags|slice(0,10) %}
-                                        {% if tags is defined %}
-                                            {% if tag in tags %}
+                                        {% if tagName is defined %}
+                                            {% if tag.label matches '/%tag%/'|replace({'%tag%': tagName}) %}
                                                 <span class="badge badge-primary pb-1">{{ tag }}</span>
                                             {% endif %}
                                         {% else %}
                                                 <span class="badge badge-primary pb-1">{{ tag }}</span>
                                         {% endif %}
                                     {% endfor %}
-                                    {% else %}
+                                {% else %}
                                     <span>Pas de tag</span>
                                 {% endif %}
                             </div>
