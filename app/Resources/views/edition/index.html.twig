@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Liste des éditions{% endblock %}
 {% block body %}
     <h1>Editions list</h1>
 
@@ -40,10 +40,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('edition_new') }}">Create a new edition</a>
-        </li>
-    </ul>
 {% endblock %}
