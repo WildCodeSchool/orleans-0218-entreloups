@@ -6,6 +6,7 @@ use AppBundle\Form\DataTransformer\TagsToCollectionTransformer;
 use AppBundle\Repository\TagRepository;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,7 +36,7 @@ class EventType extends AbstractType
                 'download_link' => false,
                 'allow_delete' => false,
             ))
-            ->add('description')
+            ->add('description', TextareaType::class)
             ->add('tags', TextType::class, array(
                 'required' => false,
                 'attr' => ['data-role' => 'tagsinput', 'class' => 'tag-input'],

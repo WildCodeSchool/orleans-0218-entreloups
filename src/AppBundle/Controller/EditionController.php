@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Edition;
+use AppBundle\Entity\Event;
 use AppBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -34,14 +35,19 @@ class EditionController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Event $event
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
      * Creates a new edition entity.
      *
-     * @Route("/new", name="edition_new")
+     * @Route("/{event}/new", name="edition_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Event $event)
     {
         $edition = new Edition();
+        $edition->setEvent($event);
         $form = $this->createForm('AppBundle\Form\EditionType', $edition);
         $form->handleRequest($request);
 
@@ -136,7 +142,7 @@ class EditionController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('edition_index');
+        return $this->redirectToRoute('event_index');
     }
 
     /**

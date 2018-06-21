@@ -2,10 +2,11 @@
   width: 16rem;
   transition: 0.5s ease;
   .overlay {
+    bottom: 32%;
     .text-description {
       position: absolute;
+      min-height: 160px;
       top: 0;
-      bottom: 34%;
       left: 0;
       right: 0;
       opacity: 0;
@@ -23,7 +24,13 @@
     }
   }
   img {
-    max-height: 172px;
+    max-height: 160px;
+  }
+  h2 {
+    font-size: calc(12px + 8 * (40vw - 220px) / 1800);
+  }
+  h3 {
+    font-size: calc(10px + 8 * (40vw - 220px) / 1800);
   }
 }
 

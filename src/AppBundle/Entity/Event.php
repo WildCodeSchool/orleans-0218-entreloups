@@ -2,7 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Edition;
+use AppBundle\Entity\Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -50,7 +54,7 @@ class Event
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"}, inversedBy="events")
      */
     private $tags;
 
@@ -236,22 +240,24 @@ class Event
         $this->description = $description;
         return $this;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->editions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->editions = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
      * Add edition.
      *
-     * @param \AppBundle\Entity\Edition $edition
+     * @param Edition $edition
      *
      * @return Event
      */
-    public function addEdition(\AppBundle\Entity\Edition $edition)
+    public function addEdition(Edition $edition)
     {
         $this->editions[] = $edition;
 
@@ -261,11 +267,11 @@ class Event
     /**
      * Remove edition.
      *
-     * @param \AppBundle\Entity\Edition $edition
+     * @param Edition $edition
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeEdition(\AppBundle\Entity\Edition $edition)
+    public function removeEdition(Edition $edition)
     {
         return $this->editions->removeElement($edition);
     }
@@ -283,11 +289,11 @@ class Event
     /**
      * Add tag.
      *
-     * @param \AppBundle\Entity\Tag $tag
+     * @param Tag $tag
      *
      * @return Event
      */
-    public function addTag(\AppBundle\Entity\Tag $tag)
+    public function addTag(Tag $tag)
     {
         $this->tags[] = $tag;
 
@@ -297,11 +303,11 @@ class Event
     /**
      * Remove tag.
      *
-     * @param \AppBundle\Entity\Tag $tag
+     * @param Tag $tag
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
+    public function removeTag(Tag $tag)
     {
         return $this->tags->removeElement($tag);
     }
