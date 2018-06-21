@@ -18,7 +18,7 @@ class EventFixtures extends Fixture
             $event->setTitle(ucfirst($faker->words(3, true)));
             $event->setCity($faker->city);
             $event->setDescription($faker->text);
-            $event->setImage('image.jpg');
+            $event->setImageName('image.jpg');
             $manager->persist($event);
         }
 
