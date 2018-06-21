@@ -31,7 +31,7 @@
                                 {% if event.tags|length > 0 %}
                                     {% for tag in event.tags|slice(0,10) %}
                                         {% if tagName is defined %}
-                                            {% if tag.label matches '/%tag%/'|replace({'%tag%': tagName}) %}
+                                            {% if tag.label matches '/%tag%/i'|replace({'%tag%': tagName}) %}
                                                 <span class="badge badge-primary pb-1">{{ tag }}</span>
                                             {% endif %}
                                         {% else %}
