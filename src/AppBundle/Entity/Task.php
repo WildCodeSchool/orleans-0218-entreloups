@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Task
@@ -45,6 +47,9 @@ class Task
     /**
      * @var \DateTime
      *
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide"
+     * )
      * @ORM\Column(name="deadline", type="datetime")
      */
     private $deadline;
