@@ -62,6 +62,7 @@ class EditionController extends Controller
         return $this->render('edition/new.html.twig', array(
             'edition' => $edition,
             'form' => $form->createView(),
+            'event' => $event
         ));
     }
 

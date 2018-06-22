@@ -26,7 +26,7 @@
                                     {{ event.title }}
                                 {% endif %}
                             </h2>
-                            <h3 class="float-left mt-2">Tags :</h3>
+                            <h3 class="float-left mt-2">Mots-clés :</h3>
                             <div class="float-left ml-2">
                                 {% if event.tags|length > 0 %}
                                     {% for tag in event.tags|slice(0,10) %}
@@ -39,7 +39,7 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% else %}
-                                    <span>Pas de tag</span>
+                                    <span>Pas de mot-clé</span>
                                 {% endif %}
                             </div>
                         </div>

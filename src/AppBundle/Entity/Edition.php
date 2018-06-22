@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Event;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Edition
@@ -32,6 +33,9 @@ class Edition
     /**
      * @var \DateTime
      *
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide"
+     * )
      * @ORM\Column(name="start_date", type="datetime")
      */
     private $startDate;
@@ -39,6 +43,9 @@ class Edition
     /**
      * @var \DateTime
      *
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide"
+     * )
      * @ORM\Column(name="end_date", type="datetime")
      */
     private $endDate;

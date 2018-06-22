@@ -27,8 +27,8 @@
             </div>
             {{ form_end(edit_form) }}
 
-            <a class="btn btn-dark text-center float-left" href="{{ path('edition_index') }}">
-                <i class="fas fa-chevron-left"></i> Retour à la liste des éditions</a>
+            <a class="btn btn-dark text-center float-left" href="{{ path('event_edit', {'id' : edition.event.id}) }}">
+                <i class="fas fa-chevron-left"></i> Retour à l'évènement</a>
             {{ form_start(delete_form) }}
             <button class="btn btn-danger float-right confirm-alert" type="submit">
                 <i class="far fa-trash-alt"></i>
