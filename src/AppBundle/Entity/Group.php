@@ -36,7 +36,7 @@ class Group extends BaseGroup
     /**
      * @return int
      */
-    public function getId (): int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -45,7 +45,7 @@ class Group extends BaseGroup
      * @param int $id
      * @return Group
      */
-    public function setId (int $id): Group
+    public function setId(int $id): Group
     {
         $this->id = $id;
         return $this;
@@ -54,7 +54,7 @@ class Group extends BaseGroup
     /**
      * @return mixed
      */
-    public function getEdition ()
+    public function getEdition()
     {
         return $this->edition;
     }
@@ -63,10 +63,9 @@ class Group extends BaseGroup
      * @param mixed $edition
      * @return Group
      */
-    public function setEdition ($edition)
+    public function setEdition($edition)
     {
         $this->edition = $edition;
         return $this;
     }
-
 }

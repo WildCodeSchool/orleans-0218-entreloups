@@ -3,7 +3,7 @@
 {% block title %}Gestion du Staff{% endblock %}
 
 {% block body %}
-<div class="row">
+<div class="row my-5">
     <div class="col-12 shadow">
         <h1>Gestion du Staff de {{ edition.name }}</h1>
         <div class="table-responsive">
@@ -11,12 +11,13 @@
                 <thead>
                 <tr>
                     {% for group in groups %}
-                        <th>{{ group.name }}</th>
+                        {% for role in group.roles %}
+                            <td>{{ role }}</td>
+                        {% endfor %}
                     {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
         </div>

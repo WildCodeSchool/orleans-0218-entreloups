@@ -51,4 +51,18 @@ class GroupController extends Controller
             'edition' => $edition,
         ));
     }
+
+    /**
+     * @Route("/{edition}/list", name="group_index")
+     * @Method("GET")
+     * @param Edition $edition
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexAction(Edition $edition)
+    {
+        $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:Group');
+        $groups = $em->findByEdition($edition->getId());
+
+        return $this->render('group/index.html.twig', ['edition' => $edition, 'groups' => $groups]);
+    }
 }

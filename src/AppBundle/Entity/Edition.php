@@ -334,7 +334,7 @@ class Edition
     /**
      * @return mixed
      */
-    public function getGroups ()
+    public function getGroups()
     {
         return $this->groups;
     }
@@ -343,7 +343,7 @@ class Edition
      * @param mixed $groups
      * @return Edition
      */
-    public function setGroups ($groups)
+    public function setGroups($groups)
     {
         $this->groups = $groups;
         return $this;
