@@ -88,6 +88,11 @@ class Edition
     private $tasks;
 
     /**
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="edition")
+     */
+    protected $groups;
+
+    /**
      * Get id.
      *
      * @return int
