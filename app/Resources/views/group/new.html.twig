@@ -7,7 +7,8 @@
         <div class="offset-3 col-md-6 shadow">
             <h1 class="text-center mt-3">Créer votre groupe lié à {{ edition.name }}</h1>
             {{ form_start(form) }}
-            {{ form_row(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.roles, {'attr' : {'class' : 'custom-select'}}) }}
             <button type="submit"  class="btn btn-primary float-right">
                 <i class="fas fa-plus"></i> Créer
             </button>

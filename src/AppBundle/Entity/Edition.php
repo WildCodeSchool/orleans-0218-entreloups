@@ -330,4 +330,22 @@ class Edition
         $this->tasks = $tasks;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups ()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     * @return Edition
+     */
+    public function setGroups ($groups)
+    {
+        $this->groups = $groups;
+        return $this;
+    }
 }
