@@ -48,6 +48,7 @@ class GroupController extends Controller
         return $this->render('group/new.html.twig', array(
             'group' => $group,
             'form' => $form->createView(),
+            'edition' => $edition,
         ));
     }
 }
