@@ -1,4 +1,9 @@
 {% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/event.css') }}">
+{% endblock %}
+
 <div class="row justify-content-center my-5">
     <div class="col-6 shadow text-center">
         <h1 class="mt-4">Mon compte</h1>
@@ -16,3 +21,52 @@
     </div>
 </div>
 <h2 class="text-center mt-2">Mes évènements</h2>
+<div class="row">
+    {% for event in user.events %}
+        <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
+            <div class="card mr-3 mb-4">
+                <a href="{{ path('event_show', { 'id': event.id }) }}">
+                    <div class="overlay">
+                        <img class="card-img-top image"
+                             src="{{ vich_uploader_asset(event, 'imageFile') }}{{ event.imageFile }}"
+                             alt="{{ event.title }}">
+                        <span class="text-description p-1">
+                                {% if event.description|length > 150 %}
+                                    {{ event.description|slice(0, 150) ~ '...' }}
+                                {% else %}
+                                    {{ event.description }}
+                                {% endif %}
+                            </span>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <div class="card-title text-center">
+                        <h2 class="text-center">
+                            {% if event.title|length > 20 %}
+                                {{ event.title|slice(0, 20) ~ '...' }}
+                            {% else %}
+                                {{ event.title }}
+                            {% endif %}
+                        </h2>
+                        <h3 class="float-left mt-2">Mots-clés :</h3>
+                        <div class="float-left ml-2">
+                            {% if event.tags|length > 0 %}
+                                {% for tag in event.tags|slice(0,10) %}
+                                    {% if tagName is defined %}
+                                        {% if tag.label matches '/%tag%/i'|replace({'%tag%': tagName}) %}
+                                            <span class="badge badge-primary pb-1">{{ tag }}</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="badge badge-primary pb-1">{{ tag }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <span>Pas de mot-clé</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
