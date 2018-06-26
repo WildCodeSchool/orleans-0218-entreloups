@@ -84,7 +84,7 @@ class UserController extends Controller
                         'form' => $form->createView(),
                         'edition' => $edition,
                     ));
-                }else {
+                } else {
                     $groupIsCreated = false;
                 }
             }
