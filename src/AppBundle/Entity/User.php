@@ -43,6 +43,14 @@ class User extends BaseUser
      */
     private $location;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @ORM\JoinTable(name="user_group_relation",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")})
+     */
+    protected $groups;
+
 
     /**
      * Get id
@@ -125,4 +133,24 @@ class User extends BaseUser
     {
         return $this->location;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups ()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     * @return User
+     */
+    public function setGroups ($groups)
+    {
+        $this->groups = $groups;
+        return $this;
+    }
+
+
 }

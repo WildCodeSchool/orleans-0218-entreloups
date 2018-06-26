@@ -1,19 +1,22 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: wilder21
- * Date: 20/06/18
- * Time: 10:04
+ * User: aragorn
+ * Date: 26/06/18
+ * Time: 11:41
  */
 
 namespace AppBundle\Form;
 
+
+use AppBundle\Entity\Role;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class InvitationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -21,7 +24,15 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class);
+            ->add('email', EmailType::class)
+            ->add('role', EntityType::class, [
+                'class' => Role::class,
+                'choice_label' => 'label',
+                'multiple' => false,
+                'expanded' => false,
+                'label' => 'Role :',
+            ])
+        ;
     }
 
     /**
@@ -30,7 +41,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User',
+            'data_class' => null,
         ));
     }
 
@@ -39,6 +50,6 @@ class UserType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_user';
+        return 'appbundle_invitation';
     }
 }

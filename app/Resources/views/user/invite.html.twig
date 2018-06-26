@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inviter un utilisateur{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-6 offset-3 text-center shadow my-5">
+            <h1 class="text-center mt-3">Inviter un utilisateur</h1>
+            {{ form_start(form) }}
+
+            {{ form_label(form.email, 'Indiquez l\'e-mail de l\'utilisateur à inviter :') }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+            {#{{ form_label(form.role) }}#}
+            {#{{ form_widget(form.role) }}#}
+            {#{{ form_errors(form.role) }}#}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2 text-center">Inviter <i class="fas fa-search"></i></button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
