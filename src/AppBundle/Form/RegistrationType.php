@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 
-
 class RegistrationType extends AbstractType
 {
     /**
