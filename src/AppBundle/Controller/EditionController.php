@@ -57,12 +57,7 @@ class EditionController extends Controller
             $em->persist($edition);
             $em->flush();
 
-            return $this->redirectToRoute('edition_show',
-                array(
-                    'slug' => $event->getSlug(),
-                    'id' => $edition->getId()
-                )
-            );
+            return $this->redirectToRoute('edition_show', array('id' => $edition->getId()));
         }
 
         return $this->render('edition/new.html.twig', array(
