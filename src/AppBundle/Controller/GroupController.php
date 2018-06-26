@@ -21,36 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class GroupController extends Controller
 {
-    /**
-     * Creates a new group entity.
-     *
-     * @Route("/{edition}/new", name="group_new")
-     * @Method({"GET", "POST"})
-     * @param Request $request
-     * @param Edition $edition
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function newAction(Request $request, Edition $edition)
-    {
-        $group = new Group('');
-        $form = $this->createForm('AppBundle\Form\GroupType', $group);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $group->setEdition($edition);
-            $em->persist($group);
-            $em->flush();
-
-            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
-        }
-
-        return $this->render('group/new.html.twig', array(
-            'group' => $group,
-            'form' => $form->createView(),
-            'edition' => $edition,
-        ));
-    }
 
     /**
      * @Route("/{edition}/list", name="group_index")
@@ -61,7 +31,7 @@ class GroupController extends Controller
     public function indexAction(Edition $edition)
     {
         $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:Group');
-        $groups = $em->findByEdition($edition->getId());
+        $groups = $em->findByEdition($edition);
 
         return $this->render('group/index.html.twig', ['edition' => $edition, 'groups' => $groups]);
     }

@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Edition;
+use AppBundle\Entity\Group;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\InvitationType;
@@ -67,25 +68,43 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
-            $user = $em->getRepository('AppBundle:User')->findOneByEmail($data['email']);
+            $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
             $groups = $edition->getGroups();
             $roleToCheck = strtoupper($data['role']->getLabel());
             $groupIsCreated = true;
+            if (empty($group)) {
+                $groupIsCreated = false;
+            }
             foreach ($groups as $group) {
                 $role = implode($group->getRoles());
                 if ($role == $roleToCheck) {
-                    $group->
+                    $user->addGroup($group);
+                    $em->flush();
+                    return $this->render('user/invite.html.twig', array(
+                        'form' => $form->createView(),
+                        'edition' => $edition,
+                    ));
+                }else {
+                    $groupIsCreated = false;
                 }
             }
-            if (in_array(strtoupper($data['role']->getLabel()), $roles)) {
-                var_dump('success');
-            }else {
-                var_dump('problem');
+            if ($groupIsCreated == false) {
+                $group = new Group($edition->getEvent()->getTitle().$edition->getName().$roleToCheck);
+                $group->addRole($data['role']);
+                $group->setEdition($edition);
+                $user->addGroup($group);
+                $em->persist($group);
+                $em->flush();
+                return $this->render('user/invite.html.twig', array(
+                    'form' => $form->createView(),
+                    'edition' => $edition,
+                ));
             }
         }
 
         return $this->render('user/invite.html.twig', array(
             'form' => $form->createView(),
+            'edition' => $edition,
         ));
     }
 }

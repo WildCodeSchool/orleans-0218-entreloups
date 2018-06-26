@@ -9,13 +9,13 @@
             {{ form_label(form.email, 'Indiquez l\'e-mail de l\'utilisateur à inviter :') }}
             {{ form_widget(form.email) }}
             {{ form_errors(form.email) }}
-            {#{{ form_label(form.role) }}#}
-            {#{{ form_widget(form.role) }}#}
-            {#{{ form_errors(form.role) }}#}
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary m-2 text-center">Inviter <i class="fas fa-search"></i></button>
+            {{ form_label(form.role) }}
+            {{ form_widget(form.role) }}
+            {{ form_errors(form.role) }}
+            <div class="form-group mt-4">
+                <a class="btn btn-dark mb-2 float-left" href="{{ path('group_index', {'edition' : edition.id}) }}"><i class="fas fa-chevron-left"></i> Retour à la liste du staff</a>
+                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Inviter</button>
             </div>
-
             {{ form_end(form) }}
         </div>
     </div>

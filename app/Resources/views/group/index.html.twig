@@ -18,8 +18,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for group in groups %}
+                <tr>
+                    {% for user in group.users|sort %}
+                        <td>{{ user.username }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
                 </tbody>
             </table>
+            <a class="btn btn-dark mb-2 float-left" href="{{ path('edition_edit', {'id' : edition.id}) }}"><i class="fas fa-chevron-left"></i> Retour à l'édition</a>
+            <a class="btn btn-primary mb-2 float-right" href="{{ path('invite_user', {'edition' : edition.id}) }}"><i class="fas fa-plus"></i> Inviter un utilisateur</a>
         </div>
     </div>
 </div>

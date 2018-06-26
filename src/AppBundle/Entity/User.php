@@ -134,23 +134,4 @@ class User extends BaseUser
         return $this->location;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getGroups ()
-    {
-        return $this->groups;
-    }
-
-    /**
-     * @param mixed $groups
-     * @return User
-     */
-    public function setGroups ($groups)
-    {
-        $this->groups = $groups;
-        return $this;
-    }
-
-
 }
