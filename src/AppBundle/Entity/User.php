@@ -66,6 +66,10 @@ class User extends BaseUser
      */
     private $codePostal;
 
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="creator")
+     */
+    private $events;
+
     /**
      * Get id
      *
@@ -218,5 +222,41 @@ class User extends BaseUser
     public function getCodePostal()
     {
         return $this->codePostal;
+    }
+
+    /**
+     * Add event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return User
+     */
+    public function addEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvent(\AppBundle\Entity\Event $event)
+    {
+        return $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

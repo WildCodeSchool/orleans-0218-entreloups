@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un groupe{% endblock %}
+
+{% block body %}
+    <div class="row my-5">
+        <div class="offset-3 col-md-6 shadow">
+            <h1 class="text-center mt-3">Créer votre groupe lié à {{ edition.name }}</h1>
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.roles, {'attr' : {'class' : 'custom-select'}}) }}
+            <button type="submit"  class="btn btn-primary float-right">
+                <i class="fas fa-plus"></i> Créer
+            </button>
+            {{ form_end(form) }}
+            <a href="{{ path('edition_edit', {'id' : edition.id}) }}" class="btn btn-dark mb-3">
+                <i class="fas fa-chevron-left"></i> Retour
+            </a>
+        </div>
+    </div>
+{% endblock %}

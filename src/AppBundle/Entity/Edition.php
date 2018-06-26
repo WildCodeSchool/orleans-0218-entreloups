@@ -88,6 +88,11 @@ class Edition
     private $tasks;
 
     /**
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="edition")
+     */
+    protected $groups;
+
+    /**
      * Get id.
      *
      * @return int
@@ -323,6 +328,24 @@ class Edition
     public function setTasks($tasks)
     {
         $this->tasks = $tasks;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     * @return Edition
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
         return $this;
     }
 }
