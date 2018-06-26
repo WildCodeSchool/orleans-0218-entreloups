@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer une tâche{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('build/datepicker.js') }}"></script>
+{% endblock %}
+{% block body %}
+    <div class="row my-5">
+        <div class="offset-3 col-md-6 mx-auto shadow">
+            <h1 class="text-center mt-3">Créer une tâche pour {{ edition.name }}</h1>
+            {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.status) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.deadline) }}
+            <div class="form-group">
+                <a class="btn btn-dark mb-2 float-left" href="{{ path('edition_edit', {'id' : edition.id}) }}"><i class="fas fa-chevron-left"></i> Retour à l'édition</a>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary mb-2 float-right" type="submit"><i class="fas fa-plus"></i> Créer</button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

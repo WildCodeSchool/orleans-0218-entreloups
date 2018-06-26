@@ -35,6 +35,19 @@ class Tag
      */
     private $label;
 
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Event", cascade={"persist"}, mappedBy="tags")
+     */
+    private $events;
+
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", cascade={"persist"}, mappedBy="tags")
+     */
+    private $users;
 
     /**
      * Get id.
@@ -73,5 +86,85 @@ class Tag
     public function __toString()
     {
         return $this->label;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return Tag
+     */
+    public function addEvent(\AppBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event.
+     *
+     * @param \AppBundle\Entity\Event $event
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEvent(\AppBundle\Entity\Event $event)
+    {
+        return $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Add user.
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Tag
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user.
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        return $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

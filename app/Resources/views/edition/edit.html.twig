@@ -10,9 +10,10 @@
 
 {% block body %}
     <div class="row my-5 shadow">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <h1 class="text-center mt-3">Gestion de l'édition: {{ edition.name }}</h1>
-            <h2 class="text-center mb-5">de l'événement: {{ edition.event.title }}</h2>
+            <h2 class="text-center mb-2">de l'évènement: {{ edition.event.title }}</h2>
+            <a href="{{ path('group_index', {'edition' : edition.id}) }}" class="btn btn-primary mb-5">Gestion du Staff</a>
         </div>
         <div class="col-md-6 mb-5">
             <h3 class="mb-3">Informations :</h3>
@@ -20,14 +21,20 @@
             {{ form_start(edit_form) }}
             {{ form_widget(edit_form) }}
             <div class="text-center">
-                <button class="btn btn-primary mb-3" type="submit"><i class="far fa-save"></i> Enregister les modifications</button>
+                <button class="btn btn-primary mb-3" type="submit">
+                    <i class="far fa-save"></i>
+                    Enregister les modifications
+                </button>
             </div>
             {{ form_end(edit_form) }}
 
-
-            <a class="btn btn-dark text-center float-left" href="{{ path('edition_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des éditions</a>
+            <a class="btn btn-dark text-center float-left" href="{{ path('event_edit', {'slug' : edition.event.slug}) }}">
+                <i class="fas fa-chevron-left"></i> Retour à l'évènement</a>
             {{ form_start(delete_form) }}
-            <button class="btn btn-danger float-right confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'édition</button>
+            <button class="btn btn-danger float-right confirm-alert" type="submit">
+                <i class="far fa-trash-alt"></i>
+                Supprimer l'édition
+            </button>
             {{ form_end(delete_form) }}
 
         </div>
@@ -39,7 +46,7 @@
             {{ form_widget(notification_form.content, { 'attr': {'rows' : '4', 'maxlength' : '250'} }) }}
             {{ form_errors(notification_form.content) }}
             <div class="text-center">
-                <button type="submit"  class="btn btn-primary mt-3">Publier   <i class="far fa-paper-plane"></i></button>
+                <button type="submit" class="btn btn-primary mt-3">Publier <i class="far fa-paper-plane"></i></button>
             </div>
             {{ form_end(notification_form) }}
             <h3 class="my-3">Les dernières nouvelles :</h3>
@@ -56,6 +63,69 @@
                     {% endfor %}
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="row shadow pt-3 mb-2">
+        <div class="col-sm-4 offset-sm-4">
+            <h3>Liste des tâches</h3>
+        </div>
+        <div class="col-sm-4">
+            <a href="{{ path('task_new', {'id' : edition.id}) }}" class="ml-2 btn btn-primary"><i class="fas fa-plus"></i> Ajouter une tâche</a>
+        </div>
+        <div class="card-deck-wrapper mt-3 mb-3">
+            <div class="card-deck">
+                {% for task in edition.tasks %}
+                    {% if loop.length > 2 %}
+                    <div class="col-md-4">
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                {{ task.name }}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text ml-2">{{ task.description }}</p>
+                                <p class="card-text ml-2">Statut : {{ task.status }}</p>
+                                <p class="card-text ml-2">Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                            </div>
+                            <div class="card-footer d-flex">
+                                <a href="{{ path('task_edit', {'edition' : edition.id, 'id' : task.id}) }}" class="btn btn-primary mx-auto mt-2"><i class="far fa-save"></i> Modifier</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% elseif loop.length == 2 %}
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    {{ task.name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text ml-2">{{ task.description }}</p>
+                                    <p class="card-text ml-2">Statut : {{ task.status }}</p>
+                                    <p class="card-text ml-2">Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                                </div>
+                                <div class="card-footer d-flex">
+                                    <a href="{{ path('task_edit', {'edition' : edition.id, 'id' : task.id}) }}" class="btn btn-primary mx-auto mt-2"><i class="far fa-save"></i> Modifier</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    {{ task.name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text ml-2">{{ task.description }}</p>
+                                    <p class="card-text ml-2">Statut : {{ task.status }}</p>
+                                    <p class="card-text ml-2">Date limite: {{ task.deadline|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
+                                </div>
+                                <div class="card-footer d-flex">
+                                    <a href="{{ path('task_edit', {'edition' : edition.id, 'id' : task.id}) }}" class="btn btn-primary mx-auto mt-2"><i class="far fa-save"></i> Modifier</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

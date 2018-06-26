@@ -21,18 +21,25 @@
                 {{ form_label(edit_form.imageFile, 'Image :') }}
                 {{ form_widget(edit_form.imageFile, { 'attr': {'class': 'form-control mb-3'} }) }}
                 {{ form_errors(edit_form.imageFile) }}
+                {{ form_label(edit_form.tags, 'Mots-clés :')}}
+                {{ form_widget(edit_form.tags) }}
+                {{ form_errors(edit_form.tags) }}
             </div>
             <div class="form-group col-md-7 offset-md-1 pr-3">
                 {{ form_label(edit_form.description, 'Description :') }}
                 {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control', 'rows': '12'}}) }}
                 {{ form_errors(edit_form.description) }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-7 pl-3">
-                {{ form_label(edit_form.tags) }}
-                {{ form_widget(edit_form.tags) }}
-                {{ form_errors(edit_form.tags) }}
+                <a class="btn btn-primary mt-3" href="{{ path('edition_new', {'slug' : event.slug}) }}"><i class="fas fa-plus"></i> Ajouter une édition</a>
+                <h3 class="mt-2">Liste des éditions</h3>
+                <ul class="editionsList list-group">
+                    {% for edition in event.editions|reverse %}
+                        {% if edition.endDate < today %}
+                            <li class="list-group-item list-group-item-dark"><a href="{{ path('edition_edit', {'id' : edition.id}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
+                        {% else %}
+                            <li class="list-group-item list-group-item-light"><a href="{{ path('edition_edit', {'id' : edition.id}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         <div class="form-row mt-3">

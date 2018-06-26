@@ -34,8 +34,8 @@
 
                 {{ form_row(form.event) }}
             <div class="form-group">
-                <a role="button" class="btn btn-dark" href="{{ path('event_index') }}">
-                    <i class="fas fa-chevron-left"></i> Retourner à la liste d'évènements
+                <a role="button" class="btn btn-dark" href="{{ path('event_edit', {'slug' : event.slug}) }}">
+                    <i class="fas fa-chevron-left"></i> Retourner à l'évènement
                 </a>
                 <button class="btn btn-primary float-right" type="submit"><i class="fas fa-plus"></i> Créer</button>
             </div>

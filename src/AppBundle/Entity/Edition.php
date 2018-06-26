@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Event;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Edition
@@ -32,6 +33,9 @@ class Edition
     /**
      * @var \DateTime
      *
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide"
+     * )
      * @ORM\Column(name="start_date", type="datetime")
      */
     private $startDate;
@@ -39,6 +43,9 @@ class Edition
     /**
      * @var \DateTime
      *
+     * @Assert\NotNull(
+     *     message="Ce champs ne peut être vide"
+     * )
      * @ORM\Column(name="end_date", type="datetime")
      */
     private $endDate;
@@ -74,6 +81,16 @@ class Edition
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="edition", cascade={"persist", "remove"})
      */
     private $notifications;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="edition", cascade={"persist", "remove"})
+     */
+    private $tasks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="edition")
+     */
+    protected $groups;
 
     /**
      * Get id.
@@ -294,5 +311,66 @@ class Edition
     public function getNotifications()
     {
         return $this->notifications;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * @param mixed $tasks
+     * @return Edition
+     */
+    public function setTasks($tasks)
+    {
+        $this->tasks = $tasks;
+        return $this;
+    }
+
+    /**
+     * Add task.
+     *
+     * @param \AppBundle\Entity\Task $task
+     *
+     * @return Edition
+     */
+    public function addTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks[] = $task;
+        return $this;
+    }
+
+    /**
+     * Remove task.
+     *
+     * @param \AppBundle\Entity\Task $task
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeTask(\AppBundle\Entity\Task $task)
+    {
+        return $this->tasks->removeElement($task);
+    }
+  
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     * @return Edition
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
+        return $this;
     }
 }

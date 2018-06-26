@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEventsByTag(string $label)
+    {
+        $query = $this->createQueryBuilder('e')
+            ->join('e.tags', 't')
+            ->where('t.label LIKE :label')
+            ->setParameter('label', '%' . $label . '%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
