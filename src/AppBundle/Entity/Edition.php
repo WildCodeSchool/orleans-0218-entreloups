@@ -88,6 +88,11 @@ class Edition
     private $tasks;
 
     /**
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="edition")
+     */
+    protected $groups;
+
+    /**
      * Get id.
      *
      * @return int
@@ -336,7 +341,6 @@ class Edition
     public function addTask(\AppBundle\Entity\Task $task)
     {
         $this->tasks[] = $task;
-
         return $this;
     }
 
@@ -350,5 +354,23 @@ class Edition
     public function removeTask(\AppBundle\Entity\Task $task)
     {
         return $this->tasks->removeElement($task);
+    }
+  
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     * @return Edition
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
+        return $this;
     }
 }
