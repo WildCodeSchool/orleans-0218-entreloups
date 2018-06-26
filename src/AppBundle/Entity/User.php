@@ -43,6 +43,12 @@ class User extends BaseUser
      */
     private $location;
 
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"}, inversedBy="users")
+     */
+    private $tags;
 
     /**
      * Get id
@@ -124,5 +130,41 @@ class User extends BaseUser
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * Add tag.
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return User
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag.
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        return $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
