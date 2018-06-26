@@ -104,6 +104,13 @@ class Event
     private $editions;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="events")
      * @JoinColumn(name="creator_id", referencedColumnName="id")
      */
@@ -329,6 +336,20 @@ class Event
     }
 
     /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Event
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        
+        return $this;
+    }
+  
+    /**
      * Set creator.
      *
      * @param \AppBundle\Entity\User|null $creator
@@ -342,6 +363,16 @@ class Event
         return $this;
     }
 
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+  
     /**
      * Get creator.
      *
