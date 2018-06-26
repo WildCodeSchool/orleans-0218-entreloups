@@ -65,9 +65,12 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
+    auth_mode: '%mailer_auth_mod%'
     host: '%mailer_host%'
+    port: '%mailer_port%'
     username: '%mailer_user%'
     password: '%mailer_password%'
+    encryption: '%mailer_encryption%'
     spool: { type: memory }
 
 fos_user:
@@ -76,6 +79,15 @@ fos_user:
     user_class: AppBundle\Entity\User
     service:                                              # since Symfony 3.4
         mailer: fos_user.mailer.twig_swift    # since Symfony 3.4
+
+    registration:
+        confirmation:
+            enabled: true
+            from_email:
+                address: noreply@entreloup.com
+                sender_name: Entre nous par Entre loups
+            #template: :Email:registration.email.twig
+
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
