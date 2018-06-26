@@ -24,12 +24,12 @@ class HomeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
-            $tagName = $data['label'];
-            $events = $em->getRepository(Event::class)->findEventsByTag($tagName);
+            $tagSearched = $data['label'];
+            $events = $em->getRepository(Event::class)->findEventsByTag($tagSearched);
 
             return $this->render('default/index.html.twig', [
                 'events' => $events,
-                'tagName' => $tagName,
+                'tagSearched' => $tagSearched,
                 'form' => $form->createView(),
             ]);
         }

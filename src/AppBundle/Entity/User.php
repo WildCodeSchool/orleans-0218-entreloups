@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -39,9 +40,9 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="Location", type="string", length=255)
+     * @ORM\Column(name="City", type="string", length=100, nullable=true)
      */
-    private $location;
+    private $city;
 
     /**
      * @var array
@@ -49,6 +50,29 @@ class User extends BaseUser
      * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"}, inversedBy="users")
      */
     private $tags;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_postal", type="string", nullable=true, length=5)*
+     * @Assert\Length(max = 5)
+     */
+    private $codePostal;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Event", mappedBy="creator")
@@ -114,27 +138,99 @@ class User extends BaseUser
     }
 
     /**
-     * Set location
+     * Set city.
      *
-     * @param string $location
+     * @param string|null $city
      *
      * @return User
      */
-    public function setLocation($location)
+    public function setCity($city = null)
     {
-        $this->location = $location;
+        $this->city = $city;
 
         return $this;
     }
 
     /**
-     * Get location
+     * Get city.
      *
-     * @return string
+     * @return string|null
      */
-    public function getLocation()
+    public function getCity()
     {
-        return $this->location;
+        return $this->city;
+    }
+
+    /**
+     * Set latitude.
+     *
+     * @param float|null $latitude
+     *
+     * @return User
+     */
+    public function setLatitude($latitude = null)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude.
+     *
+     * @return float|null
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude.
+     *
+     * @param float|null $longitude
+     *
+     * @return User
+     */
+    public function setLongitude($longitude = null)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude.
+     *
+     * @return float|null
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set codePostal.
+     *
+     * @param string|null $codePostal
+     *
+     * @return User
+     */
+    public function setCodePostal($codePostal = null)
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    /**
+     * Get codePostal.
+     *
+     * @return string|null
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
     }
 
     /**
