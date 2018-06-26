@@ -27,7 +27,7 @@
     {% for event in user.events %}
         <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
             <div class="card mr-3 mb-4">
-                <a href="{{ path('event_show', { 'id': event.id }) }}">
+                <a href="{{ path('event_show', { 'slug': event.slug }) }}">
                     <div class="overlay">
                         <img class="card-img-top image"
                              src="{{ vich_uploader_asset(event, 'imageFile') }}{{ event.imageFile }}"
@@ -54,13 +54,7 @@
                         <div class="float-left ml-2">
                             {% if event.tags|length > 0 %}
                                 {% for tag in event.tags|slice(0,10) %}
-                                    {% if tagName is defined %}
-                                        {% if tag.label matches '/%tag%/i'|replace({'%tag%': tagName}) %}
-                                            <span class="badge badge-primary pb-1">{{ tag }}</span>
-                                        {% endif %}
-                                    {% else %}
-                                        <span class="badge badge-primary pb-1">{{ tag }}</span>
-                                    {% endif %}
+                                    <span class="badge badge-primary pb-1">{{ tag }}</span>
                                 {% endfor %}
                             {% else %}
                                 <span>Pas de mot-clé</span>
