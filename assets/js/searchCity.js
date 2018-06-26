@@ -10,8 +10,7 @@ import places from "places.js";
         countries: 'fr',
         templates: {
             value: function(suggestion) {
-                console.log(suggestion);
-                return suggestion.name;
+                return suggestion.name; 
             }
         },
         aroundLatLngViaIP: false

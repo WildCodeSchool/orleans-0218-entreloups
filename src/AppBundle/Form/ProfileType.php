@@ -22,7 +22,7 @@ class ProfileType extends AbstractType
         $builder
             ->add('firstName', TextType::class, array('label' => 'Prénom :', 'translation_domain' => 'FOSUserBundle'))
             ->add('lastName', TextType::class, array('label' => 'Nom :', 'translation_domain' => 'FOSUserBundle'))
-            ->add('location', TextType::class, array('label' => 'Ville :', 'translation_domain' => 'FOSUserBundle'));
+            ->add('city', TextType::class, array('label' => 'Ville :', 'translation_domain' => 'FOSUserBundle'));
     }
 
     public function getParent()
