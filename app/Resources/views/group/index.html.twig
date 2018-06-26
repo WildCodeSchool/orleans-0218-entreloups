@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion du Staff{% endblock %}
+
+{% block body %}
+<div class="row my-5">
+    <div class="col-12 shadow">
+        <h1>Gestion du Staff de {{ edition.name }}</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    {% for group in groups %}
+                        {% for role in group.roles %}
+                            <td>{{ role }}</td>
+                        {% endfor %}
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

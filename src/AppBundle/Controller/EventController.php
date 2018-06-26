@@ -49,6 +49,7 @@ class EventController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $event->setCreator($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $event->setSlug($slugService->generateSlug($event->getTitle()));
             $em->persist($event);
