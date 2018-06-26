@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Notification;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
