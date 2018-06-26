@@ -8,6 +8,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Tag;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +24,13 @@ class RegistrationType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('location');
+            ->add('location')
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'label' => 'Choisissez vos domaines d\'intérêt par mots clés :',
+                'expanded' => true,
+                'multiple' => true,
+            ]);
     }
 
     public function getParent()
