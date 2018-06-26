@@ -29,7 +29,7 @@
                 {{ form_label(edit_form.description, 'Description :') }}
                 {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control', 'rows': '12'}}) }}
                 {{ form_errors(edit_form.description) }}
-                <a class="btn btn-primary mt-3" href="{{ path('edition_new', {'event' : event.id}) }}"><i class="fas fa-plus"></i> Ajouter une édition</a>
+                <a class="btn btn-primary mt-3" href="{{ path('edition_new', {'slug' : event.slug}) }}"><i class="fas fa-plus"></i> Ajouter une édition</a>
                 <h3 class="mt-2">Liste des éditions</h3>
                 <ul class="editionsList list-group">
                     {% for edition in event.editions|reverse %}

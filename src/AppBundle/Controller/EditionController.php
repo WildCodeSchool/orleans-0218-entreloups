@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Notification;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,7 +42,7 @@ class EditionController extends Controller
      *
      * Creates a new edition entity.
      *
-     * @Route("/{event}/new", name="edition_new")
+     * @Route("/{slug}/new", name="edition_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, Event $event)
@@ -56,7 +57,12 @@ class EditionController extends Controller
             $em->persist($edition);
             $em->flush();
 
-            return $this->redirectToRoute('edition_show', array('id' => $edition->getId()));
+            return $this->redirectToRoute('edition_show',
+                array(
+                    'slug' => $event->getSlug(),
+                    'id' => $edition->getId()
+                )
+            );
         }
 
         return $this->render('edition/new.html.twig', array(
