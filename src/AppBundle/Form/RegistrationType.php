@@ -8,7 +8,8 @@
 
 namespace AppBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 
@@ -22,7 +23,11 @@ class RegistrationType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('location');
+            ->add('city', SearchType::class)
+            ->add('codePostal', HiddenType::class)
+            ->add('latitude', HiddenType::class)
+            ->add('longitude', HiddenType::class)
+            ;
     }
 
     public function getParent()
