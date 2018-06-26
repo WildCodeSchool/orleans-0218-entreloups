@@ -332,6 +332,31 @@ class Edition
     }
 
     /**
+     * Add task.
+     *
+     * @param \AppBundle\Entity\Task $task
+     *
+     * @return Edition
+     */
+    public function addTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks[] = $task;
+        return $this;
+    }
+
+    /**
+     * Remove task.
+     *
+     * @param \AppBundle\Entity\Task $task
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeTask(\AppBundle\Entity\Task $task)
+    {
+        return $this->tasks->removeElement($task);
+    }
+  
+    /**
      * @return mixed
      */
     public function getGroups()

@@ -8,6 +8,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Tag;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +30,12 @@ class RegistrationType extends AbstractType
             ->add('codePostal', HiddenType::class)
             ->add('latitude', HiddenType::class)
             ->add('longitude', HiddenType::class)
-            ;
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'label' => 'Choisissez vos domaines d\'intérêt par mots clés :',
+                'expanded' => true,
+                'multiple' => true,
+            ]);
     }
 
     public function getParent()

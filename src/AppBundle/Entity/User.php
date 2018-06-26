@@ -45,6 +45,13 @@ class User extends BaseUser
     private $city;
 
     /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"}, inversedBy="users")
+     */
+    private $tags;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="latitude", type="float", nullable=true)
@@ -66,6 +73,8 @@ class User extends BaseUser
      */
     private $codePostal;
 
+
+    /**
      * @ORM\OneToMany(targetEntity="Event", mappedBy="creator")
      */
     private $events;
@@ -225,6 +234,41 @@ class User extends BaseUser
     }
 
     /**
+     * Add tag.
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return User
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+        return $this;
+    }
+
+    /**
+     * Remove tag.
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        return $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
      * Add event.
      *
      * @param \AppBundle\Entity\Event $event
@@ -234,10 +278,9 @@ class User extends BaseUser
     public function addEvent(\AppBundle\Entity\Event $event)
     {
         $this->events[] = $event;
-
         return $this;
     }
-
+  
     /**
      * Remove event.
      *
