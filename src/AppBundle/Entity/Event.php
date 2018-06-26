@@ -104,6 +104,12 @@ class Event
     private $editions;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="events")
+     * @JoinColumn(name="creator_id", referencedColumnName="id")
+     */
+    private $creator;
+
+    /**
      * @return File
      */
     public function getImageFile()
@@ -320,5 +326,29 @@ class Event
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set creator.
+     *
+     * @param \AppBundle\Entity\User|null $creator
+     *
+     * @return Event
+     */
+    public function setCreator(\AppBundle\Entity\User $creator = null)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * Get creator.
+     *
+     * @return \AppBundle\Entity\User|null
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }
