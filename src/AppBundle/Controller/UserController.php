@@ -69,6 +69,14 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
             $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
+            if (is_null($user)) {
+                $error = 'Utilisateur non trouvé';
+                return $this->render('user/invite.html.twig', array(
+                    'form' => $form->createView(),
+                    'edition' => $edition,
+                    'error' => $error,
+                ));
+            }
             $groups = $edition->getGroups();
             $roleToCheck = $data['role']->getId();
             $groupIsCreated = true;
