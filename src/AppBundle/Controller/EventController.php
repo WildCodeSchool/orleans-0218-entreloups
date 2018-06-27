@@ -73,7 +73,7 @@ class EventController extends Controller
     public function showAction(Event $event)
     {
         $deleteForm = $this->createDeleteForm($event);
-        $user = $this->getUser();    
+        $user = $this->getUser();
         $today = new \DateTime();
 
         return $this->render('event/show.html.twig', array(
