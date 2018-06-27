@@ -88,7 +88,7 @@ class Edition
     private $tasks;
 
     /**
-     * @ORM\OneToMany(targetEntity="Group", mappedBy="edition", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="edition")
      */
     protected $groups;
 

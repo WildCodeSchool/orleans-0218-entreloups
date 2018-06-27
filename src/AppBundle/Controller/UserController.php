@@ -72,7 +72,7 @@ class UserController extends Controller
             $groups = $edition->getGroups();
             $roleToCheck = $data['role']->getId();
             $groupIsCreated = true;
-            if (empty($groups->getSnapshot())) {
+            if ($groups->isEmpty()) {
                 $groupIsCreated = false;
             }
             foreach ($groups as $group) {
