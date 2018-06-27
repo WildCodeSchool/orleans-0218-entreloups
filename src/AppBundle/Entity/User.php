@@ -73,6 +73,14 @@ class User extends BaseUser
      */
     private $codePostal;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @ORM\JoinTable(name="user_group_relation",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")})
+     */
+    protected $groups;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Event", mappedBy="creator")

@@ -8,7 +8,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Edition;
+
 class GroupRepository extends \Doctrine\ORM\EntityRepository
 {
-
 }

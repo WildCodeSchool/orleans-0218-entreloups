@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\Group as BaseGroup;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Group
@@ -32,6 +33,12 @@ class Group extends BaseGroup
      * @ORM\ManyToOne(targetEntity="Edition", inversedBy="groups")
      */
     protected $edition;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
+     *
+     */
+    protected $users;
 
     /**
      * @return int
@@ -66,6 +73,59 @@ class Group extends BaseGroup
     public function setEdition($edition)
     {
         $this->edition = $edition;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUsers()
+    {
+        return $this->users ?: $this->users = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserUsername()
+    {
+        $usernames = array();
+        foreach ($this->getUsers() as $user) {
+            $usernames[] = $user->getUsername();
+        }
+
+        return $usernames;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasUser($username)
+    {
+        return in_array($username, $this->getUserUsername());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addUser(UserInterface $user)
+    {
+        if (!$this->getUsers()->contains($user)) {
+            $this->getUsers()->add($user);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeUser(UserInterface $user)
+    {
+        if ($this->getUsers()->contains($user)) {
+            $this->getUsers()->removeElement($user);
+        }
+
         return $this;
     }
 }

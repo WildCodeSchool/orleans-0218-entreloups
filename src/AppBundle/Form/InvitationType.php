@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: aragorn
- * Date: 25/06/18
- * Time: 15:05
+ * Date: 26/06/18
+ * Time: 11:41
  */
 
 namespace AppBundle\Form;
@@ -11,38 +11,44 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Role;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GroupType extends AbstractType
+class InvitationType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('attr' => array('placeholder' => 'NOM'), 'label' => 'Nom :'))
-            ->add('roles', EntityType::class, array(
-                'class'        => Role::class,
+            ->add('email', EmailType::class)
+            ->add('role', EntityType::class, [
+                'class' => Role::class,
                 'choice_label' => 'label',
-                'choice_value' => 'label',
-                'multiple'     => true,
+                'multiple' => false,
                 'expanded' => false,
-                'label' => 'Roles :'
-            ))
+                'label' => 'Role :',
+            ])
         ;
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Group'
+            'data_class' => null,
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_invitation';
     }
 }
