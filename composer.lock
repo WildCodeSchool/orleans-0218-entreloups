@@ -2099,16 +2099,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.2.4",
+            "version": "7.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "00bc0b93f0ff4f557e9ea766557fde96da9a03dd"
+                "reference": "400a3836ee549ae6f665323ac3f21e27eac7155f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/00bc0b93f0ff4f557e9ea766557fde96da9a03dd",
-                "reference": "00bc0b93f0ff4f557e9ea766557fde96da9a03dd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/400a3836ee549ae6f665323ac3f21e27eac7155f",
+                "reference": "400a3836ee549ae6f665323ac3f21e27eac7155f",
                 "shasum": ""
             },
             "require": {
@@ -2124,7 +2124,7 @@
                 "php": "^7.1",
                 "phpspec/prophecy": "^1.7",
                 "phpunit/php-code-coverage": "^6.0.7",
-                "phpunit/php-file-iterator": "^2.0",
+                "phpunit/php-file-iterator": "^2.0.1",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^2.0",
                 "sebastian/comparator": "^3.0",
@@ -2179,7 +2179,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-06-05T03:40:05+00:00"
+            "time": "2018-06-21T13:13:39+00:00"
         },
         {
             "name": "psr/cache",
@@ -2558,16 +2558,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "ed5fd2281113729f1ebcc64d101ad66028aeb3d5"
+                "reference": "591a30922f54656695e59b1f39501aec513403da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/ed5fd2281113729f1ebcc64d101ad66028aeb3d5",
-                "reference": "ed5fd2281113729f1ebcc64d101ad66028aeb3d5",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/591a30922f54656695e59b1f39501aec513403da",
+                "reference": "591a30922f54656695e59b1f39501aec513403da",
                 "shasum": ""
             },
             "require": {
@@ -2618,7 +2618,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2018-04-18T13:33:00+00:00"
+            "time": "2018-06-14T15:05:28+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -3864,20 +3864,20 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "8eb567d8398ce31a402ea8db3e6b5b1faf121cbc"
+                "reference": "c36f8cb21b5f1661a14fdb8cef9cc611d54a3494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/8eb567d8398ce31a402ea8db3e6b5b1faf121cbc",
-                "reference": "8eb567d8398ce31a402ea8db3e6b5b1faf121cbc",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c36f8cb21b5f1661a14fdb8cef9cc611d54a3494",
+                "reference": "c36f8cb21b5f1661a14fdb8cef9cc611d54a3494",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.4",
+                "doctrine/common": "~2.4@stable",
                 "ext-xml": "*",
                 "fig/link-util": "^1.0",
                 "php": "^5.5.9|>=7.0.8",
@@ -4015,7 +4015,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-05-25T13:16:49+00:00"
+            "time": "2018-06-25T12:29:33+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -4551,16 +4551,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "63cdae00a75862fa543b765ba63d55f6b6397d0c"
+                "reference": "8a21eb6bedad38bf1f15d529c65eb9e17d0242fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/63cdae00a75862fa543b765ba63d55f6b6397d0c",
-                "reference": "63cdae00a75862fa543b765ba63d55f6b6397d0c",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/8a21eb6bedad38bf1f15d529c65eb9e17d0242fd",
+                "reference": "8a21eb6bedad38bf1f15d529c65eb9e17d0242fd",
                 "shasum": ""
             },
             "require": {
@@ -4613,7 +4613,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-05-16T12:49:49+00:00"
+            "time": "2018-06-10T07:25:02+00:00"
         }
     ],
     "aliases": [],

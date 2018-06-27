@@ -5,7 +5,7 @@
 
 {% block body %}
     <div class="my-5">
-        <h1 class="text-center mb-3">{{ event.title }}</h1>
+        <h1 class="text-center mb-3">{{ event.title|title }}</h1>
         {% if user is defined and event.creator == user %}
             <div class="text-center mb-4">
                 <a role="button" class="btn btn-primary" href="{{ path('event_edit', {'slug': event.slug}) }}">
@@ -20,12 +20,22 @@
                 </div>
                 <div class="p-0">
                     <div>
-                        <h3>Prochaine edition :</h3>
-                        <p></p>
-                    </div>
-                    <div>
-                        <h3>Descriptif :</h3>
-                        <p>{{ event.description }}</p>
+                        <div>
+                            <h5>Descriptif :</h5>
+                            <p>{{ event.description }}</p>
+                        </div>
+                        <div class="mt-5">
+                            <h5 class="mt-2">Les éditions :</h5>
+                            <ul class="editionsList list-group">
+                                {% for edition in event.editions|reverse %}
+                                    {% if edition.endDate < today %}
+                                        <li class="list-group-item list-group-item-dark"><a href="{{ path('edition_show', {'id' : edition.id}) }}"><b>{{ edition.name }} :</b> Terminée <i class="fas fa-hourglass-end"></i></a></li>
+                                    {% else %}
+                                        <li class="list-group-item list-group-item-light"><a href="{{ path('edition_show', {'id' : edition.id}) }}"><b>{{ edition.name }} :</b> <i class="far fa-clock"></i> du {{ edition.startDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "d/M/Y H:mm") }} au {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "d/M/Y H:mm") }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
