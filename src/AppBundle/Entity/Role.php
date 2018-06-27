@@ -70,4 +70,12 @@ class Role
     {
         return $this->label;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->label;
+    }
 }

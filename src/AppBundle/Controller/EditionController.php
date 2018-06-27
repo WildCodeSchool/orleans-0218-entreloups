@@ -41,7 +41,7 @@ class EditionController extends Controller
      *
      * Creates a new edition entity.
      *
-     * @Route("/{event}/new", name="edition_new")
+     * @Route("/{slug}/new", name="edition_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, Event $event)

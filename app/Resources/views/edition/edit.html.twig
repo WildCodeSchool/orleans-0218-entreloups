@@ -10,9 +10,10 @@
 
 {% block body %}
     <div class="row my-5 shadow">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <h1 class="text-center mt-3">Gestion de l'édition: {{ edition.name }}</h1>
-            <h2 class="text-center mb-5">de l'évènement: {{ edition.event.title }}</h2>
+            <h2 class="text-center mb-2">de l'évènement: {{ edition.event.title }}</h2>
+            <a href="{{ path('group_index', {'edition' : edition.id}) }}" class="btn btn-primary mb-5">Gestion du Staff</a>
         </div>
         <div class="col-md-6 mb-5">
             <h3 class="mb-3">Informations :</h3>
@@ -27,7 +28,7 @@
             </div>
             {{ form_end(edit_form) }}
 
-            <a class="btn btn-dark text-center float-left" href="{{ path('event_edit', {'id' : edition.event.id}) }}">
+            <a class="btn btn-dark text-center float-left" href="{{ path('event_edit', {'slug' : edition.event.slug}) }}">
                 <i class="fas fa-chevron-left"></i> Retour à l'évènement</a>
             {{ form_start(delete_form) }}
             <button class="btn btn-danger float-right confirm-alert" type="submit">
