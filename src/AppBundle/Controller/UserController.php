@@ -69,6 +69,10 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $data = $form->getData();
             $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
+            if (is_null($user)) {
+                $this->addFlash('error', 'Utilisateur non trouvé');
+                return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
+            }
             $groups = $edition->getGroups();
             $roleToCheck = $data['role']->getId();
             $groupIsCreated = true;
