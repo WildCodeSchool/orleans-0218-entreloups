@@ -6,6 +6,8 @@ use AppBundle\Form\DataTransformer\TagsToCollectionTransformer;
 use AppBundle\Repository\TagRepository;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,7 +32,7 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title')
-            ->add('city')
+            ->add('city', SearchType::class)
             ->add('imageFile', VichImageType::class, array(
                 'required' => false,
                 'download_link' => false,
@@ -39,8 +41,15 @@ class EventType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('tags', TextType::class, array(
                 'required' => false,
-                'attr' => ['data-role' => 'tagsinput', 'class' => 'tag-input'],
-            ));
+                'attr' => [
+                    'data-role' => 'tagsinput',
+                    'class' => 'tag-input'
+                ],
+            ))
+            ->add('CodePostal', HiddenType::class)
+            ->add('latitude', HiddenType::class)
+            ->add('longitude', HiddenType::class)
+        ;
         $builder->get('tags')
             ->addModelTransformer(new CollectionToArrayTransformer(), true)
             ->addModelTransformer(new TagsToCollectionTransformer($this->tagRepository), true);
