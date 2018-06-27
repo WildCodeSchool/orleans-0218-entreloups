@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Tag;
+use AppBundle\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,18 +42,20 @@ class EventController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, SlugService $slugService)
     {
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $event->setCreator($this->getUser());
             $em = $this->getDoctrine()->getManager();
+            $event->setSlug($slugService->generateSlug($event->getTitle()));
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
+            return $this->redirectToRoute('event_show', array('slug' => $event->getSlug()));
         }
 
         return $this->render('event/new.html.twig', array(
@@ -64,15 +67,17 @@ class EventController extends Controller
     /**
      * Finds and displays a event entity.
      *
-     * @Route("/{id}", name="event_show")
+     * @Route("/{slug}", name="event_show")
      * @Method("GET")
      */
     public function showAction(Event $event)
     {
         $deleteForm = $this->createDeleteForm($event);
+        $today = new \DateTime();
 
         return $this->render('event/show.html.twig', array(
             'event' => $event,
+            'today' => $today,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -80,10 +85,10 @@ class EventController extends Controller
     /**
      * Displays a form to edit an existing event entity.
      *
-     * @Route("/{id}/edit", name="event_edit")
+     * @Route("/{slug}/edit", name="event_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Event $event)
+    public function editAction(Request $request, Event $event, SlugService $slugService)
     {
         $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
@@ -91,9 +96,10 @@ class EventController extends Controller
         $today = new \DateTime();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $event->setSlug($slugService->generateSlug($event->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
+            return $this->redirectToRoute('event_edit', array('slug' => $event->getSlug()));
         }
 
         return $this->render('event/edit.html.twig', array(

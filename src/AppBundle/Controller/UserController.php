@@ -8,7 +8,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Edition;
+use AppBundle\Entity\Group;
+use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
+use AppBundle\Form\InvitationType;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -46,6 +50,58 @@ class UserController extends Controller
 
         return $this->render('user/searchUser.html.twig', array(
             'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @param Edition $edition
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/{edition}/invitation", name="invite_user")
+     * @Method({"GET","POST"})
+     */
+    public function inviteAction(Request $request, Edition $edition)
+    {
+        $form = $this->createForm(InvitationType::class);
+        $form->handleRequest(($request));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $data = $form->getData();
+            $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
+            if (is_null($user)) {
+                $this->addFlash('error', 'Utilisateur non trouvé');
+                return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
+            }
+            $groups = $edition->getGroups();
+            $roleToCheck = $data['role']->getId();
+            $groupIsCreated = true;
+            if ($groups->isEmpty()) {
+                $groupIsCreated = false;
+            }
+            foreach ($groups as $group) {
+                $role = implode($group->getRoles());
+                $role = $em->getRepository(Role::class)->findOneByLabel($role);
+                $groupIsCreated = false;
+                if ($role->getId() == $roleToCheck) {
+                    $groupIsCreated = true;
+                    break;
+                }
+            }
+            if ($groupIsCreated == false) {
+                $group = new Group($edition->getEvent()->getTitle().$edition->getName().$roleToCheck);
+                $group->addRole($data['role']);
+                $group->setEdition($edition);
+            }
+            $user->addGroup($group);
+            $em->persist($group);
+            $em->flush();
+            return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
+        }
+
+        return $this->render('user/invite.html.twig', array(
+            'form' => $form->createView(),
+            'edition' => $edition,
         ));
     }
 }

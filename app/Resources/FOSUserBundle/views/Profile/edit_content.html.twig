@@ -14,6 +14,9 @@
                 {{ form_row(form.current_password, {'label': 'Mot de passe actuel :'}) }}
             </div>
             {{ form_widget(form) }}
+            <div class="form-group">
+                {{ form_row(form.tags) }}
+            </div>
             <div class="form-group text-center">
                 <a class="btn btn-dark float-left" href="/profile"><i class="fas fa-chevron-left"></i> Retour</a>
                 <a class="btn btn-info" href="/profile/change-password">Changer le mot de passe</a>

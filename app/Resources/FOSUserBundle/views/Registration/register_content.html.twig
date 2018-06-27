@@ -8,26 +8,37 @@
     <div class="offset-3 col-md-6 mx-auto shadow">
         <h1 class="text-center mt-3">Création de votre compte</h1>
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-        <div class="form-group">
-            {{ form_row(form.email, {'label': 'Adresse e-mail :'}) }}
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(form.username, {'label': 'Nom d\'utilisateur :'}) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.email, {'label': 'Adresse e-mail :'}) }}
+            </div>
         </div>
-        <div class="form-group">
-        {{ form_row(form.username, {'label': 'Nom d\'utilisateur :'}) }}
+        <div class="form-row">
+            <div class="col-12 col-lg-6 col-sm-12">
+                {{ form_row(form.plainPassword.first, {'label': 'Mot de passe :'}) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.plainPassword.second, {'label': 'Confirmation mot de passe :'}) }}
+            </div>
         </div>
-        <div class="form-group">
-        {{ form_row(form.plainPassword.first, {'label': 'Mot de passe :'}) }}
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(form.firstName, {'label': 'Prénom :'}) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.lastName, {'label': 'Nom :'}) }}
+            </div>
         </div>
-        <div class="form-group">
-        {{ form_row(form.plainPassword.second, {'label': 'Confirmation mot de passe :'}) }}
-        </div>
-        <div class="form-group">
-        {{ form_row(form.lastName, {'label': 'Nom :'}) }}
-        </div>
-        <div class="form-group">
-        {{ form_row(form.firstName, {'label': 'Prénom :'}) }}
-        </div>
-        <div class="form-group">
-        {{ form_row(form.location, {'label': 'Ville :'}) }}
+        {{ form_row(form.city, {'label': 'Ville:', 'label_attr' : {'class' : 'city_label'}}) }}
+        {{ form_row(form.latitude) }}
+        {{ form_row(form.longitude) }}
+        {{ form_row(form.codePostal) }}
+        {{ form_row(form._token) }}
+         <div class="form-group">
+        {{ form_row(form.tags) }}
         </div>
         <div class="form-group text-center">
             <button type="submit" class="btn btn-primary mx-auto"><i class='far fa-save'></i> Enregistrer</button>
@@ -37,4 +48,7 @@
 </div>
 
 {% endblock body %}
+{% block javascripts %}
+    <script src="{{ asset('build/searchCity.js') }}"></script>
+{% endblock %}
 

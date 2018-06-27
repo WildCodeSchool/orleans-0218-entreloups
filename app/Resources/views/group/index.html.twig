@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion du Staff{% endblock %}
+
+{% block body %}
+<div class="row my-5">
+    <div class="col-12 shadow">
+        <h1 class="text-center">Gestion du Staff de {{ edition.name }}</h1>
+        <div class="d-flex flex-row">
+        {% for group in groups %}
+            {% for role in group.roles %}
+                <div class="col-4">
+                    <table class="table table-bordered">
+                        <thead class="text-center font-weight-bold">
+                        <tr>
+                            <td>{{ role|lower|capitalize }}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in group.users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        </div>
+        <a class="btn btn-dark mb-2 float-left" href="{{ path('edition_edit', {'id' : edition.id}) }}"><i class="fas fa-chevron-left"></i> Retour à l'édition</a>
+        <a class="btn btn-primary mb-2 float-right" href="{{ path('invite_user', {'edition' : edition.id}) }}"><i class="fas fa-plus"></i> Inviter un utilisateur</a>
+    </div>
+</div>
+{% endblock %}
