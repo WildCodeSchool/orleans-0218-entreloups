@@ -72,7 +72,7 @@ class UserController extends Controller
             $groups = $edition->getGroups();
             $roleToCheck = $data['role']->getId();
             $groupIsCreated = true;
-            if (empty($groups)) {
+            if (empty($groups->getSnapshot())) {
                 $groupIsCreated = false;
             }
             foreach ($groups as $group) {
@@ -92,7 +92,7 @@ class UserController extends Controller
             $user->addGroup($group);
             $em->persist($group);
             $em->flush();
-            return $this->redirectToRoute('invite_user', array('edition' => $edition));
+            return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
         }
 
         return $this->render('user/invite.html.twig', array(
