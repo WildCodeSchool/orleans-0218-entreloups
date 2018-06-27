@@ -70,36 +70,29 @@ class UserController extends Controller
             $data = $form->getData();
             $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
             $groups = $edition->getGroups();
-            $roleToCheck = strtoupper($data['role']->getLabel());
+            $roleToCheck = $data['role']->getId();
             $groupIsCreated = true;
-            if (empty($group)) {
+            if (empty($groups)) {
                 $groupIsCreated = false;
             }
             foreach ($groups as $group) {
                 $role = implode($group->getRoles());
-                if ($role == $roleToCheck) {
-                    $user->addGroup($group);
-                    $em->flush();
-                    return $this->render('user/invite.html.twig', array(
-                        'form' => $form->createView(),
-                        'edition' => $edition,
-                    ));
-                } else {
-                    $groupIsCreated = false;
+                $role = $em->getRepository(Role::class)->findOneByLabel($role);
+                $groupIsCreated = false;
+                if ($role->getId() == $roleToCheck) {
+                    $groupIsCreated = true;
+                    break;
                 }
             }
             if ($groupIsCreated == false) {
                 $group = new Group($edition->getEvent()->getTitle().$edition->getName().$roleToCheck);
                 $group->addRole($data['role']);
                 $group->setEdition($edition);
-                $user->addGroup($group);
-                $em->persist($group);
-                $em->flush();
-                return $this->render('user/invite.html.twig', array(
-                    'form' => $form->createView(),
-                    'edition' => $edition,
-                ));
             }
+            $user->addGroup($group);
+            $em->persist($group);
+            $em->flush();
+            return $this->redirectToRoute('invite_user', array('edition' => $edition));
         }
 
         return $this->render('user/invite.html.twig', array(
