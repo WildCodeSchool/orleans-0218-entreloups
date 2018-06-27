@@ -1,0 +1,13 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block title %}Inscription confirmée{% endblock %}
+{% block body %}
+    <div class="row mt-5 text-center d-flex flex-column">
+        <div class="col-6 mx-auto">
+            <h1>Bienvenue {{ user.username }}!</h1>
+        </div>
+        <div class="col-3 mx-auto">
+            <a class="btn btn-primary m-2" href="{{ path('fos_user_profile_show') }}">Accéder à Mon Compte</a>
+            <a class="btn btn-primary m-2" href="{{ path('event_new') }}">Créer votre évènement</a>
+        </div>
+    </div>
+{% endblock %}

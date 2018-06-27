@@ -104,6 +104,19 @@ class Event
     private $editions;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="events")
+     * @JoinColumn(name="creator_id", referencedColumnName="id")
+     */
+    private $creator;
+
+    /**
      * @return File
      */
     public function getImageFile()
@@ -320,5 +333,53 @@ class Event
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Event
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        
+        return $this;
+    }
+  
+    /**
+     * Set creator.
+     *
+     * @param \AppBundle\Entity\User|null $creator
+     *
+     * @return Event
+     */
+    public function setCreator(\AppBundle\Entity\User $creator = null)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+  
+    /**
+     * Get creator.
+     *
+     * @return \AppBundle\Entity\User|null
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }
