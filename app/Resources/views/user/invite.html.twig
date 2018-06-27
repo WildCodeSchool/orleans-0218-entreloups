@@ -19,12 +19,9 @@
             {{ form_end(form) }}
         </div>
     </div>
-    {% if error is defined %}
-    <div class="row justify-content-center my-5">
-        <div class="col-6 text-center">
-            <p class="mt-4">{{ error }}</p>
+    {% for message in app.flashes('error') %}
+        <div class="alert-danger text-center">
+            {{ message }}
         </div>
-    </div>
-    {% endif %}
-
+    {% endfor %}
 {% endblock %}

@@ -70,12 +70,8 @@ class UserController extends Controller
             $data = $form->getData();
             $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
             if (is_null($user)) {
-                $error = 'Utilisateur non trouvé';
-                return $this->render('user/invite.html.twig', array(
-                    'form' => $form->createView(),
-                    'edition' => $edition,
-                    'error' => $error,
-                ));
+                $this->addFlash('error', 'Utilisateur non trouvé');
+                return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
             }
             $groups = $edition->getGroups();
             $roleToCheck = $data['role']->getId();
