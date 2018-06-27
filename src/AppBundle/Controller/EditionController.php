@@ -75,9 +75,11 @@ class EditionController extends Controller
     public function showAction(Edition $edition)
     {
         $deleteForm = $this->createDeleteForm($edition);
+        $user = $this->getUser();
 
         return $this->render('edition/show.html.twig', array(
             'edition' => $edition,
+            'user' => $user,
             'delete_form' => $deleteForm->createView(),
         ));
     }
