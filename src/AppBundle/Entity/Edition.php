@@ -373,5 +373,4 @@ class Edition
         $this->groups = $groups;
         return $this;
     }
-
 }
