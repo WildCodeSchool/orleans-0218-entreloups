@@ -57,29 +57,16 @@
         {% if user is defined %}
             {% if edition.event.creator == user %}
                 <div class="text-center">
-                    <a class="btn btn-dark mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
+                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
                         Gérer l'edition
                     </a>
                 </div>
-            {% elseif edition.groups is defined %}
-                {% set isManager = false %}
-
-                {% for group in edition.groups %}
-                    {% for manager in group.users %}
-                        {% if user == manager %}
-                            {% set isManager = true %}
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-
-                {% if isManager %}
-                    <div class="text-center">
-                        <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
-                            Gérer l'edition
-                        </a>
-                    </div>
-                {% endif %}
-
+            {% elseif isManager %}
+                <div class="text-center">
+                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
+                        Gérer l'edition
+                    </a>
+                </div>
             {% endif %}
         {% endif %}
     </div>
