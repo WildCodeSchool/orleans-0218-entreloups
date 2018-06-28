@@ -57,10 +57,10 @@
 {% endblock %}
 {% block javascripts %}
     <script>
-        let latitude = {{ form.latitude.vars.id }};
-        let longitude = {{ form.longitude.vars.id }};
-        let codePostal = {{ form.codePostal.vars.id }};
-        let searchBar = {{ form.city.vars.id }};
+        let latitude = {{ edit_form.latitude.vars.id }};
+        let longitude = {{ edit_form.longitude.vars.id }};
+        let codePostal = {{ edit_form.CodePostal.vars.id }};
+        let searchBar = {{ edit_form.city.vars.id }};
     </script>
     <script src="{{ asset('build/eventCity.js') }}" ></script>
 {% endblock %}

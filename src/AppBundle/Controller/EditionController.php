@@ -62,6 +62,11 @@ class EditionController extends Controller
                 $em->flush();
             } else {
                 $this->addFlash('danger', 'La date de fin ne peut pas être inférieure à la date de début');
+                return $this->render('edition/new.html.twig', array(
+                    'edition' => $edition,
+                    'form' => $form->createView(),
+                    'event' => $event
+                ));
             }
 
             return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));

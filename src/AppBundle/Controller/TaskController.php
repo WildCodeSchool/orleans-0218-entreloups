@@ -114,7 +114,7 @@ class TaskController extends Controller
             ->setAction(
                 $this->generateUrl(
                     'task_delete',
-                    array('id' => $task->getId(), 'edition' => $edition->getSlug())
+                    array('id' => $task->getId(), 'edition' => $edition->getId())
                 )
             )
             ->setMethod('DELETE')
