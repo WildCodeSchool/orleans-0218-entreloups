@@ -16,8 +16,8 @@ import places from "places.js";
         aroundLatLngViaIP: false
     });
     placesAutocomplete.on('change', function resultSelected(e) {
-        document.querySelector('#appbundle_event_latitude').value = e.suggestion.latlng.lat || '';
-        document.querySelector('#appbundle_event_longitude').value = e.suggestion.latlng.lng || '';
-        document.querySelector('#appbundle_event_CodePostal').value = e.suggestion.postcode || '';
+        latitude.value = e.suggestion.latlng.lat || '';
+        longitude.value = e.suggestion.latlng.lng || '';
+        codePostal.value = e.suggestion.postcode || '';
     });
 })();
