@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+    {% if edition.notifications is not empty %}
     <div id="carouselNews" class="carousel slide shadow p-5" data-ride="carousel">
         <ol class="carousel-indicators">
             {% for notification in edition.notifications %}
@@ -54,17 +55,18 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    {% endif %}
     <div class="float-right">
         {% if user is defined %}
             {% if edition.event.creator == user %}
                 <div class="text-center">
-                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
+                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'slug': edition.slug}) }}">
                         Gérer l'edition
                     </a>
                 </div>
             {% elseif isManager %}
                 <div class="text-center">
-                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
+                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'slug': edition.slug}) }}">
                         Gérer l'edition
                     </a>
                 </div>
