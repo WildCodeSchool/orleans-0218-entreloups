@@ -76,6 +76,7 @@ class EditionController extends Controller
     public function showAction(Edition $edition, CheckUserRole $checkUserRole)
     {
         $deleteForm = $this->createDeleteForm($edition);
+        $today = new \DateTime();
         $user = $this->getUser();
         $isManager = $checkUserRole->checkUser($user, $edition);
 
@@ -84,6 +85,7 @@ class EditionController extends Controller
             'user' => $user,
             'isManager' => $isManager,
             'delete_form' => $deleteForm->createView(),
+            'today' => $today,
         ));
     }
 
