@@ -6,7 +6,6 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
     .addEntry('datepicker', './assets/js/datepicker.js')
-    .addEntry('eventCity', './assets/js/eventCity.js')
     .addEntry('searchCity', './assets/js/searchCity.js')
     .addStyleEntry('style', './assets/scss/main.scss')
     .addStyleEntry('bootstrap-tagsinput', './assets/css/tagsinput.css')

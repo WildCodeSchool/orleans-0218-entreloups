@@ -49,6 +49,12 @@
 
 {% endblock body %}
 {% block javascripts %}
+    <script>
+        let latitude = {{ form.latitude.vars.id }};
+        let longitude = {{ form.longitude.vars.id }};
+        let codePostal = {{ form.codePostal.vars.id }};
+        let searchBar = {{ form.city.vars.id }};
+    </script>
     <script src="{{ asset('build/searchCity.js') }}"></script>
 {% endblock %}
 
