@@ -1,4 +1,9 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/toggleStyle.css') }}">
+{% endblock %}
+
 {% trans_default_domain 'FOSUserBundle' %}
+
 <div class="row justify-content-center my-5">
     <div class="col-6 shadow">
         <h1 class="text-center">Modifier mes données</h1>
@@ -31,3 +36,6 @@
         </div>
     </div>
 </div>
+{% block javascripts %}
+    <script src="{{ asset('build/toggles.js') }}"></script>
+{% endblock %}
