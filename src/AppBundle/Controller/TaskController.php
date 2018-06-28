@@ -43,7 +43,7 @@ class TaskController extends Controller
             $em->persist($task);
             $em->flush();
 
-            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+            return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
 
         return $this->render('task/new.html.twig', array(
@@ -70,7 +70,7 @@ class TaskController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+            return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
 
         return $this->render('task/edit.html.twig', array(
@@ -98,7 +98,7 @@ class TaskController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+        return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
     }
 
     /**

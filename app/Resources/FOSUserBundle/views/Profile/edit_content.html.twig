@@ -38,4 +38,11 @@
 </div>
 {% block javascripts %}
     <script src="{{ asset('build/toggles.js') }}"></script>
+    <script>
+        let latitude = {{ form.latitude.vars.id }};
+        let longitude = {{ form.longitude.vars.id }};
+        let codePostal = {{ form.codePostal.vars.id }};
+        let searchBar = {{ form.city.vars.id }};
+    </script>
+    <script src="{{ asset('build/eventCity.js') }}" ></script>
 {% endblock %}

@@ -19,7 +19,7 @@
         <tbody>
         {% for edition in editions %}
             <tr>
-                <td><a href="{{ path('edition_show', { 'id': edition.id }) }}">{{ edition.id }}</a></td>
+                <td><a href="{{ path('edition_show', { 'slug': edition.slug }) }}">{{ edition.id }}</a></td>
                 <td>{{ edition.name }}</td>
                 <td>{% if edition.startDate %}{{ edition.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if edition.endDate %}{{ edition.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -29,10 +29,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('edition_show', { 'id': edition.id }) }}">show</a>
+                            <a href="{{ path('edition_show', { 'slug': edition.slug }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('edition_edit', { 'id': edition.id }) }}">edit</a>
+                            <a href="{{ path('edition_edit', { 'slug': edition.slug }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

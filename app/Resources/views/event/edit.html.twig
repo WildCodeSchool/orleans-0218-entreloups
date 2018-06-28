@@ -34,9 +34,9 @@
                 <ul class="editionsList list-group">
                     {% for edition in event.editions|reverse %}
                         {% if edition.endDate < today %}
-                            <li class="list-group-item list-group-item-dark"><a href="{{ path('edition_edit', {'id' : edition.id}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
+                            <li class="list-group-item list-group-item-dark"><a href="{{ path('edition_edit', {'slug' : edition.slug}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
                         {% else %}
-                            <li class="list-group-item list-group-item-light"><a href="{{ path('edition_edit', {'id' : edition.id}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
+                            <li class="list-group-item list-group-item-light"><a href="{{ path('edition_edit', {'slug' : edition.slug}) }}">{{ edition.name }} se termine le {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }} </a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -54,4 +54,13 @@
             {{ form_end(delete_form) }}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let latitude = {{ edit_form.latitude.vars.id }};
+        let longitude = {{ edit_form.longitude.vars.id }};
+        let codePostal = {{ edit_form.CodePostal.vars.id }};
+        let searchBar = {{ edit_form.city.vars.id }};
+    </script>
+    <script src="{{ asset('build/eventCity.js') }}" ></script>
 {% endblock %}

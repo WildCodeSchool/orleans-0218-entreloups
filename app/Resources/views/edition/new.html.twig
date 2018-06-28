@@ -9,7 +9,13 @@
     <div class="row my-5">
         <div class="offset-3 col-md-6 mx-auto shadow">
             <h1 class="text-center mt-3">Créer une nouvelle édition</h1>
-
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             {{ form_start(form) }}
 
                 {{ form_row(form.name) }}
