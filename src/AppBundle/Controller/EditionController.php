@@ -52,11 +52,15 @@ class EditionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($edition);
-            $em->flush();
-
-            return $this->redirectToRoute('edition_show', array('id' => $edition->getId()));
+            $data = $form->getData();
+            if ($data->getStartDate() < $data->getEndDate()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($edition);
+                $em->flush();
+                return $this->redirectToRoute('edition_show', array('id' => $edition->getId()));
+            } else {
+                $this->addFlash('danger', 'La date de fin ne peut pas être inférieur à la date de début');
+            }
         }
 
         return $this->render('edition/new.html.twig', array(
@@ -100,7 +104,12 @@ class EditionController extends Controller
         $notificationForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $data = $editForm->getData();
+            if ($data->getStartDate() < $data->getEndDate()) {
+                $this->getDoctrine()->getManager()->flush();
+            } else {
+                $this->addFlash('danger', 'La date de fin ne peut pas être inférieur à la date de début');
+            }
 
             return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
         }
