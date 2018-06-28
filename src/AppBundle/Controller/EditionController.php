@@ -119,8 +119,7 @@ class EditionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $data = $editForm->getData();
             if ($data->getStartDate() < $data->getEndDate()) {
-                $edition->setSlug(
-                $edition->getEvent()->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
+                $edition->setSlug($edition->getEvent()->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
                 $this->getDoctrine()->getManager()->flush();
             } else {
                 $this->addFlash('danger', 'La date de fin ne peut pas être inférieur à la date de début');
