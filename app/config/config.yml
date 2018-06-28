@@ -65,7 +65,9 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
+    auth_mode: '%mailer_auth_mod%'
     host: '%mailer_host%'
+    port: '%mailer_port%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     encryption: '%mailer_encryption%'
@@ -85,6 +87,11 @@ fos_user:
             form:
                 name: app_user_registration
                 type: AppBundle\Form\RegistrationType
+            confirmation:
+                enabled: true
+                from_email:
+                    address: noreply@entreloup.com
+                    sender_name: Entre nous par Entre loups
     profile:
             form:
                 name: app_user_profile

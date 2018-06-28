@@ -44,3 +44,6 @@ services:
             tags:
                 - { name: twig.extension }
 
+    AppBundle\Service\Mailer:
+        id: mailer
+        class: %swiftmailer.class%
