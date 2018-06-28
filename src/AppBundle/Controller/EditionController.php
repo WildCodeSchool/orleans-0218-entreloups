@@ -124,7 +124,7 @@ class EditionController extends Controller
                 );
                 $this->getDoctrine()->getManager()->flush();
             } else {
-                $this->addFlash('danger', 'La date de fin ne peut pas être inférieur à la date de début');
+                $this->addFlash('danger', 'La date de fin ne peut pas être inférieure à la date de début');
             }
 
             return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
