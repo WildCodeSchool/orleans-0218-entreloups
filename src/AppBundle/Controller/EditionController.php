@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Notification;
+use AppBundle\Service\SlugService;
 use AppBundle\Service\CheckUserRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -45,7 +46,7 @@ class EditionController extends Controller
      * @Route("/{slug}/new", name="edition_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Event $event)
+    public function newAction(Request $request, Event $event, SlugService $slugService)
     {
         $edition = new Edition();
         $edition->setEvent($event);
@@ -54,10 +55,11 @@ class EditionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $edition->setSlug($event->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
             $em->persist($edition);
             $em->flush();
 
-            return $this->redirectToRoute('edition_show', array('id' => $edition->getId()));
+            return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
         }
 
         return $this->render('edition/new.html.twig', array(
@@ -70,7 +72,7 @@ class EditionController extends Controller
     /**
      * Finds and displays a edition entity.
      *
-     * @Route("/{id}", name="edition_show")
+     * @Route("/{slug}", name="edition_show")
      * @Method("GET")
      */
     public function showAction(Edition $edition, CheckUserRole $checkUserRole)
@@ -92,10 +94,10 @@ class EditionController extends Controller
     /**
      * Displays a form to edit an existing edition entity.
      *
-     * @Route("/{id}/edit", name="edition_edit")
+     * @Route("/{slug}/edit", name="edition_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Edition $edition)
+    public function editAction(Request $request, Edition $edition, SlugService $slugService)
     {
         $deleteForm = $this->createDeleteForm($edition);
         $editForm = $this->createForm('AppBundle\Form\EditionType', $edition);
@@ -107,9 +109,10 @@ class EditionController extends Controller
         $notificationForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $edition->setSlug($edition->getEvent()->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+            return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
 
         if ($notificationForm->isSubmitted() && $notificationForm->isValid()) {
@@ -117,7 +120,7 @@ class EditionController extends Controller
             $em->persist($notification);
             $em->flush();
 
-            return $this->redirectToRoute('edition_edit', array('id' => $edition->getId()));
+            return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
 
         $em = $this->getDoctrine()->getManager();

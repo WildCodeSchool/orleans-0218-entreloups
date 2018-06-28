@@ -93,6 +93,13 @@ class Edition
     protected $groups;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+    /**
      * Get id.
      *
      * @return int
@@ -372,5 +379,55 @@ class Edition
     {
         $this->groups = $groups;
         return $this;
+    }
+
+    /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Edition
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add group.
+     *
+     * @param \AppBundle\Entity\Group $group
+     *
+     * @return Edition
+     */
+    public function addGroup(\AppBundle\Entity\Group $group)
+    {
+        $this->groups[] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Remove group.
+     *
+     * @param \AppBundle\Entity\Group $group
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeGroup(\AppBundle\Entity\Group $group)
+    {
+        return $this->groups->removeElement($group);
     }
 }
