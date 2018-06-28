@@ -54,7 +54,7 @@ class EditionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $edition->setSlug($event->getSlug() . '/' . $slugService->generateSlug($edition->getName()));
+            $edition->setSlug($event->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
             $em->persist($edition);
             $em->flush();
 
@@ -102,7 +102,7 @@ class EditionController extends Controller
         $notificationForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $edition->setSlug($edition->getEvent()->getSlug() . '/' . $slugService->generateSlug($edition->getName()));
+            $edition->setSlug($edition->getEvent()->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
