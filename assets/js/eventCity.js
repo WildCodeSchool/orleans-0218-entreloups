@@ -4,7 +4,7 @@ import places from "places.js";
 
     // https://community.algolia.com/places/
     let placesAutocomplete = places({
-        container: document.querySelector('#appbundle_event_city'),
+        container: searchBar,
         type: 'city',
         language: 'fr',
         countries: 'fr',
