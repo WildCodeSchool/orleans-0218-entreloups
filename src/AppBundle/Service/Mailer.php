@@ -12,7 +12,7 @@ use AppBundle\Entity\User;
 
 class Mailer
 {
-    const TYPE = ['notification', 'invitation', 'confirmation'];
+    const TYPES = ['notification', 'invitation', 'confirmation'];
     protected $templating;
     protected $mailer;
 
@@ -39,7 +39,7 @@ class Mailer
     public function sendMail(User $sender, User $recipient, string $content, string $type)
     {
         $message = \Swift_Message::newInstance();
-        $template = 'mail/template.html.twig';
+        $template = 'mail/invitation.html.twig';
         $body = $this->templating->render($template, [
             'user' => $recipient,
             'sender' => $sender,

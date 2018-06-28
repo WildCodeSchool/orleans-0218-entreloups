@@ -65,7 +65,7 @@ class UserController extends Controller
      * @Route("/{edition}/invitation", name="invite_user")
      * @Method({"GET","POST"})
      */
-    public function inviteAction(Request $request, Edition $edition, Mailer $service)
+    public function inviteAction(Request $request, Edition $edition, Mailer $mailer)
     {
         $form = $this->createForm(InvitationType::class);
         $form->handleRequest(($request));
@@ -104,7 +104,7 @@ class UserController extends Controller
             $user->addGroup($group);
             $em->persist($group);
             $em->flush();
-            $service->sendMail(
+            $mailer->sendMail(
                 $this->getUser(),
                 $user,
                 "Vous avez été invité à participer à l'édition $editionName 
