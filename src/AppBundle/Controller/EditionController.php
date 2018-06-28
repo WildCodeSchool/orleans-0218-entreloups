@@ -54,10 +54,15 @@ class EditionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $edition->setSlug($event->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
-            $em->persist($edition);
-            $em->flush();
+            $data = $form->getData();
+            if ($data->getStartDate() < $data->getEndDate()) {
+                $em = $this->getDoctrine()->getManager();
+                $edition->setSlug($event->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
+                $em->persist($edition);
+                $em->flush();
+            } else {
+                $this->addFlash('danger', 'La date de fin ne peut pas être inférieure à la date de début');
+            }
 
             return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
         }
@@ -112,8 +117,15 @@ class EditionController extends Controller
         $notificationForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $edition->setSlug($edition->getEvent()->getSlug() . '_' . $slugService->generateSlug($edition->getName()));
-            $this->getDoctrine()->getManager()->flush();
+            $data = $editForm->getData();
+            if ($data->getStartDate() < $data->getEndDate()) {
+                $edition->setSlug(
+                    $edition->getEvent()->getSlug() . '_' . $slugService->generateSlug($edition->getName())
+                );
+                $this->getDoctrine()->getManager()->flush();
+            } else {
+                $this->addFlash('danger', 'La date de fin ne peut pas être inférieure à la date de début');
+            }
 
             return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
