@@ -61,7 +61,7 @@ class EditionController extends Controller
                 $em->persist($edition);
                 $em->flush();
             } else {
-                $this->addFlash('danger', 'La date de fin ne peut pas être inférieur à la date de début');
+                $this->addFlash('danger', 'La date de fin ne peut pas être inférieure à la date de début');
             }
 
             return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
