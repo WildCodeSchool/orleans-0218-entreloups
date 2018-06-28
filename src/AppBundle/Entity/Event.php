@@ -84,7 +84,6 @@ class Event
      */
     private $city;
 
-
     /**
      * @var string
      *
@@ -103,6 +102,27 @@ class Event
      */
     private $editions;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_postal", type="string",length=255 , nullable=true)
+     */
+    private $codePostal;
+  
     /**
      * @var string
      *
@@ -336,6 +356,42 @@ class Event
     }
 
     /**
+     * Set latitude.
+     *
+     * @param float|null $latitude
+     *
+     * @return Event
+     */
+    public function setLatitude($latitude = null)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude.
+     *
+     * @return float|null
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude.
+     *
+     * @param float|null $longitude
+     *
+     * @return Event
+     */
+    public function setLongitude($longitude = null)
+    {
+        $this->longitude = $longitude;
+    }
+  
+    /**
      * Set slug.
      *
      * @param string $slug
@@ -359,10 +415,44 @@ class Event
     public function setCreator(\AppBundle\Entity\User $creator = null)
     {
         $this->creator = $creator;
+      
+        return $this;
+    }
+
+    /**
+     * Get longitude.
+     *
+     * @return float|null
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set codePostal.
+     *
+     * @param string|null $codePostal
+     *
+     * @return Event
+     */
+    public function setCodePostal($codePostal = null)
+    {
+        $this->codePostal = $codePostal;
 
         return $this;
     }
 
+    /**
+     * Get codePostal.
+     *
+     * @return string|null
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+  
     /**
      * Get slug.
      *
