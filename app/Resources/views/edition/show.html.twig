@@ -53,4 +53,21 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <div class="float-right">
+        {% if user is defined %}
+            {% if edition.event.creator == user %}
+                <div class="text-center">
+                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
+                        Gérer l'edition
+                    </a>
+                </div>
+            {% elseif isManager %}
+                <div class="text-center">
+                    <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'id': edition.id}) }}">
+                        Gérer l'edition
+                    </a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}

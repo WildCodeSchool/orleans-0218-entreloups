@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Notification;
+use AppBundle\Service\CheckUserRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -72,12 +73,16 @@ class EditionController extends Controller
      * @Route("/{id}", name="edition_show")
      * @Method("GET")
      */
-    public function showAction(Edition $edition)
+    public function showAction(Edition $edition, CheckUserRole $checkUserRole)
     {
         $deleteForm = $this->createDeleteForm($edition);
+        $user = $this->getUser();
+        $isManager = $checkUserRole->checkUser($user, $edition);
 
         return $this->render('edition/show.html.twig', array(
             'edition' => $edition,
+            'user' => $user,
+            'isManager' => $isManager,
             'delete_form' => $deleteForm->createView(),
         ));
     }
