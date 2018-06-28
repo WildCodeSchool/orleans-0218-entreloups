@@ -70,7 +70,10 @@ class EditionController extends Controller
     }
 
     /**
-     * Finds and displays a edition entity.
+     *  Finds and displays a edition entity.
+     * @param Edition $edition
+     * @param CheckUserRole $checkUserRole
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/{slug}", name="edition_show")
      * @Method("GET")
