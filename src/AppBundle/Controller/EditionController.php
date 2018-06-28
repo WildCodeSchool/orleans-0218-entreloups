@@ -75,10 +75,12 @@ class EditionController extends Controller
     public function showAction(Edition $edition)
     {
         $deleteForm = $this->createDeleteForm($edition);
+        $today = new \DateTime();
 
         return $this->render('edition/show.html.twig', array(
             'edition' => $edition,
             'delete_form' => $deleteForm->createView(),
+            'today' => $today,
         ));
     }
 
