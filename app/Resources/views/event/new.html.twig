@@ -20,6 +20,13 @@
         </div>
     </div>
 {% endblock %}
+{% block javascripts %}
+    <script>let latitude = {{ form.latitude.vars.id }};
+            let longitude = {{ form.longitude.vars.id }};
+            let codePostal = {{ form.CodePostal.vars.id }};
+    </script>
+    <script src="{{ asset('build/eventCity.js') }}" ></script>
+{% endblock %}
 
 
 
