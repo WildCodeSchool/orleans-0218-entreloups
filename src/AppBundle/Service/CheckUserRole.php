@@ -3,6 +3,7 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\Edition;
+use AppBundle\Entity\Event;
 use AppBundle\Entity\User;
 
 class CheckUserRole
@@ -23,5 +24,18 @@ class CheckUserRole
         }
 
         return $isManager;
+    }
+
+    public function checkCreator(?User $user, Event $event): bool
+    {
+        if ($user === null) {
+            return false;
+        }
+        $isCreator = false;
+        $creator = $event->getCreator()->getId();
+        if ($user->getId() == $creator) {
+            $isCreator = true;
+        }
+        return $isCreator;
     }
 }
