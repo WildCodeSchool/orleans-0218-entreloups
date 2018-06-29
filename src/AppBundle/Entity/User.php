@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -86,6 +87,11 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Event", mappedBy="creator")
      */
     private $events;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Event", inversedBy="followers")
+     */
+    private $eventsFollowed;
 
     /**
      * Get id
@@ -309,5 +315,55 @@ class User extends BaseUser
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set eventsFollowed.
+     *
+     * @param \AppBundle\Entity\Event|null $eventsFollowed
+     *
+     * @return User
+     */
+    public function setEventsFollowed(\AppBundle\Entity\Event $eventsFollowed = null)
+    {
+        $this->eventsFollowed = $eventsFollowed;
+
+        return $this;
+    }
+
+    /**
+     * Get eventsFollowed.
+     *
+     * @return \AppBundle\Entity\Event|null
+     */
+    public function getEventsFollowed()
+    {
+        return $this->eventsFollowed;
+    }
+
+    /**
+     * Add eventsFollowed.
+     *
+     * @param \AppBundle\Entity\Event $eventsFollowed
+     *
+     * @return User
+     */
+    public function addEventsFollowed(\AppBundle\Entity\Event $eventsFollowed)
+    {
+        $this->eventsFollowed[] = $eventsFollowed;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventsFollowed.
+     *
+     * @param \AppBundle\Entity\Event $eventsFollowed
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEventsFollowed(\AppBundle\Entity\Event $eventsFollowed)
+    {
+        return $this->eventsFollowed->removeElement($eventsFollowed);
     }
 }

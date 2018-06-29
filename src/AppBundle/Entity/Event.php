@@ -140,6 +140,11 @@ class Event
     private $creator;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="eventsFollowed")
+     */
+    private $followers;
+
+    /**
      * @return File
      */
     public function getImageFile()
@@ -474,5 +479,41 @@ class Event
     public function getCreator()
     {
         return $this->creator;
+    }
+
+    /**
+     * Add follower.
+     *
+     * @param \AppBundle\Entity\User $follower
+     *
+     * @return Event
+     */
+    public function addFollower(\AppBundle\Entity\User $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower.
+     *
+     * @param \AppBundle\Entity\User $follower
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeFollower(\AppBundle\Entity\User $follower)
+    {
+        return $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
     }
 }
