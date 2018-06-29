@@ -112,13 +112,13 @@ class EditionController extends Controller
      * @param Request $request
      * @param Edition $edition
      * @param SlugService $slugService
-     * @param CheckUserRole $checkUserRole
+     * @param CheckUserRole $checkUser
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Edition $edition, SlugService $slugService, CheckUserRole $checkUserRole)
+    public function editAction(Request $request, Edition $edition, SlugService $slugService, CheckUserRole $checkUser)
     {
         $currentUser = $this->getUser();
-        $isAuthorized = $checkUserRole->checkUser($currentUser, $edition);
+        $isAuthorized = $checkUser->checkUser($currentUser, $edition);
         if (!$isAuthorized) {
             return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
         }
