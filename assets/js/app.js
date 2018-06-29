@@ -14,7 +14,7 @@ $('.confirm-alert').click(function () {
 let tags = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('label'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '/tag/tag.json',
+    prefetch: '/autocomplete/tag.json',
 });
 
 tags.clearPrefetchCache();

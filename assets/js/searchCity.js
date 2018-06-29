@@ -4,7 +4,7 @@ import places from "places.js";
     
     // https://community.algolia.com/places/
     let placesAutocomplete = places({
-        container: document.querySelector('#app_user_registration_city'),
+        container: searchBar,
         type: 'city',
         language: 'fr',
         countries: 'fr',
@@ -16,9 +16,9 @@ import places from "places.js";
         aroundLatLngViaIP: false
     });
     placesAutocomplete.on('change', function resultSelected(e) {
-        document.querySelector('#app_user_registration_latitude').value = e.suggestion.latlng.lat || '';
-        document.querySelector('#app_user_registration_longitude').value = e.suggestion.latlng.lng || '';
-        document.querySelector('#app_user_registration_codePostal').value = e.suggestion.postcode || '';
+        latitude.value = e.suggestion.latlng.lat || '';
+        longitude.value = e.suggestion.latlng.lng || '';
+        codePostal.value = e.suggestion.postcode || '';
     });
 })();
 

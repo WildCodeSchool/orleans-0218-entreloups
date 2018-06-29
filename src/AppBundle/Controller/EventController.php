@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Tag;
+use AppBundle\Service\CheckUserRole;
 use AppBundle\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -90,8 +91,13 @@ class EventController extends Controller
      * @Route("/{slug}/edit", name="event_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Event $event, SlugService $slugService)
+    public function editAction(Request $request, Event $event, SlugService $slugService, CheckUserRole $checkUserRole)
     {
+        $currentUser = $this->getUser();
+        $isCreator = $checkUserRole->checkCreator($currentUser, $event);
+        if (!$isCreator) {
+            return $this->redirectToRoute('event_show', array('slug' => $event->getSlug()));
+        }
         $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);

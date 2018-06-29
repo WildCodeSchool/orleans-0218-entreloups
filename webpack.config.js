@@ -6,8 +6,8 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSassLoader()
     .addEntry('datepicker', './assets/js/datepicker.js')
-    .addEntry('eventCity', './assets/js/eventCity.js')
     .addEntry('searchCity', './assets/js/searchCity.js')
+    .addEntry('toggles', './assets/js/toggles.js')
     .addStyleEntry('style', './assets/scss/main.scss')
     .addStyleEntry('bootstrap-tagsinput', './assets/css/tagsinput.css')
     .addEntry('app', './assets/js/app.js')
@@ -15,6 +15,7 @@ Encore
     .addEntry('accueil', './assets/images/accueil.jpeg')
     .addStyleEntry('event', './assets/scss/event.scss')
     .addStyleEntry('edition', './assets/scss/edition.scss')
+    .addStyleEntry('toggleStyle', './assets/scss/toggleStyle.scss')
     .enableBuildNotifications()
     .autoProvidejQuery();
 
