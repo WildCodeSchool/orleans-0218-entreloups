@@ -13,7 +13,7 @@ class CheckUserRole
         if ($user === null) {
             return false;
         }
-        $isManager = false;
+        $isManager = $this->checkCreator($user, $edition->getEvent());
 
         foreach ($edition->getGroups() as $group) {
             foreach ($group->getUsers() as $manager) {
