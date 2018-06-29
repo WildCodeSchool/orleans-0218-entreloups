@@ -22,7 +22,10 @@ class Event
 {
     /**
      * @Vich\UploadableField(mapping="event_images", fileNameProperty="imageName")
-     *
+     * @Assert\File(
+     *     mimeTypes = {"image/jpeg", "image/png", "image/jpg"},
+     *     mimeTypesMessage = "Wrong file type (jpeg,png,jpg)"
+     * )
      * @var File
      *
      */
@@ -171,7 +174,7 @@ class Event
     /**
      * @param string $imageName
      */
-    public function setImageName(string $imageName): void
+    public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }

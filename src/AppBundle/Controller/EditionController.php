@@ -109,9 +109,19 @@ class EditionController extends Controller
      *
      * @Route("/{slug}/edit", name="edition_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Edition $edition
+     * @param SlugService $slugService
+     * @param CheckUserRole $checkUser
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Edition $edition, SlugService $slugService)
+    public function editAction(Request $request, Edition $edition, SlugService $slugService, CheckUserRole $checkUser)
     {
+        $currentUser = $this->getUser();
+        $isAuthorized = $checkUser->checkUser($currentUser, $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
+        }
         $deleteForm = $this->createDeleteForm($edition);
         $editForm = $this->createForm('AppBundle\Form\EditionType', $edition);
         $editForm->handleRequest($request);
