@@ -15,8 +15,8 @@
                 <p><b>Début:</b> {{ edition.startDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
                 <p><b>Fin:</b> {{ edition.endDate|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}</p>
                 <p><b>Lieu:</b> {{ edition.place }}</p>
-                <p><b>Twitter <i class="fab fa-twitter"></i>:</b><a href="https://twitter.com/hashtag/{{ edition.hashtag }}"> #{{ edition.hashtag }}</a></p>
-                <p><b>Statut:</b> {% if not edition.status %}<i class="fas fa-exclamation-triangle"></i> Annulée{% elseif edition.endDate < today %}<i class="fas fa-hourglass-end"></i> Terminée{% elseif edition.startDate <= today <= edition.endDate %}<i class="fas fa-hourglass-start"></i> En cours{% else %}<i class="far fa-calendar-alt"></i> A venir{% endif %}</p>
+                <p><b>Twitter <i class="fab fa-twitter"></i>:</b><a href="https://twitter.com/{{ edition.hashtag }}"> #{{ edition.hashtag }}</a></p>
+                <p><b>Statut:</b> {% if not edition.status %}<i class="fas fa-exclamation-triangle"></i> Annulée{% elseif edition.endDate < today %}<i class="fas fa-hourglass-end"></i> Terminée{% elseif edition.startDate > today %}<i class="far fa-calendar-alt"></i> A venir{% else %}<i class="fas fa-hourglass-start"></i> En cours{% endif %}</p>
             </div>
         </div>
     </div>

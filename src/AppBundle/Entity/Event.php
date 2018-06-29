@@ -171,7 +171,7 @@ class Event
     /**
      * @param string $imageName
      */
-    public function setImageName(string $imageName): void
+    public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
