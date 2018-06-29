@@ -40,7 +40,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/tag.json", name="allTags")
+     * @Route("/autocomplete/tag.json", name="allTags")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
