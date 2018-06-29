@@ -27,7 +27,10 @@ class EditionFixtures extends Fixture implements DependentFixtureInterface
                 $edition->setPlace($faker->city);
                 $edition->setHashtag($faker->word);
                 $edition->setStatus(1);
-                $edition->setSlug($this->getReference('event' . $i)->getTitle() . '_' . $slugService->generateSlug($edition->getName()));
+                $edition->setSlug(
+                    $this->getReference('event' . $i)->getTitle() . '_' .
+                    $slugService->generateSlug($edition->getName())
+                );
 
                 $this->addReference('edition' . $nbEdition, $edition);
 
