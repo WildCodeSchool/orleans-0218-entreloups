@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Edition;
 use AppBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -99,37 +100,19 @@ class NotificationController extends Controller
         ));
     }
 
-    /**
-     * Deletes a notification entity.
-     *
-     * @Route("/{id}", name="notification_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Notification $notification)
-    {
-        $form = $this->createDeleteForm($notification);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($notification);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('notification_index');
-    }
 
     /**
      * Creates a form to delete a notification entity.
      *
      * @param Notification $notification The notification entity
-     *
+     * @param Edition $edition
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Notification $notification)
+    private function createDeleteForm(Notification $notification, Edition $edition)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('notification_delete', array('id' => $notification->getId())))
+            ->setAction($this->generateUrl('notification_delete', array('edition' => $edition->getId(), 'id' => $notification->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

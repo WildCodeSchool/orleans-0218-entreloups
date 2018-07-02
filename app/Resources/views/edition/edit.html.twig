@@ -61,7 +61,11 @@
                     <tbody>
                     {% for notification in notifications|reverse %}
                         <tr>
-                            <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}</td>
+                            <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}{{ form_start(deleteNotificationForms[notification.id]) }}
+                                <button class="btn btn-danger float-right confirm-alert" type="submit">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                                {{ form_end(deleteNotificationForms[notification.id]) }}</td>
                         </tr>
                         <tr>
                             <td class="pb-4">{{ notification.content|nl2br }}</td>
