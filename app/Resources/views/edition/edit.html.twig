@@ -17,13 +17,6 @@
         </div>
         <div class="col-md-6 mb-5">
             <h3 class="mb-3">Informations :</h3>
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
             {{ form_start(edit_form) }}
             {{ form_widget(edit_form) }}
             <div class="text-center">
