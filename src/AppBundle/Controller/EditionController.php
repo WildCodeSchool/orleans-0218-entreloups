@@ -217,7 +217,12 @@ class EditionController extends Controller
     private function createDeleteNotificationForm(Notification $notification, Edition $edition)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('notification_delete', array('id' => $notification->getId(), 'edition' => $edition->getId())))
+            ->setAction(
+                $this->generateUrl(
+                    'notification_delete',
+                    array('id' => $notification->getId(), 'edition' => $edition->getId())
+                )
+            )
             ->setMethod('DELETE')
             ->getForm()
             ;
