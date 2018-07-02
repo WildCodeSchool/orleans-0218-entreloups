@@ -120,8 +120,14 @@ class EditionController extends Controller
      * @Route("/{slug}/edit", name="edition_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Edition $edition, SlugService $slugService, CheckUserRole $checkUser, Mailer $mailer)
-    {
+    public function editAction(
+        Request $request,
+        Edition $edition,
+        SlugService $slugService,
+        CheckUserRole $checkUser,
+        Mailer $mailer
+    ) {
+    
         $currentUser = $this->getUser();
         $isAuthorized = $checkUser->checkUser($currentUser, $edition);
         if (!$isAuthorized) {
