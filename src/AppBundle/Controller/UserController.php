@@ -75,7 +75,7 @@ class UserController extends Controller
             $data = $form->getData();
             $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
             if (is_null($user)) {
-                $this->addFlash('error', 'Utilisateur non trouvé');
+                $this->addFlash('danger', 'Utilisateur non trouvé');
                 return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
             }
             $groups = $edition->getGroups();
@@ -111,6 +111,7 @@ class UserController extends Controller
                 de l'évènement $eventName en tant que $roleName",
                 'invitation'
             );
+            $this->addFlash('success', 'L\'utilisateur a bien été invité');
             return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
         }
 

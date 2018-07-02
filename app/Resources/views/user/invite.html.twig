@@ -2,6 +2,15 @@
 {% block title %}Inviter un utilisateur{% endblock %}
 {% block body %}
     <div class="row">
+        <div class="col-12 mt-3">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
         <div class="col-6 offset-3 text-center shadow my-5">
             <h1 class="text-center mt-3">Inviter un utilisateur</h1>
             {{ form_start(form) }}
@@ -19,9 +28,4 @@
             {{ form_end(form) }}
         </div>
     </div>
-    {% for message in app.flashes('error') %}
-        <div class="alert-danger text-center">
-            {{ message }}
-        </div>
-    {% endfor %}
 {% endblock %}
