@@ -155,6 +155,9 @@ class EditionController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $notifications = $em->getRepository(Notification::class)->findByEdition($edition->getId());
+        foreach ($notifications as $publication) {
+            $deleteNotificationForm  = $this->createDeleteForm($publication);
+        }
 
         return $this->render('edition/edit.html.twig', array(
             'edition' => $edition,
@@ -163,6 +166,7 @@ class EditionController extends Controller
             'edit_form' => $editForm->createView(),
             'notification_form' => $notificationForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'deleteNotificationForm' => $deleteNotificationForm,
         ));
     }
 
