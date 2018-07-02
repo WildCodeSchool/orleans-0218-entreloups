@@ -157,7 +157,7 @@ class EditionController extends Controller
         $notifications = $em->getRepository(Notification::class)->findByEdition($edition->getId());
 
         foreach ($notifications as $notif) {
-            $deleteNotificationForm  = $this->createDeleteNotificationForm($notif);
+            $deleteNotificationForm  = $this->createDeleteNotificationForm($notif, $edition);
             $deleteNotificationForms[$notif->getId()] = $deleteNotificationForm->createView();
         }
 
@@ -193,26 +193,6 @@ class EditionController extends Controller
     }
 
     /**
-     * Deletes a notification entity.
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/notif/{id}", name="notification_delete")
-     * @Method("DELETE")
-     */
-    public function deleteNotificationAction(Request $request, Notification $notification)
-    {
-        $form = $this->createDeleteNotificationForm($notification);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($notification);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
-    }
-
-    /**
      * Creates a form to delete a edition entity.
      *
      * @param Edition $edition The edition entity
@@ -234,10 +214,10 @@ class EditionController extends Controller
      * @param Edition $edition The edition entity
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteNotificationForm(Notification $notification)
+    private function createDeleteNotificationForm(Notification $notification, Edition $edition)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('notification_delete', array('id' => $notification->getId())))
+            ->setAction($this->generateUrl('notification_delete', array('id' => $notification->getId(), 'edition' => $edition->getId())))
             ->setMethod('DELETE')
             ->getForm()
             ;

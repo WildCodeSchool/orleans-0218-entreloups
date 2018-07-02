@@ -17,65 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 class NotificationController extends Controller
 {
     /**
-     * Lists all notification entities.
-     *
-     * @Route("/", name="notification_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $notifications = $em->getRepository('AppBundle:Notification')->findAll();
-
-        return $this->render('notification/index.html.twig', array(
-            'notifications' => $notifications,
-        ));
-    }
-
-    /**
-     * Creates a new notification entity.
-     *
-     * @Route("/new", name="notification_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $notification = new Notification();
-        $form = $this->createForm('AppBundle\Form\NotificationType', $notification);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($notification);
-            $em->flush();
-
-            return $this->redirectToRoute('notification_show', array('id' => $notification->getId()));
-        }
-
-        return $this->render('notification/new.html.twig', array(
-            'notification' => $notification,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a notification entity.
-     *
-     * @Route("/{id}", name="notification_show")
-     * @Method("GET")
-     */
-    public function showAction(Notification $notification)
-    {
-        $deleteForm = $this->createDeleteForm($notification);
-
-        return $this->render('notification/show.html.twig', array(
-            'notification' => $notification,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing notification entity.
      *
      * @Route("/{id}/edit", name="notification_edit")
@@ -100,7 +41,25 @@ class NotificationController extends Controller
         ));
     }
 
+    /**
+     * Deletes a notification entity.
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/{id}/edition/{edition}", name="notification_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Notification $notification, Edition $edition)
+    {
+        $form = $this->createDeleteForm($notification, $edition);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($notification);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
+    }
 
     /**
      * Creates a form to delete a notification entity.
@@ -112,7 +71,7 @@ class NotificationController extends Controller
     private function createDeleteForm(Notification $notification, Edition $edition)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('notification_delete', array('edition' => $edition->getId(), 'id' => $notification->getId())))
+            ->setAction($this->generateUrl('notification_delete', array('id' => $notification->getId(), 'edition' => $edition->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
