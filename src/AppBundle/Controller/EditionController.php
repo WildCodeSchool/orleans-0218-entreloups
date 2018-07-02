@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Notification;
+use AppBundle\Service\Mailer;
 use AppBundle\Service\SlugService;
 use AppBundle\Service\CheckUserRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -105,17 +106,21 @@ class EditionController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing edition entity.
-     *
-     * @Route("/{slug}/edit", name="edition_edit")
-     * @Method({"GET", "POST"})
      * @param Request $request
      * @param Edition $edition
      * @param SlugService $slugService
      * @param CheckUserRole $checkUser
+     * @param Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *  Displays a form to edit an existing edition entity.
+     *
+     * @Route("/{slug}/edit", name="edition_edit")
+     * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Edition $edition, SlugService $slugService, CheckUserRole $checkUser)
+    public function editAction(Request $request, Edition $edition, SlugService $slugService, CheckUserRole $checkUser, Mailer $mailer)
     {
         $currentUser = $this->getUser();
         $isAuthorized = $checkUser->checkUser($currentUser, $edition);
@@ -149,7 +154,15 @@ class EditionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($notification);
             $em->flush();
-
+            foreach ($edition->getEvent()->getFollowers() as $user) {
+                $mailer->notifMail(
+                    $edition->getEvent()->getCreator(),
+                    $user,
+                    "Une nouvelle a été publiée concernant cet évènement",
+                    'notification',
+                    $edition->getEvent()
+                );
+            }
             return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
 
