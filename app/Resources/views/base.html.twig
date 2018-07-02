@@ -49,7 +49,17 @@
             </div>
         </nav>
     </header>
-
+    {% block flash %}
+        <div class="row mt-3">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} col-8 offset-2 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endblock %}
         {% block banner %}{% endblock %}
         <div class="container">
             {% block body %}{% endblock %}
