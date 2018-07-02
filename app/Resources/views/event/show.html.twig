@@ -18,13 +18,6 @@
             <a role="button" class="btn btn-primary" href="{{ path('event_follow', {'slug': event.slug}) }}">
                 Suivre
             </a>
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }} text-center mt-2">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
         </div>
         {% endif %}
         <div>
