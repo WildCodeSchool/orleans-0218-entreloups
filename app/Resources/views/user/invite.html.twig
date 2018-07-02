@@ -19,9 +19,4 @@
             {{ form_end(form) }}
         </div>
     </div>
-    {% for message in app.flashes('error') %}
-        <div class="alert-danger text-center">
-            {{ message }}
-        </div>
-    {% endfor %}
 {% endblock %}
