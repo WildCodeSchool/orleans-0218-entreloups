@@ -53,7 +53,7 @@ class NotificationController extends Controller
      * @Method("DELETE")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request,Edition $edition, Notification $notification)
+    public function deleteAction(Request $request, Edition $edition, Notification $notification)
     {
         $form = $this->createDeleteForm($notification, $edition);
         $form->handleRequest($request);
