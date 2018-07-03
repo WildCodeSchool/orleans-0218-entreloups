@@ -317,4 +317,28 @@ class User extends BaseUser
     {
         return $this->events;
     }
+
+    /**
+     * Set mobility.
+     *
+     * @param int $mobility
+     *
+     * @return User
+     */
+    public function setMobility($mobility)
+    {
+        $this->mobility = $mobility;
+
+        return $this;
+    }
+
+    /**
+     * Get mobility.
+     *
+     * @return int
+     */
+    public function getMobility()
+    {
+        return $this->mobility;
+    }
 }
