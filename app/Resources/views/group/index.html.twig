@@ -28,8 +28,12 @@
             {% endfor %}
         {% endfor %}
         </div>
-        <a class="btn btn-dark mb-2 float-left" href="{{ path('edition_edit', {'slug' : edition.slug}) }}"><i class="fas fa-chevron-left"></i> Retour à l'édition</a>
-        <a class="btn btn-primary mb-2 float-right" href="{{ path('invite_user', {'edition' : edition.id}) }}"><i class="fas fa-plus"></i> Inviter un utilisateur</a>
+        <a class="btn btn-dark mb-2 float-left" href="{{ path('edition_edit', {'slug' : edition.slug}) }}">
+            <i class="fas fa-chevron-left"></i> Retour à l'édition
+        </a>
+        <a class="btn btn-primary mb-2 float-right" href="{{ path('invite_user', {'edition' : edition.id}) }}">
+            <i class="fas fa-plus"></i> Ajouter un collaborateur
+        </a>
     </div>
 </div>
 {% endblock %}

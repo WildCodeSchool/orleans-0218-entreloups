@@ -27,6 +27,12 @@ class Edition
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 255,
+     *     minMessage = "Le titre de l'édition doit être supérieur à {{ limit }} caractères.",
+     *     maxMessage = "Le titre de l'édition doit être inférieur à {{ limit }} caractères."
+     * )
      */
     private $name;
 

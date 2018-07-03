@@ -6,6 +6,7 @@ use AppBundle\Entity\Event;
 use AppBundle\Entity\Tag;
 use AppBundle\Service\CheckUserRole;
 use AppBundle\Service\CheckDistance;
+use AppBundle\Service\Mailer;
 use AppBundle\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -68,6 +69,33 @@ class EventController extends Controller
         return $this->render('event/proximity_events.html.twig', [
             'events' => $proxEvents,
         ]);
+    }
+  
+    /**
+     * @param Event $event
+     * @Route("/{slug}/follow", name="event_follow")
+     * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function followAction(Event $event)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $isAFollower = false;
+        foreach ($event->getFollowers() as $user) {
+            if ($user->getId() === $this->getUser()->getId()) {
+                $this->addFlash('warning', 'Vous suivez déjà cet évènement');
+                $isAFollower = true;
+                break;
+            }
+        }
+        if (!$isAFollower) {
+            $event->addFollower($this->getUser());
+            $this->getUser()->addEventsFollowed($event);
+            $em->flush();
+            $this->addFlash('success', 'Vous suivez cet évènement');
+        }
+
+        return $this->redirectToRoute('event_show', array('slug' => $event->getSlug()));
     }
 
     /**

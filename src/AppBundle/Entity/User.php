@@ -3,7 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="Un compte existe déjà avec cet email")
  */
 class User extends BaseUser
 {
@@ -93,6 +96,12 @@ class User extends BaseUser
      * @Assert\Length(max = 3)
      */
     private $mobility;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Event", inversedBy="followers")
+     */
+    private $eventsFollowed;
+
 
     /**
      * Get id
@@ -328,7 +337,18 @@ class User extends BaseUser
     public function setMobility($mobility)
     {
         $this->mobility = $mobility;
-
+    }
+  
+    /**
+     * Set eventsFollowed.
+     *
+     * @param \AppBundle\Entity\Event|null $eventsFollowed
+     *
+     * @return User
+     */
+    public function setEventsFollowed(\AppBundle\Entity\Event $eventsFollowed = null)
+    {
+        $this->eventsFollowed = $eventsFollowed;
         return $this;
     }
 
@@ -340,5 +360,41 @@ class User extends BaseUser
     public function getMobility()
     {
         return $this->mobility;
+    }
+  
+    /**
+     * Get eventsFollowed.
+     *
+     * @return \AppBundle\Entity\Event|null
+     */
+    public function getEventsFollowed()
+    {
+        return $this->eventsFollowed;
+    }
+
+    /**
+     * Add eventsFollowed.
+     *
+     * @param \AppBundle\Entity\Event $eventsFollowed
+     *
+     * @return User
+     */
+    public function addEventsFollowed(\AppBundle\Entity\Event $eventsFollowed)
+    {
+        $this->eventsFollowed[] = $eventsFollowed;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventsFollowed.
+     *
+     * @param \AppBundle\Entity\Event $eventsFollowed
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEventsFollowed(\AppBundle\Entity\Event $eventsFollowed)
+    {
+        return $this->eventsFollowed->removeElement($eventsFollowed);
     }
 }

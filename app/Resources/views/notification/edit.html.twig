@@ -1,22 +1,24 @@
 {% extends 'base.html.twig' %}
-{% block title %}Notification Edition{% endblock %}
-
+{% block title %}Modification d'une nouvelle{% endblock %}
 {% block body %}
-    <h1>Notification edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('notification_index') }}">Back to the list</a>
-        </li>
-        <li>
+    <div class="row my-5">
+        <div class="offset-3 col-md-6 mx-auto shadow">
+            <h1 class="text-center mt-3">Modification d'une nouvelle pour: {{ notification.edition.event.title }} {{ notification.edition.name }}</h1>
+            <div class="form-group">
+                {{ form_start(edit_form) }}
+                {{ form_label(edit_form.content, '250 caractères maximum :') }}
+                {{ form_widget(edit_form.content, { 'attr': {'rows' : '4', 'maxlength' : '250'} }) }}
+                {{ form_errors(edit_form.content) }}
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary my-2 float-right" type="submit"><i class="far fa-save"></i> Modifier</button>
+            </div>
+            {{ form_end(edit_form) }}
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <div class="form-group">
+                <button class="btn btn-danger my-2 float-left confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer</button>
+            </div>
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}
