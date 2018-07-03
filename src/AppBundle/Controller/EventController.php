@@ -158,6 +158,10 @@ class EventController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($event->getEditions()->count() > 0) {
+                $this->addFlash('danger', 'Vous ne pouvez pas supprimer un évènement qui contient une edition');
+                return $this->redirectToRoute('event_edit', array('slug' => $event->getSlug()));
+            }
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->flush();
