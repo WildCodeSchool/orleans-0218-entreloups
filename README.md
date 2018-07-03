@@ -8,7 +8,7 @@ on May 15, 2018 and finished on July 6 2018.
 Entrenous par Entreloups operates as a website providing membership software, allowing its users to schedule events 
 using a common platform.
 
-![alt text](web/Page_accueil.png)
+![alt text](web/Accueil.png)
 
 System requirements
 -------------------
