@@ -37,8 +37,7 @@ class ProfileType extends AbstractType
                 'attr' => [
                     'min' => 0,
                     'max' => 200,
-                ])
-            )
+                ]))
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'label' => 'Choisissez vos domaines d\'intérêt par mots clés :',

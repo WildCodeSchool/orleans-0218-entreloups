@@ -24,13 +24,12 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
     public function findEventsWhoHaveEditionByDate(\DateTime $dateTime)
     {
         $query = $this->createQueryBuilder('e')
-            ->join('e.editions', 'ed' )
+            ->join('e.editions', 'ed')
             ->where('ed.startDate > :nowDate')
             ->setParameter('nowDate', $dateTime)
             ->getQuery()
             ->getResult()
         ;
         return $query;
-
     }
 }
