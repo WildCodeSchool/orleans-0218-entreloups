@@ -59,9 +59,11 @@
         {% endfor %}
     </div>
         {% block banner %}{% endblock %}
-        <div class="container">
-            {% block body %}{% endblock %}
-        </div>
+        {% block content %}
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        {% endblock %}
         {% include 'footer.html.twig' %}
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('build/app.js') }}"></script>
