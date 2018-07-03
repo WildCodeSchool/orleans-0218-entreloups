@@ -57,10 +57,10 @@ class EventController extends Controller
         $userMobility = $user->getMobility();
         $proxEvents = [];
 
-        foreach ( $events as $event) {
+        foreach ($events as $event) {
             $eventLat = $event->getLatitude();
             $eventLng= $event->getLongitude();
-            $distance = $checkDistance->getDistance($userLat,$userLng, $eventLat, $eventLng);
+            $distance = $checkDistance->getDistance($userLat, $userLng, $eventLat, $eventLng);
 
             if ($distance < $userMobility) {
                 array_push($proxEvents, $event);
