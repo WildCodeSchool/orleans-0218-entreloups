@@ -38,4 +38,4 @@ $ npm run dev
 
 Thx
 ---
-Nicolas VINCENT, Sylvain Blondeau, John DEVOS and to all the Wild Code School promo Feb 2018!!!
+Nicolas VINCENT, Sylvain BLONDEAU, John DEVOS and to all the Wild Code School promo Feb 2018!!!
