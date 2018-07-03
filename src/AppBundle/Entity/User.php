@@ -68,7 +68,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="code_postal", type="string", nullable=true, length=5)*
+     * @ORM\Column(name="code_postal", type="string", nullable=true, length=5)
      * @Assert\Length(max = 5)
      */
     private $codePostal;
@@ -86,6 +86,13 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Event", mappedBy="creator")
      */
     private $events;
+
+    /**
+     * @var int
+     * @ORM\Column(name="mobility", type="integer", length=3)
+     * @Assert\Length(max = 3)
+     */
+    private $mobility;
 
     /**
      * Get id
