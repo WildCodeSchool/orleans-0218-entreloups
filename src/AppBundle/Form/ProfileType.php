@@ -31,13 +31,13 @@ class ProfileType extends AbstractType
             ->add('codePostal', HiddenType::class)
             ->add('latitude', HiddenType::class)
             ->add('longitude', HiddenType::class)
-            ->add('mobility', RangeType::class, [
+            ->add('mobility', RangeType::class, array(
+                'translation_domain' => 'FOSUserBundle',
                 'attr' => [
                     'min' => 0,
                     'max' => 200,
-                    'value' => 100
-                ]
-            ])
+                ])
+            )
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'label' => 'Choisissez vos domaines d\'intérêt par mots clés :',

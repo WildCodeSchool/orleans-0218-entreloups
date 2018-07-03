@@ -29,6 +29,9 @@
                 <ul class="navbar-nav">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                         <li class="nav-item">
+                            <a href="{{ path('event_around') }}" class="nav-link">Proche de chez moi</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ path('event_new') }}" class="nav-link">Créer un évènement</a>
                         </li>
                         <li class="nav-item">

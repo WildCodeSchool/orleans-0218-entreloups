@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/event.css') }}">
+{% endblock %}
+{%  block body %}
+    <h1 class="mt-5 text-center">Evènements Près de chez moi :</h1>
+    <div class="row">
+        {% include 'event/events.html.twig' %}
+    </div>
+{% endblock %}
