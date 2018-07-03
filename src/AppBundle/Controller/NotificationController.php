@@ -34,7 +34,7 @@ class NotificationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('notification_edit', array('id' => $notification->getId()));
+            return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
         }
 
         return $this->render('notification/edit.html.twig', array(
@@ -61,7 +61,7 @@ class NotificationController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('notification_index');
+        return $this->redirectToRoute('edition_edit', array('slug' => $edition->getSlug()));
     }
 
     /**
