@@ -46,11 +46,14 @@ class NotificationController extends Controller
 
     /**
      * Deletes a notification entity.
-     *
-     * @Route("/{id}", name="notification_delete")
+     * @param Request $request
+     * @param Edition $edition
+     * @param Notification $notification
+     * @Route("/{edition}/delete/{id}", name="notification_delete")
      * @Method("DELETE")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request, Notification $notification)
+    public function deleteAction(Request $request,Edition $edition, Notification $notification)
     {
         $form = $this->createDeleteForm($notification);
         $form->handleRequest($request);
