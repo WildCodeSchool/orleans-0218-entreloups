@@ -10,13 +10,13 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="row mx-5 my-5 shadow">
-            <div class="col-12 text-center">
+        <div class="row mx-md-5 my-5 shadow">
+            <div class="col-12 text-center px-md-5">
                 <h1 class="text-center mt-3">Gestion de l'édition: {{ edition.name }}</h1>
                 <h2 class="text-center mb-2">de l'évènement: {{ edition.event.title }}</h2>
                 <a href="{{ path('group_index', {'edition' : edition.id}) }}" class="btn btn-primary mb-5">Gestion du Staff</a>
             </div>
-            <div class="col-md-6 mb-5">
+            <div class="col-md-6 mb-5 px-md-5">
                 <h3 class="mb-3">Publier une nouvelle :</h3>
                 {{ form_start(notification_form) }}
                 {{ form_label(notification_form.content, '250 caractères maximum :') }}
@@ -62,7 +62,7 @@
                     <div class="col-md-4">
                             <button class="btn btn-primary mb-2" type="submit">
                                 <i class="far fa-save"></i>
-                                Enregistrer
+                                Enregistrer les modifications
                             </button>
                         {{ form_end(edit_form) }}
                     </div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 px-md-5">
                 <h3 class="mb-3">Les dernières nouvelles :</h3>
                 <div class="tableWrapper">
                     <table class="table table-striped newsTable">
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="row shadow pt-3 mb-2 mx-5">
+        <div class="row shadow pt-3 mb-2 mx-md-5">
             <div class="col-sm-4 offset-sm-4">
                 <h3>Liste des tâches</h3>
             </div>
