@@ -11,7 +11,9 @@ class CheckDistance
         $lat1 = $userLat;
         $lat2 = $eventLat;
         $theta = $lon1 - $lon2;
-        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $sin = sin(deg2rad($lat1)) * sin(deg2rad($lat2));
+        $cos = cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = $sin + $cos;
         $dist = acos($dist);
         $dist = rad2deg($dist);
         $miles = $dist * 60 * 1.1515;
