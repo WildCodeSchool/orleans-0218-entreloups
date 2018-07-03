@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Tag;
 use AppBundle\Service\CheckUserRole;
+use AppBundle\Service\CheckDistance;
 use AppBundle\Service\Mailer;
 use AppBundle\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,18 +25,52 @@ class EventController extends Controller
      *
      * @Route("/", name="event_index")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $allEvents = $em->getRepository('AppBundle:Event')->findAll();
 
         return $this->render('event/index.html.twig', array(
-            'events' => $events,
+            'events' => $allEvents
         ));
     }
 
+    /**
+     * Show Event Around User
+     *
+     * @Route("/around", name="event_around")
+     * @Method("GET")
+     * @param CheckDistance $checkDistance
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function aroundAction(CheckDistance $checkDistance)
+    {
+        $date = new \DateTime('now');
+        $em = $this->getDoctrine()->getManager();
+        $events = $em->getRepository('AppBundle:Event')->findEventsWhoHaveEditionByDate($date);
+
+        $user = $this->getUser();
+        $userLat = $user->getLatitude();
+        $userLng = $user->getLongitude();
+        $userMobility = $user->getMobility();
+        $proxEvents = [];
+
+        foreach ($events as $event) {
+            $eventLat = $event->getLatitude();
+            $eventLng= $event->getLongitude();
+            $distance = $checkDistance->getDistance($userLat, $userLng, $eventLat, $eventLng);
+
+            if ($distance < $userMobility) {
+                array_push($proxEvents, $event);
+            }
+        }
+        return $this->render('event/proximity_events.html.twig', [
+            'events' => $proxEvents,
+        ]);
+    }
+  
     /**
      * @param Event $event
      * @Route("/{slug}/follow", name="event_follow")

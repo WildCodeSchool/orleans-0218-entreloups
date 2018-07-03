@@ -71,7 +71,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="code_postal", type="string", nullable=true, length=5)*
+     * @ORM\Column(name="code_postal", type="string", nullable=true, length=5)
      * @Assert\Length(max = 5)
      */
     private $codePostal;
@@ -91,9 +91,17 @@ class User extends BaseUser
     private $events;
 
     /**
+     * @var int
+     * @ORM\Column(name="mobility", type="integer", length=3)
+     * @Assert\Length(max = 3)
+     */
+    private $mobility;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Event", inversedBy="followers")
      */
     private $eventsFollowed;
+
 
     /**
      * Get id
@@ -320,6 +328,18 @@ class User extends BaseUser
     }
 
     /**
+     * Set mobility.
+     *
+     * @param int $mobility
+     *
+     * @return User
+     */
+    public function setMobility($mobility)
+    {
+        $this->mobility = $mobility;
+    }
+  
+    /**
      * Set eventsFollowed.
      *
      * @param \AppBundle\Entity\Event|null $eventsFollowed
@@ -329,10 +349,19 @@ class User extends BaseUser
     public function setEventsFollowed(\AppBundle\Entity\Event $eventsFollowed = null)
     {
         $this->eventsFollowed = $eventsFollowed;
-
         return $this;
     }
 
+    /**
+     * Get mobility.
+     *
+     * @return int
+     */
+    public function getMobility()
+    {
+        return $this->mobility;
+    }
+  
     /**
      * Get eventsFollowed.
      *

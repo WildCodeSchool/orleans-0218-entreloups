@@ -7,6 +7,7 @@ Encore
     .enableSassLoader()
     .addEntry('datepicker', './assets/js/datepicker.js')
     .addEntry('searchCity', './assets/js/searchCity.js')
+    .addEntry('rangeValue', './assets/js/rangeValue.js')
     .addEntry('toggles', './assets/js/toggles.js')
     .addStyleEntry('style', './assets/scss/main.scss')
     .addStyleEntry('bootstrap-tagsinput', './assets/css/tagsinput.css')

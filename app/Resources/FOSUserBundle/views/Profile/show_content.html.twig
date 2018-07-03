@@ -15,6 +15,7 @@
                 <p>{{ 'Nom d\'utilisateur'|trans }} : {{ user.username }}</p>
                 <p>{{ 'Email'|trans }} : {{ user.email }}</p>
                 <p>{{ 'Ville'|trans }} : {{ user.city }}</p>
+                <p>{{ 'Mobilité'|trans }} : {{ user.mobility }} km</p>
                 <p>{{ 'Mes mots clés'|trans }} : {% for tag in user.tags %}{{ tag }}, {% endfor %}</p>
                 <a class="btn btn-primary mb-3" href="/profile/edit"><i class="fas fa-pencil-alt"></i> Modifier</a>
             </div>
