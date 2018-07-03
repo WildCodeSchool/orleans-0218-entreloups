@@ -27,7 +27,7 @@ class NotificationController extends Controller
      */
     public function editAction(Request $request, Edition $edition, Notification $notification)
     {
-        $deleteForm = $this->createDeleteForm($notification);
+        $deleteForm = $this->createDeleteForm($notification, $edition);
         $editForm = $this->createForm('AppBundle\Form\NotificationType', $notification);
         $editForm->handleRequest($request);
 
@@ -46,13 +46,16 @@ class NotificationController extends Controller
 
     /**
      * Deletes a notification entity.
-     *
-     * @Route("/{id}", name="notification_delete")
+     * @param Request $request
+     * @param Edition $edition
+     * @param Notification $notification
+     * @Route("/{edition}/delete/{id}", name="notification_delete")
      * @Method("DELETE")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request, Notification $notification)
+    public function deleteAction(Request $request, Edition $edition, Notification $notification)
     {
-        $form = $this->createDeleteForm($notification);
+        $form = $this->createDeleteForm($notification, $edition);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,10 +74,15 @@ class NotificationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Notification $notification)
+    private function createDeleteForm(Notification $notification, Edition $edition)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('notification_delete', array('id' => $notification->getId())))
+            ->setAction(
+                $this->generateUrl(
+                    'notification_delete',
+                    array('id' => $notification->getId(), 'edition' => $edition->getId())
+                )
+            )
             ->setMethod('DELETE')
             ->getForm()
             ;

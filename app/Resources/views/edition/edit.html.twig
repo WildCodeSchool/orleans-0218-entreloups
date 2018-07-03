@@ -76,22 +76,31 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6 px-md-5">
-                <h3 class="mb-3">Les dernières nouvelles :</h3>
-                <div class="tableWrapper">
-                    <table class="table table-striped newsTable">
-                        <tbody>
-                        {% for notification in notifications|reverse %}
-                            <tr>
-                                <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}<a href="{{ path('notification_edit', {'edition' : edition.id, 'id' : notification.id}) }}" class="btn btn-primary float-right"><i class="far fa-edit"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="pb-4">{{ notification.content|nl2br }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                <h3 class="my-3">Les dernières nouvelles :</h3>
+            <div class="tableWrapper">
+                <table class="table table-striped newsTable">
+                    <tbody>
+                    {% for notification in notifications|reverse %}
+                        <tr>
+                            <td>
+                                {% if notification.publicationTime %}
+                                    {{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}
+                                {% endif %}
+                                    <a 
+                                    href="{{ path('notification_edit', {'edition' : edition.id, 'id' : notification.id}) }}" 
+                                    class="btn btn-primary float-right"
+                                    title="Modifier la nouvelle">Modifier 
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pb-4">{{ notification.content|nl2br }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
                 </div>
             </div>
         </div>
