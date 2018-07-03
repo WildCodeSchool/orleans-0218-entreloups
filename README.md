@@ -13,7 +13,7 @@ using a common platform.
 System requirements
 -------------------
 
-* PHP 7;
+* PHP 7.1;
 
 * Web-server (Apache or Nginx);
 
