@@ -24,6 +24,7 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->remove('current_password')
             ->add('firstName', TextType::class, array('label' => 'Prénom :', 'translation_domain' => 'FOSUserBundle'))
             ->add('lastName', TextType::class, array('label' => 'Nom :', 'translation_domain' => 'FOSUserBundle'))
             ->add('city', SearchType::class, array('label' => 'Ville :', 'translation_domain' => 'FOSUserBundle'))
