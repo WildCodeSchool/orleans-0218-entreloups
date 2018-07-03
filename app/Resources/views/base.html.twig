@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('build/style.css') }}">
         {% block stylesheets %}{% endblock %}
@@ -49,7 +49,15 @@
             </div>
         </nav>
     </header>
-
+    <div class="row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} mt-3 col-6 offset-3 text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
         {% block banner %}{% endblock %}
         <div class="container">
             {% block body %}{% endblock %}

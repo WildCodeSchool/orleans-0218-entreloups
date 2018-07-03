@@ -17,13 +17,6 @@
         </div>
         <div class="col-md-6 mb-5">
             <h3 class="mb-3">Informations :</h3>
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
             {{ form_start(edit_form) }}
             {{ form_widget(edit_form) }}
             <div class="text-center">
@@ -61,7 +54,7 @@
                     <tbody>
                     {% for notification in notifications|reverse %}
                         <tr>
-                            <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}</td>
+                            <td>{% if notification.publicationTime %}{{ notification.publicationTime|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y H:mm")|title }}{% endif %}<a href="{{ path('notification_edit', {'edition' : edition.id, 'id' : notification.id}) }}" class="btn btn-primary float-right"><i class="far fa-edit"></i></a></td>
                         </tr>
                         <tr>
                             <td class="pb-4">{{ notification.content|nl2br }}</td>
