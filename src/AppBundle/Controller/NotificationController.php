@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Edition;
 use AppBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,11 +18,14 @@ class NotificationController extends Controller
 {
     /**
      * Displays a form to edit an existing notification entity.
-     *
-     * @Route("/{id}/edit", name="notification_edit")
+     * @param Request $request
+     * @param Edition $edition
+     * @param Notification $notification
+     * @Route("/{edition}/edit/{id}", name="notification_edit")
      * @Method({"GET", "POST"})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Notification $notification)
+    public function editAction(Request $request, Edition $edition, Notification $notification)
     {
         $deleteForm = $this->createDeleteForm($notification);
         $editForm = $this->createForm('AppBundle\Form\NotificationType', $notification);
