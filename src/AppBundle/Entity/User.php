@@ -102,6 +102,11 @@ class User extends BaseUser
      */
     private $eventsFollowed;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Edition", inversedBy="participants")
+     */
+    private $editionsParticipated;
+
 
     /**
      * Get id
@@ -396,5 +401,41 @@ class User extends BaseUser
     public function removeEventsFollowed(\AppBundle\Entity\Event $eventsFollowed)
     {
         return $this->eventsFollowed->removeElement($eventsFollowed);
+    }
+
+    /**
+     * Add editionsParticipated.
+     *
+     * @param \AppBundle\Entity\Edition $editionsParticipated
+     *
+     * @return User
+     */
+    public function addEditionsParticipated(\AppBundle\Entity\Edition $editionsParticipated)
+    {
+        $this->editionsParticipated[] = $editionsParticipated;
+
+        return $this;
+    }
+
+    /**
+     * Remove editionsParticipated.
+     *
+     * @param \AppBundle\Entity\Edition $editionsParticipated
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeEditionsParticipated(\AppBundle\Entity\Edition $editionsParticipated)
+    {
+        return $this->editionsParticipated->removeElement($editionsParticipated);
+    }
+
+    /**
+     * Get editionsParticipated.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEditionsParticipated()
+    {
+        return $this->editionsParticipated;
     }
 }
