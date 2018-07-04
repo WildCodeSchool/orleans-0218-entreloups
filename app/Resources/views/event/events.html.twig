@@ -1,4 +1,4 @@
-{% if events is defined and events is not empty %}
+{% if events is not empty %}
     {% for event in events %}
         <div class="col-xl-3 col-md-6 offset-md-0 offset-1 col-lg-4">
             <div class="card mr-3 mb-4">
@@ -49,6 +49,6 @@
             </div>
         </div>
     {% endfor %}
-    {% else %}
-        <h2 class="text-center">Aucun évènement n'a été trouvé suite à votre recherche</h2>
+{% else %}
+    <p class="text-center col-12">Aucun évènement n'a été trouvé</p>
 {% endif %}
