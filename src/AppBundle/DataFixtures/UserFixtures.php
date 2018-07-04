@@ -24,6 +24,7 @@ class UserFixtures extends Fixture
             $user->setLongitude(1.69829);
             $user->setCodePostal('45130');
             $user->setPlainPassword('azerty');
+            $user->setMobility(100);
             $manager->persist($user);
             $this->addReference('user' . $i, $user);
         }

@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('build/style.css') }}">
         {% block stylesheets %}{% endblock %}
@@ -29,6 +29,9 @@
                 <ul class="navbar-nav">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                         <li class="nav-item">
+                            <a href="{{ path('event_around') }}" class="nav-link">Proche de chez moi</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ path('event_new') }}" class="nav-link">Créer un évènement</a>
                         </li>
                         <li class="nav-item">
@@ -49,11 +52,21 @@
             </div>
         </nav>
     </header>
-
+    <div class="row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} mt-3 col-6 offset-3 text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
         {% block banner %}{% endblock %}
-        <div class="container">
-            {% block body %}{% endblock %}
-        </div>
+        {% block content %}
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        {% endblock %}
         {% include 'footer.html.twig' %}
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('build/app.js') }}"></script>

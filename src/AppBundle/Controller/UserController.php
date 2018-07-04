@@ -28,33 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
-     * Displays a search field to find one particular user.
-     *
-     * @Route("/search/edition/{id}", name="search_user")
-     * @Method({"GET", "POST"})
-     */
-    public function searchAction(Request $request)
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest(($request));
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $searchedUser = $em->getRepository(User::class)->findOneByEmail($user->getEmail());
-
-            return $this->render('user/searchUser.html.twig', array(
-                'form' => $form->createView(),
-                'searchedUser' => $searchedUser,
-            ));
-        }
-
-        return $this->render('user/searchUser.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
      * @param Request $request
      * @param Edition $edition
      * @param Mailer $mailer
@@ -75,7 +48,7 @@ class UserController extends Controller
             $data = $form->getData();
             $user = $em->getRepository(User::class)->findOneByEmail($data['email']);
             if (is_null($user)) {
-                $this->addFlash('error', 'Utilisateur non trouvé');
+                $this->addFlash('danger', 'Utilisateur non trouvé');
                 return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
             }
             $groups = $edition->getGroups();
@@ -111,6 +84,7 @@ class UserController extends Controller
                 de l'évènement $eventName en tant que $roleName",
                 'invitation'
             );
+            $this->addFlash('success', 'L\'utilisateur a bien été invité');
             return $this->redirectToRoute('invite_user', array('edition' => $edition->getId()));
         }
 

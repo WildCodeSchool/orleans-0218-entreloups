@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Tag;
 use AppBundle\Service\CheckUserRole;
+use AppBundle\Service\CheckDistance;
+use AppBundle\Service\Mailer;
 use AppBundle\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -23,16 +25,77 @@ class EventController extends Controller
      *
      * @Route("/", name="event_index")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $allEvents = $em->getRepository('AppBundle:Event')->findAll();
 
         return $this->render('event/index.html.twig', array(
-            'events' => $events,
+            'events' => $allEvents
         ));
+    }
+
+    /**
+     * Show Event Around User
+     *
+     * @Route("/around", name="event_around")
+     * @Method("GET")
+     * @param CheckDistance $checkDistance
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function aroundAction(CheckDistance $checkDistance)
+    {
+        $date = new \DateTime('now');
+        $em = $this->getDoctrine()->getManager();
+        $events = $em->getRepository('AppBundle:Event')->findEventsWhoHaveEditionByDate($date);
+
+        $user = $this->getUser();
+        $userLat = $user->getLatitude();
+        $userLng = $user->getLongitude();
+        $userMobility = $user->getMobility();
+        $proxEvents = [];
+
+        foreach ($events as $event) {
+            $eventLat = $event->getLatitude();
+            $eventLng= $event->getLongitude();
+            $distance = $checkDistance->getDistance($userLat, $userLng, $eventLat, $eventLng);
+
+            if ($distance < $userMobility) {
+                array_push($proxEvents, $event);
+            }
+        }
+        return $this->render('event/proximity_events.html.twig', [
+            'events' => $proxEvents,
+        ]);
+    }
+  
+    /**
+     * @param Event $event
+     * @Route("/{slug}/follow", name="event_follow")
+     * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function followAction(Event $event)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $isAFollower = false;
+        foreach ($event->getFollowers() as $user) {
+            if ($user->getId() === $this->getUser()->getId()) {
+                $this->addFlash('warning', 'Vous suivez déjà cet évènement');
+                $isAFollower = true;
+                break;
+            }
+        }
+        if (!$isAFollower) {
+            $event->addFollower($this->getUser());
+            $this->getUser()->addEventsFollowed($event);
+            $em->flush();
+            $this->addFlash('success', 'Vous suivez cet évènement');
+        }
+
+        return $this->redirectToRoute('event_show', array('slug' => $event->getSlug()));
     }
 
     /**
@@ -130,6 +193,10 @@ class EventController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($event->getEditions()->count() > 0) {
+                $this->addFlash('danger', 'Vous ne pouvez pas supprimer un évènement qui contient une edition');
+                return $this->redirectToRoute('event_edit', array('slug' => $event->getSlug()));
+            }
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->flush();
