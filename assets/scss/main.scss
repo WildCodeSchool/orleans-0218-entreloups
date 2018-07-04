@@ -83,3 +83,7 @@ h5 {
     color: #000;
   }
 }
+
+.btn-primary:not(:disabled):not(.disabled).active {
+  background-color: darken($mainColor, 25%);
+}
