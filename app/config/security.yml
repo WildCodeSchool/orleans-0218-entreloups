@@ -45,3 +45,5 @@ security:
             - { path: ^/tag/, role: ROLE_ADMIN }
             - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    access_denied_url: /
