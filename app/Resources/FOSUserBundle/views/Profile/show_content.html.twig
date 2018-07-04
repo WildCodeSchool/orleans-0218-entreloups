@@ -53,15 +53,15 @@
         </div>
     </div>
     <div class="tab-pane fade" id="participant" role="tabpanel" aria-labelledby="participant-tab">
-        {#{% set events = [] %}#}
-        {#{% for edition in user.editionsParticipated %}#}
-            {#{% if edition.event not in events %}#}
-                {#{% set events = events|merge([group.edition.event]) %}#}
-            {#{% endif %}#}
-        {#{% endfor %}#}
-        {#<div class="row">#}
-            {#{% include 'event/events.html.twig' %}#}
-        {#</div>#}
+        {% set events = [] %}
+        {% for edition in user.editionsParticipated %}
+            {% if edition.event not in events %}
+                {% set events = events|merge([group.edition.event]) %}
+            {% endif %}
+        {% endfor %}
+        <div class="row">
+            {% include 'event/events.html.twig' %}
+        </div>
     </div>
     <div class="tab-pane fade" id="management" role="tabpanel" aria-labelledby="management-tab">
         {% set events = [] %}
