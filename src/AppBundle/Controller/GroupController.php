@@ -53,7 +53,7 @@ class GroupController extends Controller
         $isCreator = $checkUserRole->checkCreator($this->getUser(), $edition->getEvent());
         if (!$isCreator && $isManager) {
             return $this->redirectToRoute('group_index', array('edition' => $edition->getId()));
-        }elseif (!$isCreator && !$isManager) {
+        } elseif (!$isCreator && !$isManager) {
             return $this->redirectToRoute('homepage');
         }
         $user->getGroups()->removeElement($group);
