@@ -56,7 +56,7 @@
         {% set events = [] %}
         {% for edition in user.editionsParticipated %}
             {% if edition.event not in events %}
-                {% set events = events|merge([group.edition.event]) %}
+                {% set events = events|merge([edition.event]) %}
             {% endif %}
         {% endfor %}
         <div class="row">
