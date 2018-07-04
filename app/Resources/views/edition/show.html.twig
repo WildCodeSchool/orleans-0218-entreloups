@@ -30,7 +30,7 @@
         </div>
     </div>
     {% if edition.notifications is not empty %}
-    <div id="carouselNews" class="carousel slide shadow p-5" data-ride="carousel">
+    <div id="carouselNews" class="carousel slide shadow p-5 col-12" data-ride="carousel">
         <ol class="carousel-indicators">
             {% for notification in edition.notifications %}
                 {% if loop.first %}
@@ -73,5 +73,10 @@
                 </a>
             </div>
         {% endif %}
+    </div>
+    <div class="row">
+        <a class="btn btn-dark my-3" href="{{ path('event_show', {'slug': edition.event.slug}) }}">
+            <i class="fas fa-chevron-left"></i> Retour
+        </a>
     </div>
 {% endblock %}
