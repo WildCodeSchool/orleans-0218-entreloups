@@ -29,7 +29,7 @@ class InvitationType extends AbstractType
                 'choice_label' => 'label',
                 'multiple' => false,
                 'expanded' => false,
-                'label' => 'Role :',
+                'label' => 'Rôle :',
             ])
         ;
     }
