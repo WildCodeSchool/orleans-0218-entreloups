@@ -1,5 +1,6 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/toggleStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/rangeStyle.css') }}">
 {% endblock %}
 
 {% trans_default_domain 'FOSUserBundle' %}
@@ -18,10 +19,10 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-8">
-                        {{ form_row(form.mobility, {'label' : 'Mobilité:' }) }}
+                        {{ form_row(form.mobility, {'label' : 'Mobilité:' , 'attr': {'class': 'sliderRange'}}) }}
                     </div>
                     <div class="col-4 align-self-end">
-                        <p class="distance align-self-center">Distance :<span id="distance"></span> km</p>
+                        <p class="distance align-self-center">Distance : <span id="distance"></span> km</p>
                     </div>
                 </div>
             </div>
