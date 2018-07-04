@@ -2,7 +2,7 @@
 {% block title %}{{ edition.event.title }} - {{ edition.name }}{% endblock %}
 {% block body %}
     <div class="row my-5">
-        <div class="shadow ">
+        <div class="shadow col-12">
             {% if app.user is defined and edition.event.creator != app.user %}
                 {% if edition.groups is not empty %}
                 {% for group in edition.groups %}
@@ -44,7 +44,7 @@
         </div>
     </div>
     {% if edition.notifications is not empty %}
-    <div id="carouselNews" class="carousel slide shadow p-5" data-ride="carousel">
+    <div id="carouselNews" class="carousel slide shadow p-5 col-12" data-ride="carousel">
         <ol class="carousel-indicators">
             {% for notification in edition.notifications %}
                 {% if loop.first %}
@@ -95,5 +95,10 @@
                 </div>
             {% endif %}
         {% endif %}
+    </div>
+    <div class="row">
+        <a class="btn btn-dark my-3" href="{{ path('event_show', {'slug': edition.event.slug}) }}">
+            <i class="fas fa-chevron-left"></i> Retour
+        </a>
     </div>
 {% endblock %}
