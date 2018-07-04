@@ -1,5 +1,6 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/toggleStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/rangeStyle.css') }}">
 {% endblock %}
 {% block body %}
 
@@ -36,6 +37,14 @@
             </div>
         </div>
         {{ form_row(form.city, {'label': 'Ville:', 'label_attr' : {'class' : 'city_label'}}) }}
+        <div class="row ">
+            <div class="col-8">
+                {{ form_row(form.mobility, {'label' : 'Mobilité:', 'attr': {'class': 'sliderRange'}}) }}
+            </div>
+            <div class="col-4 align-self-center">
+                <p class="distance align-self-center">Distance : <span id="distance"></span> km</p>
+            </div>
+        </div>
         {{ form_row(form.latitude) }}
         {{ form_row(form.longitude) }}
         {{ form_row(form.codePostal) }}
@@ -57,8 +66,10 @@
         let longitude = {{ form.longitude.vars.id }};
         let codePostal = {{ form.codePostal.vars.id }};
         let searchBar = {{ form.city.vars.id }};
+        let rangeBar = {{ form.mobility.vars.id }};
     </script>
     <script src="{{ asset('build/searchCity.js') }}"></script>
     <script src="{{ asset('build/toggles.js') }}"></script>
+    <script src="{{ asset('build/rangeValue.js') }}"></script>
 {% endblock %}
 

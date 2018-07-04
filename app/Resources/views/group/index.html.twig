@@ -5,11 +5,11 @@
 {% block body %}
 <div class="row my-5">
     <div class="col-12 shadow">
-        <h1 class="text-center">Gestion du Staff de {{ edition.name }}</h1>
-        <div class="d-flex flex-row">
+        <h1 class="text-center mb-3">Gestion du Staff de {{ edition.name }}</h1>
+        <div class="d-flex flex-column flex-md-row">
         {% for group in groups %}
             {% for role in group.roles %}
-                <div class="col-4">
+                <div class="col-12 col-sm-4">
                     <table class="table table-bordered">
                         <thead class="text-center font-weight-bold">
                         <tr>
@@ -19,7 +19,14 @@
                         <tbody>
                         {% for user in group.users %}
                         <tr>
-                            <td>{{ user.username }}</td>
+                            <td>{{ user.username }}
+                                {% if app.user.id == edition.event.creator.id %}
+                                <a class="btn btn-sm ml-2 float-right confirm-alert btn-danger"
+                                        href="{{ path('remove_user_group', {'id' : group.id, 'user' : user.id}) }}">
+                                    <i class="far fa-trash-alt mr-2"></i>Retirer
+                                </a>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                         </tbody>
@@ -28,8 +35,14 @@
             {% endfor %}
         {% endfor %}
         </div>
-        <a class="btn btn-dark mb-2 float-left" href="{{ path('edition_edit', {'slug' : edition.slug}) }}"><i class="fas fa-chevron-left"></i> Retour à l'édition</a>
-        <a class="btn btn-primary mb-2 float-right" href="{{ path('invite_user', {'edition' : edition.id}) }}"><i class="fas fa-plus"></i> Inviter un utilisateur</a>
+        <div class="form-inline justify-content-between">
+        <a class="btn btn-dark mb-2" href="{{ path('edition_edit', {'slug' : edition.slug}) }}">
+            <i class="fas fa-chevron-left"></i> Retour
+        </a>
+        <a class="btn btn-primary mb-2" href="{{ path('invite_user', {'edition' : edition.id}) }}">
+            <i class="fas fa-plus"></i> Ajouter
+        </a>
+        </div>
     </div>
 </div>
 {% endblock %}

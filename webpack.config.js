@@ -7,6 +7,7 @@ Encore
     .enableSassLoader()
     .addEntry('datepicker', './assets/js/datepicker.js')
     .addEntry('searchCity', './assets/js/searchCity.js')
+    .addEntry('rangeValue', './assets/js/rangeValue.js')
     .addEntry('toggles', './assets/js/toggles.js')
     .addStyleEntry('style', './assets/scss/main.scss')
     .addStyleEntry('bootstrap-tagsinput', './assets/css/tagsinput.css')
@@ -17,6 +18,7 @@ Encore
     .addStyleEntry('edition', './assets/scss/edition.scss')
     .addStyleEntry('toggleStyle', './assets/scss/toggleStyle.scss')
     .addStyleEntry('error404', './assets/scss/error404.scss')
+    .addStyleEntry('rangeStyle', './assets/scss/rangeStyle.scss')
     .enableBuildNotifications()
     .autoProvidejQuery();
 

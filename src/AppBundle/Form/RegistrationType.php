@@ -10,7 +10,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,6 +27,13 @@ class RegistrationType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('city', SearchType::class)
+            ->add('mobility', RangeType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'value' => 100
+                ]
+            ])
             ->add('codePostal', HiddenType::class)
             ->add('latitude', HiddenType::class)
             ->add('longitude', HiddenType::class)
