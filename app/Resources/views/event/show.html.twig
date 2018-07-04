@@ -13,6 +13,13 @@
                 </a>
             </div>
         {% endif %}
+        {% if user is defined and event.creator != user %}
+        <div class="text-center mb-4">
+            <a role="button" class="btn btn-primary" href="{{ path('event_follow', {'slug': event.slug}) }}">
+                Suivre
+            </a>
+        </div>
+        {% endif %}
         <div>
             <section class="d-flex flex-row">
                 <div class="p-0 mr-5">
@@ -37,6 +44,15 @@
                                     {% endif %}
                                 {% endfor %}
                             </ul>
+                        </div>
+                        <div class="mt-5">
+                            <h5 class="mt-2">
+                            {% for user in event.followers %}
+                                {% if loop.last %}
+                                    {{ loop.length }}
+                                {% endif %}
+                            {% endfor %}
+                             Followers</h5>
                         </div>
                     </div>
                 </div>

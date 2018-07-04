@@ -19,7 +19,7 @@ class EditionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Nom :'])
+            ->add('name', TextType::class, ['label' => 'Edition :'])
             ->add(
                 'startDate',
                 DateTimeType::class,

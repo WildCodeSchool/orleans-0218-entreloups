@@ -5,19 +5,19 @@
     <h1 class="text-center mt-3">Gestion de votre événement</h1>
         {{ form_start(edit_form) }}
         <div class="form-row">
-            <div class="form-group col-md-4 pl-3">
+            <div class="form-group col-md-4 px-3">
                 {{ form_label(edit_form.title, 'Titre :') }}
                 {{ form_widget(edit_form.title, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(edit_form.title) }}
             </div>
-            <div class="form-group col-md-7 offset-md-1 pr-3">
+            <div class="form-group col-md-7 offset-md-1 px-3">
                 {{ form_label(edit_form.city, 'Ville :') }}
                 {{ form_widget(edit_form.city, { 'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(edit_form.city) }}
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4 pl-3">
+            <div class="form-group col-md-4 px-3">
                 {{ form_label(edit_form.imageFile, 'Image :') }}
                 {{ form_widget(edit_form.imageFile, { 'attr': {'class': 'form-control mb-3'} }) }}
                 {{ form_errors(edit_form.imageFile) }}
@@ -25,7 +25,7 @@
                 {{ form_widget(edit_form.tags) }}
                 {{ form_errors(edit_form.tags) }}
             </div>
-            <div class="form-group col-md-7 offset-md-1 pr-3">
+            <div class="form-group col-md-7 offset-md-1 px-3">
                 {{ form_label(edit_form.description, 'Description :') }}
                 {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control', 'rows': '12'}}) }}
                 {{ form_errors(edit_form.description) }}
@@ -42,16 +42,19 @@
                 </ul>
             </div>
         </div>
-        <div class="form-row mt-3">
-            <div class="col text-center">
-                <a class="btn btn-dark text-center float-left ml-3" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des événements</a>
-
-                <button class="btn btn-primary mb-3" type="submit"><i class="far fa-save"></i> Enregister les modifications</button>
+        <div class="form-row mt-3 text-center">
+            <div class="col-md-4">
+                <a class="btn btn-dark mb-2" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des événements</a>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary mb-2" type="submit"><i class="far fa-save"></i> Enregistrer les modifications</button>
                 {{ form_end(edit_form) }}
             </div>
-            {{ form_start(delete_form) }}
-            <button class="btn btn-danger float-right mr-3 confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
-            {{ form_end(delete_form) }}
+            <div class="col-md-4">
+                {{ form_start(delete_form) }}
+                <button class="btn btn-danger mb-2 confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
+                {{ form_end(delete_form) }}
+            </div>
         </div>
     </div>
 {% endblock %}

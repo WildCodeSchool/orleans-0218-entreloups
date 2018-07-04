@@ -8,6 +8,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Event;
 use AppBundle\Entity\User;
 
 class Mailer
@@ -44,6 +45,35 @@ class Mailer
             'user' => $recipient,
             'sender' => $sender,
             'content' => $content,
+            'type' => $type
+        ]);
+        // Pilot mail
+        $message
+            ->setFrom($sender->getEmail())
+            ->setTo($recipient->getEmail())
+            ->setSubject($type)
+            ->setBody($body, 'text/html');
+        $this->mailer->send($message);
+    }
+
+    /**
+     * @param User $recipient
+     * @param User $sender
+     * @param Event $event
+     * @param string $content
+     * @param string $type
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function notifMail(User $sender, User $recipient, string $content, string $type, Event $event)
+    {
+        $message = \Swift_Message::newInstance();
+        $template = 'mail/notification.html.twig';
+        $body = $this->templating->render($template, [
+            'user' => $recipient,
+            'content' => $content,
+            'event' => $event,
             'type' => $type
         ]);
         // Pilot mail

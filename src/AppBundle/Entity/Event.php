@@ -7,6 +7,7 @@ use AppBundle\Entity\Tag;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
  * @Vich\Uploadable
+ * @UniqueEntity(fields={"title"}, message="Un évènement existe déjà avec ce titre")
  */
 class Event
 {
@@ -138,6 +140,11 @@ class Event
      * @JoinColumn(name="creator_id", referencedColumnName="id")
      */
     private $creator;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="eventsFollowed")
+     */
+    private $followers;
 
     /**
      * @return File
@@ -474,5 +481,41 @@ class Event
     public function getCreator()
     {
         return $this->creator;
+    }
+
+    /**
+     * Add follower.
+     *
+     * @param \AppBundle\Entity\User $follower
+     *
+     * @return Event
+     */
+    public function addFollower(\AppBundle\Entity\User $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower.
+     *
+     * @param \AppBundle\Entity\User $follower
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeFollower(\AppBundle\Entity\User $follower)
+    {
+        return $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
     }
 }
