@@ -16,6 +16,7 @@ Encore
     .addStyleEntry('event', './assets/scss/event.scss')
     .addStyleEntry('edition', './assets/scss/edition.scss')
     .addStyleEntry('toggleStyle', './assets/scss/toggleStyle.scss')
+    .addStyleEntry('error404', './assets/scss/error404.scss')
     .enableBuildNotifications()
     .autoProvidejQuery();
 

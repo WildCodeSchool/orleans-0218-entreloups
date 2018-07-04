@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('build/error404.css') }}">
+    <section id="not-found">
+        <div id="title">Error404</div>
+        <div class="circles">
+            <p class="content">404<br>
+                <small>PAGE NOT FOUND</small>
+            </p>
+            <span class="circle big"></span>
+            <span class="circle med"></span>
+            <span class="circle small"></span>
+        </div>
+    </section>
+
+{% endblock %}
