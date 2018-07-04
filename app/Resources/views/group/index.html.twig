@@ -19,7 +19,14 @@
                         <tbody>
                         {% for user in group.users %}
                         <tr>
-                            <td>{{ user.username }}</td>
+                            <td>{{ user.username }}
+                                {% if app.user.id == edition.event.creator.id %}
+                                <a class="btn btn-sm ml-2 float-right confirm-alert btn-danger"
+                                        href="{{ path('remove_user_group', {'id' : group.id, 'user' : user.id}) }}">
+                                    <i class="far fa-trash-alt mr-2"></i>Retirer
+                                </a>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                         </tbody>

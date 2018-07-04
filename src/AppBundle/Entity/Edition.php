@@ -106,6 +106,11 @@ class Edition
     private $slug;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="editionsParticipated")
+     */
+    private $participants;
+
+    /**
      * Get id.
      *
      * @return int
@@ -435,5 +440,41 @@ class Edition
     public function removeGroup(\AppBundle\Entity\Group $group)
     {
         return $this->groups->removeElement($group);
+    }
+
+    /**
+     * Add participant.
+     *
+     * @param \AppBundle\Entity\User $participant
+     *
+     * @return Edition
+     */
+    public function addParticipant(\AppBundle\Entity\User $participant)
+    {
+        $this->participants[] = $participant;
+
+        return $this;
+    }
+
+    /**
+     * Remove participant.
+     *
+     * @param \AppBundle\Entity\User $participant
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeParticipant(\AppBundle\Entity\User $participant)
+    {
+        return $this->participants->removeElement($participant);
+    }
+
+    /**
+     * Get participants.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
     }
 }

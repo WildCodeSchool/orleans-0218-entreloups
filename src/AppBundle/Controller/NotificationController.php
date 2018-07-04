@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Notification;
+use AppBundle\Service\CheckUserRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,8 +26,13 @@ class NotificationController extends Controller
      * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Edition $edition, Notification $notification)
+    public function editAction(Request $request, Edition $edition, Notification $notification, CheckUserRole $checkUser)
     {
+        $currentUser = $this->getUser();
+        $isAuthorized = $checkUser->checkUser($currentUser, $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
+        }
         $deleteForm = $this->createDeleteForm($notification, $edition);
         $editForm = $this->createForm('AppBundle\Form\NotificationType', $notification);
         $editForm->handleRequest($request);
