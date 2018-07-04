@@ -27,3 +27,8 @@
     {% set events = user.events %}
     {% include 'event/events.html.twig' %}
 </div>
+<h2 class="text-center mt-2">Mes évènements suivis</h2>
+<div class="row">
+    {% set events = user.eventsFollowed %}
+    {% include 'event/events.html.twig' %}
+</div>
