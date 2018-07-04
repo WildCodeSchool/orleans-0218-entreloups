@@ -42,17 +42,17 @@
                 </ul>
             </div>
         </div>
-        <div class="form-row mt-3 text-center">
-            <div class="col-md-4">
-                <a class="btn btn-dark mb-2" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour à la liste des événements</a>
+        <div class="row mt-3">
+            <div class="col-md-4 ">
+                <a class="btn btn-dark mb-2 col-12" href="{{ path('event_index') }}"><i class="fas fa-chevron-left"></i> Retour <span class="d-lg-inline d-md-none d-sm-none d-none">à la liste des événements</span></a>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-primary mb-2" type="submit"><i class="far fa-save"></i> Enregistrer les modifications</button>
+                <button class="btn btn-primary mb-2 col-12" type="submit"><i class="far fa-save"></i> Enregistrer <span class="d-lg-inline d-md-none d-sm-none d-none">les modifications</span></button>
                 {{ form_end(edit_form) }}
             </div>
             <div class="col-md-4">
                 {{ form_start(delete_form) }}
-                <button class="btn btn-danger mb-2 confirm-alert" type="submit"><i class="far fa-trash-alt"></i> Supprimer l'événement</button>
+                <button class="btn btn-danger mb-2 confirm-alert col-12" type="submit"><i class="far fa-trash-alt"></i> Supprimer <span class="d-lg-inline d-md-none d-sm-none d-none">l'événement</span></button>
                 {{ form_end(delete_form) }}
             </div>
         </div>
