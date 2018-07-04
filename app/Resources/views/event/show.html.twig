@@ -21,11 +21,10 @@
         </div>
         {% endif %}
         <div>
-            <section class="d-flex flex-row">
-                <div class="p-0 mr-5">
+            <section class="d-flex flex-column flex-md-row">
+                <div class="p-0 mr-md-5">
                     <img class="img-fluid" src="{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}">
-                    <h3 class="mt-2">Ville :</h3>
-                    <p>{{ event.city }}</p>
+                    <p class="mt-2"><b>Ville :</b> {{ event.city }}</p>
                 </div>
                 <div class="p-0">
                     <div>

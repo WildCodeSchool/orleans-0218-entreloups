@@ -22,13 +22,56 @@
         </div>
     </div>
 </div>
-<h2 class="text-center mt-2">Mes évènements</h2>
-<div class="row">
-    {% set events = user.events %}
-    {% include 'event/events.html.twig' %}
+<h2 class="text-center mt-2">Mes évènements en tant que</h2>
+<div class="row justify-content-center mb-2">
+    <ul class="nav nav-pills justify-content-center" id="eventTab" role="tablist">
+        <li class="mr-md-5 mr-1 mb-2">
+            <a class="btn btn-primary nav-link active" id="created-tab" data-toggle="tab" href="#created" role="tab" aria-controls="created" aria-selected="true">Créateur</a>
+        </li>
+        <li class="mr-md-5 mr-1">
+            <a class="btn btn-primary nav-link" id="followed-tab" data-toggle="tab" href="#followed" role="tab" aria-controls="followed" aria-selected="false">Follower</a>
+        </li>
+        <li class="mr-md-5 mr-1">
+            <a class="btn btn-primary nav-link" id="participant-tab" data-toggle="tab" href="#participant" role="tab" aria-controls="participant" aria-selected="false">Participant</a>
+        </li>
+        <li>
+            <a class="btn btn-primary nav-link" id="management-tab" data-toggle="tab" href="#management" role="tab" aria-controls="management" aria-selected="false">Collaborateur</a>
+        </li>
+    </ul>
 </div>
-<h2 class="text-center mt-2">Mes évènements suivis</h2>
-<div class="row">
-    {% set events = user.eventsFollowed %}
-    {% include 'event/events.html.twig' %}
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="created" role="tabpanel" aria-labelledby="created-tab">
+        <div class="row">
+            {% set events = user.events %}
+            {% include 'event/events.html.twig' %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="followed" role="tabpanel" aria-labelledby="followed-tab">
+        <div class="row">
+            {% set events = user.eventsFollowed %}
+            {% include 'event/events.html.twig' %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="participant" role="tabpanel" aria-labelledby="participant-tab">
+        {% set events = [] %}
+        {% for edition in user.editionsParticipated %}
+            {% if edition.event not in events %}
+                {% set events = events|merge([group.edition.event]) %}
+            {% endif %}
+        {% endfor %}
+        <div class="row">
+            {% include 'event/events.html.twig' %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="management" role="tabpanel" aria-labelledby="management-tab">
+        {% set events = [] %}
+        {% for group in user.groups %}
+            {% if group.edition.event not in events %}
+                {% set events = events|merge([group.edition.event]) %}
+            {% endif %}
+        {% endfor %}
+        <div class="row">
+            {% include 'event/events.html.twig' %}
+        </div>
+    </div>
 </div>

@@ -2,7 +2,29 @@
 {% block title %}{{ edition.event.title }} - {{ edition.name }}{% endblock %}
 {% block body %}
     <div class="row my-5">
-        <div class="shadow d-flex flex-row justify-content-center align-items-center col-12">
+        <div class="shadow col-12">
+            {% if app.user is defined and edition.event.creator != app.user %}
+                {% if edition.groups is not empty %}
+                {% for group in edition.groups %}
+                    {% for user in group.users %}
+                        {% if app.user != user %}
+                            <div class="text-center mt-2 mb-2">
+                                <a role="button" class="btn btn-primary" href="{{ path('participate_edition', {'slug': edition.slug}) }}">
+                                    Participer
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                {% else %}
+                    <div class="text-center mt-2 mb-2">
+                        <a role="button" class="btn btn-primary" href="{{ path('participate_edition', {'slug': edition.slug}) }}">
+                            Participer
+                        </a>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="d-flex flex-row justify-content-center align-items-center">
             <div class="col-2 d-none d-sm-block mt-3">
                 <figure>
                     <img class="img-thumbnail imgEdition"
@@ -17,6 +39,7 @@
                 <p><b>Lieu:</b> {{ edition.place }}</p>
                 <p><b>Twitter <i class="fab fa-twitter"></i>:</b><a href="https://twitter.com/{{ edition.hashtag }}"> #{{ edition.hashtag }}</a></p>
                 <p><b>Statut:</b> {% if not edition.status %}<i class="fas fa-exclamation-triangle"></i> Annulée{% elseif edition.endDate < today %}<i class="fas fa-hourglass-end"></i> Terminée{% elseif edition.startDate > today %}<i class="far fa-calendar-alt"></i> A venir{% else %}<i class="fas fa-hourglass-start"></i> En cours{% endif %}</p>
+            </div>
             </div>
         </div>
     </div>

@@ -38,6 +38,32 @@ class EditionController extends Controller
     }
 
     /**
+     * @param Edition $edition
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/participer/{slug}", name="participate_edition")
+     */
+    public function participateAction(Edition $edition)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $isAParticipant = false;
+        foreach ($edition->getParticipants() as $participant) {
+            if ($participant->getId() === $this->getUser()->getId()) {
+                $this->addFlash('warning', 'Vous participez déjà à cette édition');
+                $isAParticipant = true;
+                break;
+            }
+        }
+        if (!$isAParticipant) {
+            $edition->addParticipant($this->getUser());
+            $this->getUser()->addEditionsParticipated($edition);
+            $em->flush();
+            $this->addFlash('success', 'Vous participez à cette édition');
+        }
+
+        return $this->redirectToRoute('edition_show', array('slug' => $edition->getSlug()));
+    }
+
+    /**
      * @param Request $request
      * @param Event $event
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
