@@ -17,6 +17,7 @@ Encore
     .addStyleEntry('event', './assets/scss/event.scss')
     .addStyleEntry('edition', './assets/scss/edition.scss')
     .addStyleEntry('toggleStyle', './assets/scss/toggleStyle.scss')
+    .addStyleEntry('rangeStyle', './assets/scss/rangeStyle.scss')
     .enableBuildNotifications()
     .autoProvidejQuery();
 
