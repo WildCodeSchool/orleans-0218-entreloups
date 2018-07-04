@@ -29,6 +29,8 @@
         {{ form_end(form) }}
     </div>
     <div id="events" class="row">
-        {% include 'event/events.html.twig' %}
+        {% if events is defined %}
+            {% include 'event/events.html.twig' %}
+        {% endif %}
     </div>
 {% endblock %}
