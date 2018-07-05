@@ -28,14 +28,16 @@ class GroupController extends Controller
      * @Route("/{edition}/list", name="group_index")
      * @Method("GET")
      * @param Edition $edition
+     * @param CheckUserRole $checkUserRole
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Edition $edition)
+    public function indexAction(Edition $edition, CheckUserRole $checkUserRole)
     {
         $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:Group');
         $groups = $em->findByEdition($edition);
+        $isCreator = $checkUserRole->checkCreator($this->getUser(), $edition->getEvent());
 
-        return $this->render('group/index.html.twig', ['edition' => $edition, 'groups' => $groups]);
+        return $this->render('group/index.html.twig', ['edition' => $edition, 'groups' => $groups, 'isCreator' => $isCreator]);
     }
 
     /**

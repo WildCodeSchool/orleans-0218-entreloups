@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Edition;
 use AppBundle\Entity\Task;
+use AppBundle\Service\CheckUserRole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,14 +26,19 @@ class TaskController extends Controller
     /**
      * @param Request $request
      * @param Edition $edition
+     * @param CheckUserRole $checkUserRole
      *
      * Creates a new task entity.
      * @Route("/{id}/new", name="task_new")
      * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request, Edition $edition)
+    public function newAction(Request $request, Edition $edition, CheckUserRole $checkUserRole)
     {
+        $isAuthorized = $checkUserRole->checkUser($this->getUser(), $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('homepage');
+        }
         $task = new Task();
         $task->setEdition($edition);
         $form = $this->createForm('AppBundle\Form\TaskType', $task);
@@ -56,13 +62,18 @@ class TaskController extends Controller
     /**
      * @param Request $request
      * @param Edition $edition
+     * @param CheckUserRole $checkUserRole
      * @param Task $task
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @Route("/{edition}/edit/{id}", name="task_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Edition $edition, Task $task)
+    public function editAction(Request $request, Edition $edition, Task $task, CheckUserRole $checkUserRole)
     {
+        $isAuthorized = $checkUserRole->checkUser($this->getUser(), $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('homepage');
+        }
         $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
         $deleteForm = $this->createDeleteForm($task, $edition);
@@ -83,12 +94,17 @@ class TaskController extends Controller
     /**
      * @param Task $task
      * @param Edition $edition
+     * @param CheckUserRole $checkUserRole
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/{edition}/delete/{id}", name="task_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Task $task, Edition $edition)
+    public function deleteAction(Request $request, Task $task, Edition $edition, CheckUserRole $checkUserRole)
     {
+        $isAuthorized = $checkUserRole->checkUser($this->getUser(), $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('homepage');
+        }
         $form = $this->createDeleteForm($task, $edition);
         $form->handleRequest($request);
 

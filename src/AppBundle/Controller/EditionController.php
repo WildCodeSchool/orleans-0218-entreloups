@@ -66,6 +66,8 @@ class EditionController extends Controller
     /**
      * @param Request $request
      * @param Event $event
+     * @param CheckUserRole $checkUserRole
+     * @param SlugService $slugService
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * Creates a new edition entity.
@@ -73,9 +75,13 @@ class EditionController extends Controller
      * @Route("/{slug}/new", name="edition_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Event $event, SlugService $slugService)
+    public function newAction(Request $request, Event $event, SlugService $slugService, CheckUserRole $checkUserRole)
     {
         $edition = new Edition();
+        $isAuthorized = $checkUserRole->checkUser($this->getUser(), $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('homepage');
+        }
         $edition->setEvent($event);
         $form = $this->createForm('AppBundle\Form\EditionType', $edition);
         $form->handleRequest($request);
