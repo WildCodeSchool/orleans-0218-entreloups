@@ -13,9 +13,9 @@
                 {{ form_label(form.role) }}
                 {{ form_widget(form.role) }}
                 {{ form_errors(form.role) }}
-                <div class="form-group mt-4 text-center">
-                    <button type="submit" class="btn btn-primary float-md-right mb-2"><i class="fas fa-plus"></i> Ajouter</button>
-                    <a class="btn btn-dark float-md-left" href="{{ path('group_index', {'edition' : edition.id}) }}"><i class="fas fa-chevron-left"></i> Retour à la liste du staff</a>
+                <div class="form-group mt-4 d-flex justify-content-between text-center">
+                    <a class="btn btn-dark" href="{{ path('group_index', {'edition' : edition.id}) }}"><i class="fas fa-chevron-left"></i> Retour</a>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</button>
                 </div>
                 {{ form_end(form) }}
             </div>
