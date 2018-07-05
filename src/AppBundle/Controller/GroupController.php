@@ -37,7 +37,9 @@ class GroupController extends Controller
         $groups = $em->findByEdition($edition);
         $isCreator = $checkUserRole->checkCreator($this->getUser(), $edition->getEvent());
 
-        return $this->render('group/index.html.twig', ['edition' => $edition, 'groups' => $groups, 'isCreator' => $isCreator]);
+        return $this->render('group/index.html.twig', [
+            'edition' => $edition, 'groups' => $groups, 'isCreator' => $isCreator
+        ]);
     }
 
     /**
