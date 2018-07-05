@@ -14,6 +14,7 @@ use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\InvitationType;
 use AppBundle\Form\UserType;
+use AppBundle\Service\CheckUserRole;
 use AppBundle\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,6 +32,7 @@ class UserController extends Controller
      * @param Request $request
      * @param Edition $edition
      * @param Mailer $mailer
+     * @param CheckUserRole $checkUserRole
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -38,8 +40,12 @@ class UserController extends Controller
      * @Route("/{edition}/invitation", name="invite_user")
      * @Method({"GET","POST"})
      */
-    public function inviteAction(Request $request, Edition $edition, Mailer $mailer)
+    public function inviteAction(Request $request, Edition $edition, Mailer $mailer, CheckUserRole $checkUserRole)
     {
+        $isAuthorized = $checkUserRole->checkUser($this->getUser(), $edition);
+        if (!$isAuthorized) {
+            return $this->redirectToRoute('homepage');
+        }
         $form = $this->createForm(InvitationType::class);
         $form->handleRequest(($request));
 
