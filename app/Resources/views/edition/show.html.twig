@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row my-5">
         <div class="shadow col-12">
-            {% if user is defined and isManager == false %}
+            {% if user != null and isManager == false %}
                 <div class="text-center mt-2 mb-2">
                     <a role="button" class="btn btn-primary" href="{{ path('participate_edition', {'slug': edition.slug}) }}">
                         Participer
