@@ -1,5 +1,5 @@
 .footerRow {
-  height: 8vh;
+  height: auto;
   background-color: $mainColor;
   color: $lightFontColor;
 }
@@ -15,6 +15,7 @@
 .sn-icon {
   padding: 0px 5px 0px 5px;
   color: $lightFontColor;
+  font-size: calc(17px + 12 * (100vw - 200px) / 1400);
 }
 
 .vertical-align {
