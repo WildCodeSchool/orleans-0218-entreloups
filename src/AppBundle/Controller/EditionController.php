@@ -78,7 +78,7 @@ class EditionController extends Controller
     public function newAction(Request $request, Event $event, SlugService $slugService, CheckUserRole $checkUserRole)
     {
         $edition = new Edition();
-        $isAuthorized = $checkUserRole->checkUser($this->getUser(), $edition);
+        $isAuthorized = $checkUserRole->checkCreator($this->getUser(), $event);
         if (!$isAuthorized) {
             return $this->redirectToRoute('homepage');
         }
