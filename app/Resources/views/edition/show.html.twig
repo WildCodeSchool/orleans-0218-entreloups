@@ -65,7 +65,10 @@
         </a>
     </div>
     {% endif %}
-    <div class="float-right">
+    <div class="row d-flex justify-content-between">
+        <a class="btn btn-dark my-2" href="{{ path('event_show', {'slug': edition.event.slug}) }}">
+            <i class="fas fa-chevron-left"></i> Retour
+        </a>
         {% if isManager %}
             <div class="text-center">
                 <a class="btn btn-primary mt-2" href="{{ path('edition_edit', {'slug': edition.slug}) }}">
@@ -73,10 +76,5 @@
                 </a>
             </div>
         {% endif %}
-    </div>
-    <div class="row">
-        <a class="btn btn-dark my-3" href="{{ path('event_show', {'slug': edition.event.slug}) }}">
-            <i class="fas fa-chevron-left"></i> Retour
-        </a>
     </div>
 {% endblock %}
