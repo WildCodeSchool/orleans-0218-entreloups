@@ -34,7 +34,16 @@ $ cd orleans-0218-entreloups
 **Install dependencies**  
 $ composer install  
 $ npm install  
-$ npm run dev
+
+**Initiate Project**
+$ php bin/console doctrine:database:create
+$ php bin/console doctrine:schema:update --force
+
+**Compile Webpack for CSS and JS**
+$ ./node_modules/.bin/encore dev
+
+**Launch Server PHP**
+$ php bin/console server:run
 
 Thx
 ---
