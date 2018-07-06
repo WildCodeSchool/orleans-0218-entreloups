@@ -19,6 +19,10 @@ System requirements
 
 * Database (MySQL/MariaDB or PostgreSQL);
 
+* composer https://getcomposer.org/doc/00-intro.md
+
+* npm https://www.npmjs.com/get-npm
+
 
 How To Use
 ----------
