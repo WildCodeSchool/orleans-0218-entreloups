@@ -49,7 +49,7 @@ $ npm run build (for prod environment)
 
 **Launch Server PHP**
 $ php bin/console server:run (DEV Only)
-$ for prod env, parameter a web server (apache, nginx, ...)
+$ for prod env, configure a web server (apache, nginx, ...)
 
 **First User Admin**
 $ create an account with link "Inscription"
