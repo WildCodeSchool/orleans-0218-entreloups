@@ -24,3 +24,4 @@
 !/var/reports
 /var/reports/*
 !var/reports/.gitkeep
+deploy.php
