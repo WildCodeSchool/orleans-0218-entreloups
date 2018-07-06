@@ -44,7 +44,8 @@ $ php bin/console doctrine:database:create
 $ php bin/console doctrine:schema:update --force
 
 **Compile Webpack for CSS and JS**
-$ npm run dev
+$ npm run dev (for dev environment)
+$ npm run build (for prod environment)
 
 **Launch Server PHP**
 $ php bin/console server:run
