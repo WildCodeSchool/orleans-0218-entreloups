@@ -40,10 +40,16 @@ $ php bin/console doctrine:database:create
 $ php bin/console doctrine:schema:update --force
 
 **Compile Webpack for CSS and JS**
-$ ./node_modules/.bin/encore dev
+$ npm run dev
 
 **Launch Server PHP**
 $ php bin/console server:run
+
+**First User Admin**
+$ create an account with link "Inscription"
+$ check the mail confirmation
+$ promote your role admin with the command line:
+$ php bin/console fos:user:promote the_username ROLE_ADMIN
 
 Thx
 ---
