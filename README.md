@@ -54,6 +54,7 @@ $ create an account with link "Inscription"
 $ check the mail confirmation
 $ promote your role admin with the command line:
 $ php bin/console fos:user:promote the_username ROLE_ADMIN
+$ create yours roles with the url /role
 
 Thx
 ---
